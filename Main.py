@@ -70,11 +70,11 @@ def redrawAll(app, canvas): # draw (view) the model in the canvas
     pass      
 
 def initPlayer(app, row, col, tokenPath):
-    app.img = app.loadImage(tokenPath)
-    app.img = app.img.resize((app.width//app.dungeon.getSize()
+    playerSprite = app.loadImage(tokenPath)
+    playerSprite = playerSprite.resize((app.width//app.dungeon.getSize()
                             , app.height//app.dungeon.getSize())
                             , Image.NEAREST)
-    app.player = Player(row, col, app.img)
+    app.player = Player(row, col, playerSprite)
 
 def initGrid(app, gridSize): 
     app.dungeon = level_generation(gridSize)
