@@ -88,7 +88,7 @@ def appStarted(app): # initialize the model (app.xyz)
     initGrid(app, 16)
     app.spawnPoint = app.dungeon.getSpawnPoint()
     app.endPoint = app.dungeon.getEndPoint()
-    initPlayer(app, app.spawnPoint[0], app.spawnPoint[1], 'Python\CS15-112\Term Project\sprites\humanfigher1-1x1.gif')
+    initPlayer(app, app.spawnPoint[0], app.spawnPoint[1], 'sprites\humanfigher1-1x1.gif')
     pass           
 
 def appStopped(app): # cleanup after app is done running
