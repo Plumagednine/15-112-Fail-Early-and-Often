@@ -83,7 +83,7 @@ def initGrid(app, gridSize):
 def appStarted(app): # initialize the model (app.xyz)
     app.framerate = 30
     app.timerDelay = 1000//app.framerate
-    app.startMenu = True
+    app.startMenu = False
     app.winMenu = False
     initGrid(app, 16)
     app.spawnPoint = app.dungeon.getSpawnPoint()
