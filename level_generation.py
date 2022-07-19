@@ -108,7 +108,7 @@ class level_generation:
                 #get the number of surrounding hallways
                 surroundingHallways = surroundingCells(workingWall)
                 # if there are less than 2 paths
-                if (surroundingHallways < 2):
+                if (surroundingHallways <= 1):
                     # set position as hallway
                     app.grid[workingWall[0]][workingWall[1]] = 0
                     
@@ -134,7 +134,7 @@ class level_generation:
                 #get the number of surrounding hallways
                 surroundingHallways = surroundingCells(workingWall)
                 # if there are less than 2 paths
-                if (surroundingHallways < 2):
+                if (surroundingHallways <= 1):
                     #set position as hallway
                     app.grid[workingWall[0]][workingWall[1]] = 0
                     
@@ -160,7 +160,7 @@ class level_generation:
                 #get the number of surrounding hallways
                 surroundingHallways = surroundingCells(workingWall)
                 # if there are less than 2 paths
-                if (surroundingHallways < 2):
+                if (surroundingHallways <= 1):
                     # set position as hallway
                     app.grid[workingWall[0]][workingWall[1]] = 0
                     
@@ -186,7 +186,7 @@ class level_generation:
                 #get the number of surrounding hallways
                 surroundingHallways = surroundingCells(workingWall)
                 # if there are less than 2 paths
-                if (surroundingHallways < 2):
+                if (surroundingHallways <= 1):
                     # set position as hallway
                     app.grid[workingWall[0]][workingWall[1]] = 0
                     
