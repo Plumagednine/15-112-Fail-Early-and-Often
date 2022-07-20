@@ -14,29 +14,29 @@ def create_elipse(canvas, cx, cy, radius, **options):
                     , cy + radius
                     , **options)
 
-def getCell(app, x, y, grid):
+def getCell(app, x, y, width, height, grid):
     (gridSize) = grid.getSize()
-    cellWidth = app.width // gridSize
-    cellHeight = app.height // gridSize
+    cellWidth = width // gridSize
+    cellHeight = height // gridSize
     row =  y//cellHeight
     col = x//cellWidth
     return (row, col)
 
-def getCellBounds(app, row, col, gridSize):
-    cellWidth = app.width // gridSize
-    cellHeight = app.height // gridSize
+def getCellBounds(app, row, col, width, height, gridSize):
+    cellWidth = width // gridSize
+    cellHeight = height // gridSize
     x0 = col * cellWidth
     y0 = row * cellHeight
     x1 = (col+1) * cellWidth
     y1 = (row+1) * cellHeight
     return (x0, y0, x1, y1)
 
-def generateGUIGRid(app, canvas, grid):
+def generateDungeon(app, canvas, grid):
     gridSize = grid.getSize()
     gridLayout = grid.getLayout()
     for row in range(gridSize):
         for col in range(gridSize):
-            (x0, y0, x1, y1) = getCellBounds(app, row, col, gridSize)
+            (x0, y0, x1, y1) = getCellBounds(app, row, col, app.gridWidth, app.gridHeight, gridSize)
             if gridLayout[row][col] == 0:
                 canvas.create_rectangle(x0, y0, x1, y1, fill='#ffffff', width = 1)
             elif gridLayout[row][col] == 1:
@@ -49,43 +49,57 @@ def generateGUIGRid(app, canvas, grid):
 
 def drawPlayer(app, canvas, player):
     (x, y) = player.getPos()
-    (x0, y0, x1, y1) = getCellBounds(app, x, y, app.dungeon.getSize())
+    (x0, y0, x1, y1) = getCellBounds(app, x, y, app.gridWidth, app.gridHeight, app.dungeon.getSize())
     canvas.create_image(x0 + (x1-x0)//2, y0 + (y1-y0)//2, pilImage = player.getImage())
     pass
 
 def redrawAll(app, canvas): # draw (view) the model in the canvas
     #Draw Background
     canvas.create_rectangle(0, 0, app.width, app.height, fill='#000000')
+    
+    #start menu
     if app.startMenu:
-        
         pass
     
+    #win menu
     if app.winMenu:
+        canvas.create_text(app.width//2, app.height//2, text="You Win!", fill='#ffffff', font='Arial 30')
         pass
     
     #Draw Game
     if (not app.startMenu and not app.winMenu):
-        generateGUIGRid(app, canvas, app.dungeon)
+        generateDungeon(app, canvas, app.dungeon)
         drawPlayer(app, canvas, app.player)
     pass      
 
 def initPlayer(app, row, col, tokenPath):
     playerSprite = app.loadImage(tokenPath)
-    playerSprite = playerSprite.resize((app.width//app.dungeon.getSize()
-                            , app.height//app.dungeon.getSize())
+    playerSprite = playerSprite.resize((app.gridWidth//app.dungeon.getSize()
+                            , app.gridHeight//app.dungeon.getSize())
                             , Image.NEAREST)
     app.player = Player(row, col, playerSprite)
 
-def initGrid(app, gridSize): 
+def initDungeon(app, gridSize): 
     app.dungeon = level_generation(gridSize)
-    print(app.dungeon.getLayout())
+
+
 
 def appStarted(app): # initialize the model (app.xyz)
+#######################################
+###Make System Variables###############
+#######################################
     app.framerate = 30
     app.timerDelay = 1000//app.framerate
+    app.sidebarWidth = app.width-app.height
+    app.sidebarHeight = app.height
+    app.gridWidth = app.width-app.sidebarWidth
+    app.gridHeight = app.height
     app.startMenu = False
     app.winMenu = False
-    initGrid(app, 16)
+#######################################
+###Make Dungeon and Player#############
+#######################################
+    initDungeon(app, 16)
     app.spawnPoint = app.dungeon.getSpawnPoint()
     app.endPoint = app.dungeon.getEndPoint()
     initPlayer(app, app.spawnPoint[0], app.spawnPoint[1], 'sprites\humanfigher1-1x1.gif')
@@ -149,4 +163,4 @@ def sizeChanged(app): # respond to window size changes
     pass  
 
             
-runApp(width = 800, height = 800, title = '15-112: Fail Early and Often')
+runApp(width = 1200, height = 800, title = '15-112: Fail Early and Often')

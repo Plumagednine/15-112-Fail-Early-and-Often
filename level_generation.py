@@ -259,7 +259,4 @@ class level_generation:
     def updateGrid(app, row, col, value):
         app.grid[row][col] = value
         return app.grid
-
-grid = level_generation(6)
-print(grid.getLayout())
     
