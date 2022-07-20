@@ -7,6 +7,11 @@ from level_generation import *
 from Player import *
 import math
 
+
+#######################################
+###Helper Functions####################
+#######################################
+
 def create_elipse(canvas, cx, cy, radius, **options):
     canvas.create_oval(cx - radius
                     , cy - radius
@@ -30,6 +35,11 @@ def getCellBounds(app, row, col, width, height, gridSize):
     x1 = (col+1) * cellWidth
     y1 = (row+1) * cellHeight
     return (x0, y0, x1, y1)
+
+
+#######################################
+###GUI Functions#######################
+#######################################
 
 def generateDungeon(app, canvas, grid):
     gridSize = grid.getSize()
@@ -65,13 +75,20 @@ def redrawAll(app, canvas): # draw (view) the model in the canvas
     if app.winMenu:
         canvas.create_text(app.width//2, app.height//2, text="You Win!", fill='#ffffff', font='Arial 30')
         pass
-    
+
+#######################################
+###While Game is Running###############
+#######################################
     #Draw Game
     if (not app.startMenu and not app.winMenu):
         generateDungeon(app, canvas, app.dungeon)
         drawPlayer(app, canvas, app.player)
     pass      
 
+
+#######################################
+###Init Functions######################
+#######################################
 def initPlayer(app, row, col, tokenPath):
     playerSprite = app.loadImage(tokenPath)
     playerSprite = playerSprite.resize((app.gridWidth//app.dungeon.getSize()
@@ -82,7 +99,8 @@ def initPlayer(app, row, col, tokenPath):
 def initDungeon(app, gridSize): 
     app.dungeon = level_generation(gridSize)
 
-
+def initSidebar(app, canvas):
+    pass
 
 def appStarted(app): # initialize the model (app.xyz)
 #######################################
@@ -107,6 +125,12 @@ def appStarted(app): # initialize the model (app.xyz)
 
 def appStopped(app): # cleanup after app is done running
     pass           
+
+
+
+#######################################
+###User Input##########################
+#######################################
 
 def keyPressed(app, event): # use event.key
     if (not app.startMenu and not app.winMenu):
@@ -155,6 +179,11 @@ def mouseMoved(app, event): # use event.x and event.y
 
 def mouseDragged(app, event): # use event.x and event.y
     pass  
+
+
+#######################################
+###System Changes#############
+#######################################
 
 def timerFired(app): # respond to timer events
     pass           
