@@ -1,2 +1,2 @@
 # 15-112-Fail-Early-and-Often
-My CS15-115 Term Project
+My Carnegie Mellon University CS15-115 Term Project
