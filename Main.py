@@ -57,29 +57,6 @@ def getCellBounds(app, row, col, width, height, gridSize):
 #######################################
 ###Game Draw Functions#################
 #######################################
-
-def generateDungeon(app, canvas, grid):
-    gridSize = grid.getSize()
-    gridLayout = grid.getLayout()
-    for row in range(gridSize):
-        for col in range(gridSize):
-            (x0, y0, x1, y1) = getCellBounds(app, row, col, app.gridWidth, app.gridHeight, gridSize)
-            if gridLayout[row][col] == 0:
-                canvas.create_rectangle(x0, y0, x1, y1, fill='#fffcf9', width = 1)
-            elif gridLayout[row][col] == 1:
-                canvas.create_rectangle(x0, y0, x1, y1, fill='#1c0f13', width = 1)
-            elif gridLayout[row][col] == 2:
-                canvas.create_rectangle(x0, y0, x1, y1, fill='#1b4965', width = 1)
-            elif gridLayout[row][col] == 3:
-                canvas.create_rectangle(x0, y0, x1, y1, fill='#6C7D47', width = 1)
-    pass
-
-def drawPlayer(app, canvas, player):
-    (x, y) = player.getPos()
-    (x0, y0, x1, y1) = getCellBounds(app, x, y, app.gridWidth, app.gridHeight, app.dungeon.getSize())
-    canvas.create_image(x0 + (x1-x0)//2, y0 + (y1-y0)//2, pilImage = player.getImage())
-    pass
-
 def drawSidebar(app, canvas):
     canvas.create_text(app.sidebarMinWidth, app.sidebarMinHeight, text="Player Stats and Inventory:", fill='#fffcf9', font=(app.font,14), anchor = 'nw')
     # create health bar
@@ -142,8 +119,8 @@ def redrawAll(app, canvas): # draw (view) the model in the canvas
 
     #Draw Game
     if app.gameState == 'game':
-        generateDungeon(app, canvas, app.dungeon)
-        drawPlayer(app, canvas, app.player)
+        app.dungeon.drawDungeon(app, canvas)
+        app.player.drawPlayer(app, canvas)
         drawSidebar(app, canvas)
     pass      
 
@@ -159,14 +136,21 @@ def resizeSprite(sprite, width, height):
     sprite = sprite.resize((width, height), Image.NEAREST)
     return sprite
 
+def updateSpriteDimensions(app):
+    app.playerSprite  = resizeSprite(app.playerSprite, app.gridWidth//app.dungeon.getSize(), app.gridHeight//app.dungeon.getSize())
+    app.player.updateSprite(app.playerSprite)
+    pass
+
 def initPlayer(app, row, col, tokenPath, hitPoints = 100, strength = 10
                , dexterity = 10, constitution = 10, movementSpeed = 30):
     app.playerSprite = app.loadImage(tokenPath)
     app.playerSprite = resizeSprite(app.playerSprite, app.gridWidth//app.dungeon.getSize(), app.gridHeight//app.dungeon.getSize())
     app.player = Player(row, col, app.playerSprite, hitPoints, strength, dexterity, constitution, movementSpeed)
+    pass
 
 def initDungeon(app, gridSize): 
     app.dungeon = level_generation(gridSize)
+    pass
 
 def initSidebar(app):
     cellWidth = app.sidebarWidth // app.dungeon.getSize()
@@ -183,10 +167,6 @@ def initDimensions(app):
     app.sidebarWidth = app.width-app.gridWidth
     app.sidebarHeight = app.height
     pass
-
-def updateSpriteDimensions(app):
-        app.playerSprite  = resizeSprite(app.playerSprite, app.gridWidth//app.dungeon.getSize(), app.gridHeight//app.dungeon.getSize())
-        app.player.updateSprite(app.playerSprite)
 
 #######################################
 ###Start Menu Initializers#############
@@ -258,26 +238,21 @@ def keyPressed(app, event): # use event.key
         if event.key == 'w' and app.player.getPos()[0] > 0:
             if grid[playerPOS[0]-1][playerPOS[1]] != 1:
                 app.player.moveUp()
-            pass
+
         elif event.key == 'a' and app.player.getPos()[1] > 0:
             if grid[playerPOS[0]][playerPOS[1]-1] != 1:
                 app.player.moveLeft()
-            pass
+
         elif event.key == 's' and app.player.getPos()[0] < app.dungeon.getSize()-1:
             if grid[playerPOS[0]+1][playerPOS[1]] != 1:
                 app.player.moveDown()
-            pass
+
         elif event.key == 'd' and (app.player.getPos()[1]) < app.dungeon.getSize()-1:
             if grid[playerPOS[0]][playerPOS[1]+1] != 1:
                 app.player.moveRight()
-            pass
+
         if app.player.getPos() == app.endPoint:
             app.gameState = 'win'
-            pass
-        #attack
-        if event.key == 'e':
-            app.player.takeDamage(10)
-            pass
         
     if app.gameState == 'start':
         pass
@@ -295,8 +270,6 @@ def mousePressed(app, event): # use event.x and event.y
     if app.gameState == 'start':
         if (row,col) in app.startGameButton:
             app.gameState = 'game'
-            pass
-        pass
     pass  
 
 # def mouseReleased(app, event): # use event.x and event.y

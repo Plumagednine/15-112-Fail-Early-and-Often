@@ -1,7 +1,49 @@
+import decimal
 from cmu_112_graphics import *
 import random
 
 class level_generation:
+    #######################################
+    ###Helper Functions####################
+    #######################################
+
+    def almostEqual(self, d1, d2, epsilon=10**-7): #helper-fn
+        # note: use math.isclose() outside 15-112 with Python version 3.5 or later
+        return (abs(d2 - d1) < epsilon)
+
+    def roundHalfUp(self, d): #helper-fn
+        # Round to nearest with ties going away from zero.
+        rounding = decimal.ROUND_HALF_UP
+        # See other rounding options here:
+        # https://docs.python.org/3/library/decimal.html#rounding-modes
+        return int(decimal.Decimal(d).to_integral_value(rounding=rounding))
+
+    def create_elipse(self, canvas, cx, cy, radius, **options):
+        canvas.create_oval(cx - radius
+                        , cy - radius
+                        , cx + radius
+                        , cy + radius
+                        , **options)
+
+    def getCell(self, x, y, width, height, gridSize):
+        cellWidth = width // gridSize
+        cellHeight = height // gridSize
+        row =  y//cellHeight
+        col = x//cellWidth
+        return (row, col)
+
+    def getCellBounds(self, row, col, width, height, gridSize):
+        cellWidth = width // gridSize
+        cellHeight = height // gridSize
+        x0 = col * cellWidth
+        y0 = row * cellHeight
+        x1 = (col+1) * cellWidth
+        y1 = (row+1) * cellHeight
+        return (x0, y0, x1, y1)
+
+    #######################################
+    ###Initalizer Function#################
+    #######################################
     def __init__(self, gridSize = 5):
         self.gridSize = gridSize
         self.grid=[]
@@ -238,6 +280,22 @@ class level_generation:
         ##########End INIT################################################################################
         ##################################################################################################
 
+    def drawDungeon(self, app, canvas):
+        gridSize = self.getSize()
+        gridLayout = self.getLayout()
+        for row in range(gridSize):
+            for col in range(gridSize):
+                (x0, y0, x1, y1) = self.getCellBounds(row, col, app.gridWidth, app.gridHeight, gridSize)
+                if gridLayout[row][col] == 0:
+                    canvas.create_rectangle(x0, y0, x1, y1, fill='#fffcf9', width = 1)
+                elif gridLayout[row][col] == 1:
+                    canvas.create_rectangle(x0, y0, x1, y1, fill='#1c0f13', width = 1)
+                elif gridLayout[row][col] == 2:
+                    canvas.create_rectangle(x0, y0, x1, y1, fill='#1b4965', width = 1)
+                elif gridLayout[row][col] == 3:
+                    canvas.create_rectangle(x0, y0, x1, y1, fill='#6C7D47', width = 1)
+        pass
+    
     def getSize(self):
         return self.gridSize
     
