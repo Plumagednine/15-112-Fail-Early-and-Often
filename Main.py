@@ -65,13 +65,13 @@ def generateDungeon(app, canvas, grid):
         for col in range(gridSize):
             (x0, y0, x1, y1) = getCellBounds(app, row, col, app.gridWidth, app.gridHeight, gridSize)
             if gridLayout[row][col] == 0:
-                canvas.create_rectangle(x0, y0, x1, y1, fill='#ffffff', width = 1)
+                canvas.create_rectangle(x0, y0, x1, y1, fill='#fffcf9', width = 1)
             elif gridLayout[row][col] == 1:
-                canvas.create_rectangle(x0, y0, x1, y1, fill='#000000', width = 1)
+                canvas.create_rectangle(x0, y0, x1, y1, fill='#1c0f13', width = 1)
             elif gridLayout[row][col] == 2:
-                canvas.create_rectangle(x0, y0, x1, y1, fill='#0000ff', width = 1)
+                canvas.create_rectangle(x0, y0, x1, y1, fill='#1b4965', width = 1)
             elif gridLayout[row][col] == 3:
-                canvas.create_rectangle(x0, y0, x1, y1, fill='#00ff00', width = 1)
+                canvas.create_rectangle(x0, y0, x1, y1, fill='#6C7D47', width = 1)
     pass
 
 def drawPlayer(app, canvas, player):
@@ -81,14 +81,14 @@ def drawPlayer(app, canvas, player):
     pass
 
 def drawSidebar(app, canvas):
-    canvas.create_text(app.sidebarMinWidth, app.sidebarMinHeight, text="Player Stats and Inventory:", fill='#ffffff', font=(app.font,14), anchor = 'nw')
+    canvas.create_text(app.sidebarMinWidth, app.sidebarMinHeight, text="Player Stats and Inventory:", fill='#fffcf9', font=(app.font,14), anchor = 'nw')
     # create health bar
     healthBarMultiplier = app.player.getHealthMultiplyer()
     healthBarSize = (app.sidebarMaxWidth - app.sidebarMinWidth) * healthBarMultiplier
-    canvas.create_rectangle(app.sidebarMinWidth, app.sidebarMinHeight+20, app.sidebarMaxWidth, app.sidebarMaxHeight//10+20, fill='#ff0000')
-    canvas.create_rectangle(app.sidebarMinWidth, app.sidebarMinHeight+20, app.sidebarMinWidth + healthBarSize, app.sidebarMaxHeight//10+20, fill='#00ff00')
+    canvas.create_rectangle(app.sidebarMinWidth, app.sidebarMinHeight+20, app.sidebarMaxWidth, app.sidebarMaxHeight//10+20, fill='#f71735')
+    canvas.create_rectangle(app.sidebarMinWidth, app.sidebarMinHeight+20, app.sidebarMinWidth + healthBarSize, app.sidebarMaxHeight//10+20, fill='#44af69')
     canvas.create_text(app.sidebarMinWidth+10, (app.sidebarMinHeight+app.sidebarMaxHeight//10)//2+20
-                       , text=f'Health: {app.player.getHealth()}', fill='#ffffff', font=(app.font,14), anchor = 'w')
+                       , text=f'Health: {app.player.getHealth()}', fill='#fffcf9', font=(app.font,14), anchor = 'w')
     pass
 
 
@@ -103,7 +103,7 @@ def drawStartMenu(app, canvas):
     for row in range(gridSize):
         for col in range(gridSize):
             (x0, y0, x1, y1) = getCellBounds(app, row, col, app.width, app.height, gridSize)
-            canvas.create_rectangle(x0, y0, x1, y1, fill='#ffffff', width = 0)
+            canvas.create_rectangle(x0, y0, x1, y1, fill='#fffcf9', width = 0)
             if app.startMenuGrid[row][col] == 1: 
                 title.append((row,col))
             if app.startMenuGrid[row][col] == 2:
@@ -115,12 +115,12 @@ def drawStartMenu(app, canvas):
     # make title
     midIndex = len(title)//2
     tempX0,tempY0,tempX1,tempY1 = getCellBounds(app, title[midIndex][0], title[midIndex][1], app.width, app.height, gridSize)
-    canvas.create_text(tempX0,tempY0, text="15-112: Fail Early and Often", fill='#000000', font=(app.font,60), anchor = 'n',)
+    canvas.create_text(tempX0,tempY0, text="15-112: Fail Early and Often", fill='#1c0f13', font=(app.font,60), anchor = 'n',)
     
     # make start button
     midIndex = len(startButton)//2
     tempX0,tempY0,tempX1,tempY1 = getCellBounds(app, startButton[midIndex][0], startButton[midIndex][1], app.width, app.height, gridSize)
-    canvas.create_text(tempX0,tempY0, text="Start Game", fill='#000000', font=(app.font,60), anchor = 'n')
+    canvas.create_text(tempX0,tempY0, text="Start Game", fill='#1c0f13', font=(app.font,60), anchor = 'n')
     pass
 
 #######################################
@@ -128,7 +128,7 @@ def drawStartMenu(app, canvas):
 #######################################
 def redrawAll(app, canvas): # draw (view) the model in the canvas
     #Draw Background
-    canvas.create_rectangle(0, 0, app.width, app.height, fill='#000000')
+    canvas.create_rectangle(0, 0, app.width, app.height, fill='#1c0f13')
     
     #start menu
     if app.gameState == 'start':
@@ -137,7 +137,7 @@ def redrawAll(app, canvas): # draw (view) the model in the canvas
     
     #win menu
     if app.gameState == 'win':
-        canvas.create_text(app.width//2, app.height//2, text="You Win!", fill='#ffffff', font=(app.font,25))
+        canvas.create_text(app.width//2, app.height//2, text="You Win!", fill='#fffcf9', font=(app.font,25))
         pass
 
     #Draw Game
