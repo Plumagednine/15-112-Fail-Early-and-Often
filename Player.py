@@ -2,10 +2,20 @@ from cmu_112_graphics import *
 
 
 class Player:
-    def __init__(app, row = 0, col = 0, token = ''):
+    def __init__(app, row = 0, col = 0, token = '', hitPoints = 100
+                 , strength = 10, dexterity = 10, constitution = 10
+                 , movementSpeed = 30):
         app.sprite = token
         app.row = row
         app.col = col
+        app.totalHP = hitPoints
+        app.currentHP = hitPoints
+        app.strength = strength
+        app.dexterity = dexterity
+        app.constitution = constitution
+        app.movementSpeed = movementSpeed
+        app.inventory = []
+        
         pass
     
     def getPos(app):
@@ -38,3 +48,15 @@ class Player:
     
     def getImage(app):
         return app.sprite
+    
+    def getHealth(app):
+        return app.currentHP
+    
+    def getHealthMultiplyer(app):
+        return app.currentHP/app.totalHP
+    
+    def takeDamage(app, damage):
+        if app.currentHP - damage <= 0:
+            app.currentHP = 0
+        else:
+            app.currentHP -= damage

@@ -1,6 +1,7 @@
 import os
 from asyncio.locks import _ContextManagerMixin
 from tkinter import *
+import pyglet
 
 from cmu_112_graphics import *
 from level_generation import *
@@ -63,6 +64,17 @@ def drawPlayer(app, canvas, player):
     canvas.create_image(x0 + (x1-x0)//2, y0 + (y1-y0)//2, pilImage = player.getImage())
     pass
 
+def drawSidebar(app, canvas):
+    canvas.create_text(app.sidebarMinWidth, app.sidebarMinHeight, text="Player Stats and Inventory:", fill='#ffffff', font=(app.font,14), anchor = 'nw')
+    # create health bar
+    healthBarMultiplier = app.player.getHealthMultiplyer()
+    healthBarSize = (app.sidebarMaxWidth - app.sidebarMinWidth) * healthBarMultiplier
+    canvas.create_rectangle(app.sidebarMinWidth, app.sidebarMinHeight+20, app.sidebarMaxWidth, app.sidebarMaxHeight//10+20, fill='#ff0000')
+    canvas.create_rectangle(app.sidebarMinWidth, app.sidebarMinHeight+20, app.sidebarMinWidth + healthBarSize, app.sidebarMaxHeight//10+20, fill='#00ff00')
+    canvas.create_text(app.sidebarMinWidth+10, (app.sidebarMinHeight+app.sidebarMaxHeight//10)//2+20
+                       , text=f'Health: {app.player.getHealth()}', fill='#ffffff', font=(app.font,14), anchor = 'w')
+    pass
+
 def redrawAll(app, canvas): # draw (view) the model in the canvas
     #Draw Background
     canvas.create_rectangle(0, 0, app.width, app.height, fill='#000000')
@@ -73,7 +85,7 @@ def redrawAll(app, canvas): # draw (view) the model in the canvas
     
     #win menu
     if app.winMenu:
-        canvas.create_text(app.width//2, app.height//2, text="You Win!", fill='#ffffff', font='Arial 30')
+        canvas.create_text(app.width//2, app.height//2, text="You Win!", fill='#ffffff', font=(app.font,25))
         pass
 
 #######################################
@@ -83,6 +95,7 @@ def redrawAll(app, canvas): # draw (view) the model in the canvas
     if (not app.startMenu and not app.winMenu):
         generateDungeon(app, canvas, app.dungeon)
         drawPlayer(app, canvas, app.player)
+        drawSidebar(app, canvas)
     pass      
 
 
@@ -93,15 +106,24 @@ def resizeSprite(sprite, width, height):
     sprite = sprite.resize((width, height), Image.NEAREST)
     return sprite
 
-def initPlayer(app, row, col, tokenPath):
+def initPlayer(app, row, col, tokenPath, hitPoints = 100, strength = 10
+               , dexterity = 10, constitution = 10, movementSpeed = 30):
     app.playerSprite = app.loadImage(tokenPath)
     app.playerSprite = resizeSprite(app.playerSprite, app.gridWidth//app.dungeon.getSize(), app.gridHeight//app.dungeon.getSize())
-    app.player = Player(row, col, app.playerSprite)
+    app.player = Player(row, col, app.playerSprite, hitPoints, strength, dexterity, constitution, movementSpeed)
 
 def initDungeon(app, gridSize): 
     app.dungeon = level_generation(gridSize)
 
-def initSidebar(app, canvas):
+def initSidebar(app):
+    cellWidth = app.sidebarWidth // app.dungeon.getSize()
+    cellHeight = app.sidebarHeight // app.dungeon.getSize()
+    app.sidebarMinWidth = app.gridWidth + app.gridWidth//app.dungeon.getSize()
+    app.sidebarMinHeight = app.gridHeight//app.dungeon.getSize()
+    app.sidebarMaxWidth = app.width - app.gridWidth//app.dungeon.getSize()
+    app.sidebarMaxHeight = app.height - app.gridHeight//app.dungeon.getSize()
+    print(app.sidebarMinWidth, app.sidebarMinHeight, app.sidebarMaxWidth, app.sidebarMaxHeight)
+    print(app.dungeon.getSize(), app.gridWidth, app.gridHeight)
     pass
 
 def initDimensions(app):
@@ -123,6 +145,8 @@ def appStarted(app): # initialize the model (app.xyz)
     app.timerDelay = 1000//app.framerate
     app.startMenu = False
     app.winMenu = False
+    pyglet.font.add_file('font\Vecna-oppx.ttf')
+    app.font = 'Vecna-oppx'
     initDimensions(app)
 #######################################
 ###Make Dungeon and Player#############
@@ -131,6 +155,7 @@ def appStarted(app): # initialize the model (app.xyz)
     app.spawnPoint = app.dungeon.getSpawnPoint()
     app.endPoint = app.dungeon.getEndPoint()
     initPlayer(app, app.spawnPoint[0], app.spawnPoint[1], 'sprites\humanfigher1-1x1.gif')
+    initSidebar(app)
     pass           
 
 def appStopped(app): # cleanup after app is done running
@@ -146,6 +171,7 @@ def keyPressed(app, event): # use event.key
     if (not app.startMenu and not app.winMenu):
         grid = app.dungeon.getLayout()
         playerPOS = app.player.getPos()
+        #movement
         if event.key == 'w' and app.player.getPos()[0] > 0:
             if grid[playerPOS[0]-1][playerPOS[1]] != 1:
                 app.player.moveUp()
@@ -165,6 +191,10 @@ def keyPressed(app, event): # use event.key
         if app.player.getPos() == app.endPoint:
             print("You Win!")
             app.winMenu = True
+            pass
+        #attack
+        if event.key == 'e':
+            app.player.takeDamage(10)
             pass
         
     if app.startMenu:
