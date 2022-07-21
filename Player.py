@@ -32,5 +32,9 @@ class Player:
         app.col += 1
         pass
     
+    def updateSprite(app, token):
+        app.sprite = token
+        pass
+    
     def getImage(app):
         return app.sprite

@@ -89,12 +89,14 @@ def redrawAll(app, canvas): # draw (view) the model in the canvas
 #######################################
 ###Init Functions######################
 #######################################
+def resizeSprite(sprite, width, height):
+    sprite = sprite.resize((width, height), Image.NEAREST)
+    return sprite
+
 def initPlayer(app, row, col, tokenPath):
-    playerSprite = app.loadImage(tokenPath)
-    playerSprite = playerSprite.resize((app.gridWidth//app.dungeon.getSize()
-                            , app.gridHeight//app.dungeon.getSize())
-                            , Image.NEAREST)
-    app.player = Player(row, col, playerSprite)
+    app.playerSprite = app.loadImage(tokenPath)
+    app.playerSprite = resizeSprite(app.playerSprite, app.gridWidth//app.dungeon.getSize(), app.gridHeight//app.dungeon.getSize())
+    app.player = Player(row, col, app.playerSprite)
 
 def initDungeon(app, gridSize): 
     app.dungeon = level_generation(gridSize)
@@ -102,18 +104,26 @@ def initDungeon(app, gridSize):
 def initSidebar(app, canvas):
     pass
 
+def initDimensions(app):
+    app.gridWidth = app.width-int(app.height*.5)
+    app.gridHeight = app.height
+    app.sidebarWidth = app.width-app.gridWidth
+    app.sidebarHeight = app.height
+    pass
+
+def updateSpriteDimensions(app):
+        app.playerSprite  = resizeSprite(app.playerSprite, app.gridWidth//app.dungeon.getSize(), app.gridHeight//app.dungeon.getSize())
+        app.player.updateSprite(app.playerSprite)
+
 def appStarted(app): # initialize the model (app.xyz)
 #######################################
 ###Make System Variables###############
 #######################################
     app.framerate = 30
     app.timerDelay = 1000//app.framerate
-    app.sidebarWidth = app.width-app.height
-    app.sidebarHeight = app.height
-    app.gridWidth = app.width-app.sidebarWidth
-    app.gridHeight = app.height
     app.startMenu = False
     app.winMenu = False
+    initDimensions(app)
 #######################################
 ###Make Dungeon and Player#############
 #######################################
@@ -165,20 +175,20 @@ def keyPressed(app, event): # use event.key
         
     pass    
 
-def keyReleased(app, event): # use event.key
-    pass   
+# def keyReleased(app, event): # use event.key
+    # pass   
 
 def mousePressed(app, event): # use event.x and event.y
     pass  
 
-def mouseReleased(app, event): # use event.x and event.y
-    pass 
+# def mouseReleased(app, event): # use event.x and event.y
+#     pass 
 
-def mouseMoved(app, event): # use event.x and event.y
-    pass    
+# def mouseMoved(app, event): # use event.x and event.y
+#     pass    
 
-def mouseDragged(app, event): # use event.x and event.y
-    pass  
+# def mouseDragged(app, event): # use event.x and event.y
+#     pass  
 
 
 #######################################
@@ -189,6 +199,8 @@ def timerFired(app): # respond to timer events
     pass           
 
 def sizeChanged(app): # respond to window size changes
+    initDimensions(app)
+    updateSpriteDimensions(app)
     pass  
 
             
