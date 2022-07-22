@@ -115,8 +115,8 @@ class Player:
         pass
     
     def dealDamage(self):
-        if self.weapons[self.currentWeapon].itemWeight == 'Light':
+        if self.weapons[self.currentWeapon].itemModifier == 'Dexterity':
             return self.dexterityModifier + random.randint(1,self.weapons[self.currentWeapon].itemModifierValue)
-        elif self.weapons[self.currentWeapon].itemWeight == 'Heavy':
+        elif self.weapons[self.currentWeapon].itemModifier == 'Strength':
             return self.strengthModifier + random.randint(1,self.weapons[self.currentWeapon].itemModifierValue)
          
