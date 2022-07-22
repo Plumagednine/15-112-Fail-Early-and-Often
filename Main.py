@@ -90,20 +90,11 @@ def redrawAll(app, canvas): # draw (view) the model in the canvas
 #######################################
 ###Game Initializers###################
 #######################################
-def resizeSprite(sprite, width, height):
-    sprite = sprite.resize((width, height), Image.NEAREST)
-    return sprite
 
-def updateSpriteDimensions(app):
-    app.playerSprite  = resizeSprite(app.playerSprite, app.gridWidth//app.dungeon.getSize(), app.gridHeight//app.dungeon.getSize())
-    app.player.updateSprite(app.playerSprite)
-    pass
-
-def initPlayer(app, row, col, tokenPath, hitPoints = 100, strength = 10
-               , dexterity = 10, constitution = 10, movementSpeed = 30):
-    app.playerSprite = app.loadImage(tokenPath)
-    app.playerSprite = resizeSprite(app.playerSprite, app.gridWidth//app.dungeon.getSize(), app.gridHeight//app.dungeon.getSize())
-    app.player = Player(row, col, app.playerSprite, hitPoints, strength, dexterity, constitution, movementSpeed)
+def initPlayer(app, row, col, tokenPath, hitPoints = 100, strength = 10, dexterity = 10, constitution = 10, movementSpeed = 30):
+    playerSpriteCounter = 0
+    app.playerSprites = animateSprite(app, tokenPath, app.gridWidth, app.gridHeight, app.dungeon.getSize()) 
+    app.player = Player(row, col, app.playerSprites, playerSpriteCounter, hitPoints, strength, dexterity, constitution, movementSpeed)
     pass
 
 def initDungeon(app, gridSize): 
@@ -165,6 +156,7 @@ def appStarted(app): # initialize the model (app.xyz)
     #Make System Variables
     app.framerate = 30
     app.timerDelay = 1000//app.framerate
+    app.animationTimer = 0
     app.gameState = 'start'
     pyglet.font.add_file('font\Vecna-oppx.ttf')
     app.font = 'Vecna-oppx'
@@ -177,7 +169,7 @@ def appStarted(app): # initialize the model (app.xyz)
     initDungeon(app, 16)
     app.spawnPoint = app.dungeon.getSpawnPoint()
     app.endPoint = app.dungeon.getEndPoint()
-    initPlayer(app, app.spawnPoint[0], app.spawnPoint[1], 'sprites\humanfigher1-1x1.gif')
+    initPlayer(app, app.spawnPoint[0], app.spawnPoint[1], 'sprites\humanfigher1-1x1.png')
     initSidebar(app)
     pass           
 
@@ -245,11 +237,15 @@ def mousePressed(app, event): # use event.x and event.y
 #######################################
 
 def timerFired(app): # respond to timer events
+    app.animationTimer += app.framerate
+    if app.animationTimer >= 100:
+        app.animationTimer = 0
+        app.player.animateSprite(app)
     pass           
 
 def sizeChanged(app): # respond to window size changes
     initDimensions(app)
-    updateSpriteDimensions(app)
+    app.player.updateSprite(updateSpriteDimensions(app, app.player.getSprites(), app.gridWidth, app.gridHeight, app.dungeon.getSize()))
     initSidebar(app)
     initStartMenu(app)
     pass  

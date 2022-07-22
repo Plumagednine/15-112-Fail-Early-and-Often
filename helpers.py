@@ -39,3 +39,21 @@ def getCellBounds(row, col, width, height, gridSize):
     x1 = (col+1) * cellWidth
     y1 = (row+1) * cellHeight
     return (x0, y0, x1, y1)
+
+def resizeSprite(sprite, width, height):
+    sprite = sprite.resize((width, height), Image.NEAREST)
+    return sprite
+
+def updateSpriteDimensions(app, sprites, width, height, gridSize):
+    for i in range(4):
+        sprites[i] = resizeSprite(sprites[i], width//gridSize, height//gridSize)
+    return sprites
+
+def animateSprite(app, tokenPath, width, height, gridSize):
+    spritestrip = app.loadImage(tokenPath)
+    sprites = []
+    for i in range(4):
+        sprite = spritestrip.crop((960*i, 0, 960+960*i, 960))
+        sprite = resizeSprite(sprite, width//gridSize, height//gridSize)
+        sprites.append(sprite)   
+    return sprites 
