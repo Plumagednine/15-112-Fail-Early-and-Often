@@ -1,9 +1,15 @@
+import ast
 import decimal
 from cmu_112_graphics import *
 import random
+import json
     
 #######################################
 ###Helper Functions####################
+#######################################
+
+#######################################
+###Math Functions######################
 #######################################
 
 def almostEqual(d1, d2, epsilon=10**-7): #helper-fn
@@ -17,12 +23,9 @@ def roundHalfUp(d): #helper-fn
     # https://docs.python.org/3/library/decimal.html#rounding-modes
     return int(decimal.Decimal(d).to_integral_value(rounding=rounding))
 
-def create_elipse(canvas, cx, cy, radius, **options):
-    canvas.create_oval(cx - radius
-                    , cy - radius
-                    , cx + radius
-                    , cy + radius
-                    , **options)
+#######################################
+###Grid Functions######################
+#######################################
 
 def getCell(x, y, width, height, gridSize):
     cellWidth = width // gridSize
@@ -39,6 +42,17 @@ def getCellBounds(row, col, width, height, gridSize):
     x1 = (col+1) * cellWidth
     y1 = (row+1) * cellHeight
     return (x0, y0, x1, y1)
+
+#######################################
+###Graphics Functions##################
+#######################################
+
+def create_elipse(canvas, cx, cy, radius, **options):
+    canvas.create_oval(cx - radius
+                    , cy - radius
+                    , cx + radius
+                    , cy + radius
+                    , **options)
 
 def resizeSprite(sprite, width, height):
     sprite = sprite.resize((width, height), Image.NEAREST)
@@ -57,3 +71,15 @@ def animateSprite(app, tokenPath, width, height, gridSize):
         sprite = resizeSprite(sprite, width//gridSize, height//gridSize)
         sprites.append(sprite)   
     return sprites 
+
+#######################################
+###File Management Functions###########
+#######################################
+    
+def loadJSON(filePath):
+    with open(filePath) as f:
+        return json.load(f)
+    
+def loadText(filePath):
+    with open(filePath) as f:
+        return ast.literal_eval(f.read())

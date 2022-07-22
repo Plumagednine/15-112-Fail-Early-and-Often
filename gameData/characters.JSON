@@ -1,0 +1,17 @@
+[
+    {
+        "characterName": "Default Character",
+        "row": 0,
+        "column": 0,
+        "spriteSheet": "sprites\\humanfigher1-1x1.png",
+        "spriteCounter": 0,
+        "hitPoints": 100,
+        "strength": 10,
+        "dexterity": 10, 
+        "constitution": 10,
+        "movementSpeed": 30,
+        "weapons": ["Basic Dagger"],
+        "armor": ["Basic Leather Armor"],
+        "miscItems": ["Basic Potion"]
+    }
+]

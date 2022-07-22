@@ -3,24 +3,29 @@ from helpers import *
 from Items import *
 
 class Player:
-    def __init__(self, row = 0, col = 0, spriteSheet = '', spriteCounter = 0, hitPoints = 100
-                 , strength = 10, dexterity = 10, constitution = 10
-                 , movementSpeed = 30):
-        self.sprites = spriteSheet
-        self.spriteCounter = spriteCounter
-        self.row = row
-        self.col = col
-        self.totalHP = hitPoints
-        self.currentHP = hitPoints
-        self.strength = strength
-        self.dexterity = dexterity
-        self.constitution = constitution
-        self.movementSpeed = movementSpeed
+    def __init__(self, playerDict):
+        self.sprites = playerDict.get("spriteSheet")
+        self.spriteCounter = 0
+        self.row = playerDict.get("row")
+        self.col = playerDict.get("column")
+        self.totalHP = playerDict.get("hitPoints")
+        self.currentHP = playerDict.get("hitPoints")
+        self.strength = playerDict.get("strength")
+        self.dexterity = playerDict.get("dexterity")
+        self.constitution = playerDict.get("constitution")
+        self.movementSpeed = playerDict.get("movementSpeed")
         self.weapons = [0]*5
+        for i in range(len(playerDict.get("weapons"))):
+            self.weapons[i] = playerDict.get("weapons")[i]
         self.currentWeapon = 0
         self.armor = [0]*5
+        for i in range(len(playerDict.get("armor"))):
+            self.armor[i] = playerDict.get("armor")[i]
         self.miscItems = [0]*5
+        for i in range(len(playerDict.get("miscItems"))):
+            self.miscItems[i] = playerDict.get("miscItems")[i]
         self.currentItem = 0
+        print(self.weapons, self.armor, self.miscItems)
         pass
     
 #######################################
