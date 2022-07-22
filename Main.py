@@ -26,6 +26,15 @@ def drawSidebar(app, canvas):
     canvas.create_rectangle(app.sidebarMinWidth, app.sidebarMinHeight+20, app.sidebarMinWidth + healthBarSize, app.sidebarMaxHeight//10+20, fill='#44af69')
     canvas.create_text(app.sidebarMinWidth+10, (app.sidebarMinHeight+app.sidebarMaxHeight//10)//2+20
                        , text=f'Health: {app.playerCharacter.getHealth()}', fill='#fffcf9', font=(app.font,14), anchor = 'w')
+    
+    #create weapon inventory
+    for col in range(len(app.playerCharacter.weapons)):
+        (x0, y0, x1, y1) = getCellBounds(0, col, app.sidebarActualWidth, app.sidebarActualWidth, 5)
+        if col == app.playerCharacter.currentWeapon:
+            canvas.create_rectangle(x0+app.sidebarMinWidth, y0+app.sidebarMaxHeight//10+40,
+                                x1+app.sidebarMinWidth, y1+app.sidebarMaxHeight//10+40, fill='#F686BD', width = 1)
+        canvas.create_rectangle(x0+app.sidebarMinWidth+10, y0+app.sidebarMaxHeight//10+40+10,
+                                x1+app.sidebarMinWidth-10, y1+app.sidebarMaxHeight//10+40-10, fill='#fffcf9', width = 1)
     pass
 
 
@@ -97,7 +106,9 @@ def initPlayer(app, player):
     spriteSheet = player.sprites
     app.playerCharacterSprites = animateSprite(app, spriteSheet, app.gridWidth, app.gridHeight, app.dungeon.getSize()) 
     player.sprites = app.playerCharacterSprites
-    player.row, player.col = app.dungeon.getSpawnPoint()
+    player.dungeonRow, player.dungeonCol = app.dungeon.getSpawnPoint()
+    app.playerMaxMoves = player.movementSpeed//10
+    app.playerMovesLeft = app.playerMaxMoves
     pass
 
 def initDungeon(app, gridSize): 
@@ -105,12 +116,12 @@ def initDungeon(app, gridSize):
     pass
 
 def initSidebar(app):
-    cellWidth = app.sidebarWidth // app.dungeon.getSize()
-    cellHeight = app.sidebarHeight // app.dungeon.getSize()
     app.sidebarMinWidth = app.gridWidth + app.gridWidth//app.dungeon.getSize()
     app.sidebarMinHeight = app.gridHeight//app.dungeon.getSize()
     app.sidebarMaxWidth = app.width - app.gridWidth//app.dungeon.getSize()
     app.sidebarMaxHeight = app.height - app.gridHeight//app.dungeon.getSize()
+    app.sidebarActualWidth = app.sidebarMaxWidth - app.sidebarMinWidth
+    app.sidebarActualHeight = app.sidebarMaxHeight - app.sidebarMinHeight
     pass
 
 def initDimensions(app):
@@ -161,6 +172,7 @@ def appStarted(app): # initialize the model (app.xyz)
     app.timerDelay = 1000//app.framerate
     app.animationTimer = 0
     app.gameState = 'start'
+    app.turn = 'player'
     pyglet.font.add_file('font\Vecna-oppx.ttf')
     app.font = 'Vecna-oppx'
     initDimensions(app)
@@ -191,25 +203,29 @@ def appStopped(app): # cleanup after app is done running
 def keyPressed(app, event): # use event.key
     if app.gameState == 'game':
         grid = app.dungeon.getLayout()
-        playerPOS = app.playerCharacter.getPos()
+        playerDungeonPOS = app.playerCharacter.getDungeonPos()
         #movement
-        if event.key == 'w' and app.playerCharacter.getPos()[0] > 0:
-            if grid[playerPOS[0]-1][playerPOS[1]] != 1:
-                app.playerCharacter.moveUp()
+        if app.turn == 'player':
+            if event.key == 'w' and app.playerCharacter.getDungeonPos()[0] > 0:
+                if grid[playerDungeonPOS[0]-1][playerDungeonPOS[1]] != 1:
+                    app.playerCharacter.moveUpDungeon()
 
-        elif event.key == 'a' and app.playerCharacter.getPos()[1] > 0:
-            if grid[playerPOS[0]][playerPOS[1]-1] != 1:
-                app.playerCharacter.moveLeft()
+            elif event.key == 'a' and app.playerCharacter.getDungeonPos()[1] > 0:
+                if grid[playerDungeonPOS[0]][playerDungeonPOS[1]-1] != 1:
+                    app.playerCharacter.moveLeftDungeon()
 
-        elif event.key == 's' and app.playerCharacter.getPos()[0] < app.dungeon.getSize()-1:
-            if grid[playerPOS[0]+1][playerPOS[1]] != 1:
-                app.playerCharacter.moveDown()
+            elif event.key == 's' and app.playerCharacter.getDungeonPos()[0] < app.dungeon.getSize()-1:
+                if grid[playerDungeonPOS[0]+1][playerDungeonPOS[1]] != 1:
+                    app.playerCharacter.moveDownDungeon()
 
-        elif event.key == 'd' and (app.playerCharacter.getPos()[1]) < app.dungeon.getSize()-1:
-            if grid[playerPOS[0]][playerPOS[1]+1] != 1:
-                app.playerCharacter.moveRight()
+            elif event.key == 'd' and (app.playerCharacter.getDungeonPos()[1]) < app.dungeon.getSize()-1:
+                if grid[playerDungeonPOS[0]][playerDungeonPOS[1]+1] != 1:
+                    app.playerCharacter.moveRightDungeon()
+            # app.playerMovesLeft -= 1
+            if app.playerMovesLeft <= 0:
+                app.turn = 'enemy'
 
-        if app.playerCharacter.getPos() == app.endPoint:
+        if app.playerCharacter.getDungeonPos() == app.endPoint:
             app.gameState = 'win'
         
     if app.gameState == 'start':
@@ -243,14 +259,19 @@ def mousePressed(app, event): # use event.x and event.y
 
 
 #######################################
-###System Changes#############
+###System Changes######################
 #######################################
 
 def timerFired(app): # respond to timer events
-    app.animationTimer += app.framerate
-    if app.animationTimer >= 100:
-        app.animationTimer = 0
-        app.playerCharacter.animateSprite(app)
+    if app.gameState == 'game':
+        #monster turns
+        if app.turn == 'enemy':
+            pass
+        #handle animations
+        app.animationTimer += app.framerate
+        if app.animationTimer >= 100:
+            app.animationTimer = 0
+            app.playerCharacter.animateSprite(app)
     pass           
 
 def sizeChanged(app): # respond to window size changes

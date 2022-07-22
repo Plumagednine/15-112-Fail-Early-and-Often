@@ -5,8 +5,10 @@ from Items import *
 class Player:
     def __init__(self, playerDict, allItemsDictionary):
         self.sprites = playerDict.get("spriteSheet")
-        self.row = playerDict.get("row")
-        self.col = playerDict.get("column")
+        self.dungeonRow = playerDict.get("dungeonRow")
+        self.dungeonCol = playerDict.get("dungeonCol")
+        self.roomRow = playerDict.get("roomRow")
+        self.roomCol = playerDict.get("roomCol")
         self.totalHP = playerDict.get("hitPoints")
         self.currentHP = playerDict.get("hitPoints")
         self.strengthModifier = (playerDict.get("strength")-10)//2
@@ -27,13 +29,13 @@ class Player:
         #######################################
         self.armor = [0]*5
         for i in range(len(playerDict.get("armor"))):
-            self.armor[i] = playerDict.get("armor")[i]
+            self.armor[i] = self.allItems.get(playerDict.get("armor")[i])
         #######################################
         ###Miscellaneous Items Inventory#######
         #######################################
         self.miscItems = [0]*5
         for i in range(len(playerDict.get("miscItems"))):
-            self.miscItems[i] = playerDict.get("miscItems")[i]
+            self.miscItems[i] = self.allItems.get(playerDict.get("miscItems")[i])
         self.currentItem = 0
         print(self.weapons, self.armor, self.miscItems)
         pass
@@ -43,7 +45,7 @@ class Player:
 #######################################
 
     def drawPlayer(self, app, canvas):
-        (x, y) = self.getPos()
+        (x, y) = self.getDungeonPos()
         (x0, y0, x1, y1) = getCellBounds(x, y, app.gridWidth, app.gridHeight, app.dungeon.getSize())
         canvas.create_image(x0 + (x1-x0)//2, y0 + (y1-y0)//2, image=ImageTk.PhotoImage(self.getImage()))
         pass
@@ -62,32 +64,61 @@ class Player:
     def getImage(self):
         return self.sprites[self.spriteCounter]
     
-#######################################
-###Movement and Location Functions#####
-#######################################
+###############################################
+###Dungeon Movement and Location Functions#####
+###############################################
     
-    def getPos(self):
-        return (self.row, self.col)
+    def getDungeonPos(self):
+        return (self.dungeonRow, self.dungeonCol)
     
-    def setPos(self, row, col):
-        self.row = row
-        self.col = col
+    def setDungeonPos(self, row, col):
+        self.dungeonRow = row
+        self.dungeonCol = col
         pass
     
-    def moveUp(self):
-        self.row -= 1
+    def moveUpDungeon(self):
+        self.dungeonRow -= 1
         pass
     
-    def moveDown(self):
-        self.row += 1
+    def moveDownDungeon(self):
+        self.dungeonRow += 1
         pass
     
-    def moveLeft(self):
-        self.col -= 1
+    def moveLeftDungeon(self):
+        self.dungeonCol -= 1
         pass
         
-    def moveRight(self):
-        self.col += 1
+    def moveRightDungeon(self):
+        self.dungeonCol += 1
+        pass
+    
+      
+###############################################
+###Dungeon Movement and Location Functions#####
+###############################################
+    
+    def getRoomPos(self):
+        return (self.roomRow, self.roomCol)
+    
+    def setRoomPos(self, row, col):
+        self.roomRow = row
+        self.roomCol = col
+        pass
+    
+    def moveUpRoom(self):
+        self.roomRow -= 1
+        pass
+    
+    def moveDownRoom(self):
+        self.roomRow += 1
+        pass
+    
+    def moveLeftRoom(self):
+        self.roomCol -= 1
+        pass
+        
+    def moveRightRoom(self):
+        self.roomCol += 1
         pass
 
 #######################################
