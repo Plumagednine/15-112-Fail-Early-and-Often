@@ -2,6 +2,7 @@
     {
         "itemName": "Basic Dagger",
         "itemType": "Weapon",
+        "itemWeight": "Light",
         "itemDescription": "Dagger is a double-edged knife used for stabbing, thrusting or as a secondary defense weapon in close combat.",
         "maxStackSize": 1,
         "itemModifier": "Damage",
@@ -11,6 +12,7 @@
     {
         "itemName": "Rapier",
         "itemType": "Weapon",
+        "itemWeight": "Light",
         "itemDescription": "A rapier is a military one-handed melee weapon in the light blade weapon group.",
         "maxStackSize": 1,
         "itemModifier": "Damage",

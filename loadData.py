@@ -12,10 +12,10 @@ def loadItems():
         allItemsDictionary[itemDict.get('itemName')] = Items(itemDict)
     return allItemsDictionary
 
-def loadPlayerCharacters():
+def loadPlayerCharacters(allItemsDictionary):
     characters = loadJSON('gameData\characters.JSON')
     allCharactersDictionary = {}
     for character in characters:
         characterDict = character
-        allCharactersDictionary[characterDict.get('characterName')] = Player(characterDict)
+        allCharactersDictionary[characterDict.get('characterName')] = Player(characterDict, allItemsDictionary)
     return allCharactersDictionary

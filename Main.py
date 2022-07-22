@@ -161,21 +161,24 @@ def appStarted(app): # initialize the model (app.xyz)
     app.timerDelay = 1000//app.framerate
     app.animationTimer = 0
     app.gameState = 'start'
-    allCharacters = loadPlayerCharacters()
-    app.playerCharacter = allCharacters.get('Default Character')
     pyglet.font.add_file('font\Vecna-oppx.ttf')
     app.font = 'Vecna-oppx'
     initDimensions(app)
     
-    #make start Menu
+    #Make Start Menu
     initStartMenu(app)
     
-    #Make Dungeon and Player
+    #Make Dungeon
     initDungeon(app, 16)
     app.spawnPoint = app.dungeon.getSpawnPoint()
     app.endPoint = app.dungeon.getEndPoint()
-    initPlayer(app, app.playerCharacter)
     initSidebar(app)
+    
+    #Make Player
+    allItems = loadItems()
+    allCharacters = loadPlayerCharacters(allItems)
+    app.playerCharacter = allCharacters.get('Default Character')
+    initPlayer(app, app.playerCharacter)
     pass           
 
 def appStopped(app): # cleanup after app is done running
@@ -225,6 +228,8 @@ def mousePressed(app, event): # use event.x and event.y
     if app.gameState == 'start':
         if (row,col) in app.startGameButton:
             app.gameState = 'game'
+    elif app.gameState == 'game':
+        print(app.playerCharacter.dealDamage())
     pass  
 
 # def mouseReleased(app, event): # use event.x and event.y

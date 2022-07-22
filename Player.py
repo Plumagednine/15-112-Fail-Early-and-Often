@@ -3,24 +3,34 @@ from helpers import *
 from Items import *
 
 class Player:
-    def __init__(self, playerDict):
+    def __init__(self, playerDict, allItemsDictionary):
         self.sprites = playerDict.get("spriteSheet")
-        self.spriteCounter = 0
         self.row = playerDict.get("row")
         self.col = playerDict.get("column")
         self.totalHP = playerDict.get("hitPoints")
         self.currentHP = playerDict.get("hitPoints")
-        self.strength = playerDict.get("strength")
-        self.dexterity = playerDict.get("dexterity")
-        self.constitution = playerDict.get("constitution")
+        self.strengthModifier = (playerDict.get("strength")-10)//2
+        self.dexterityModifier = (playerDict.get("dexterity")-10)//2
+        self.constitutionModifier = (playerDict.get("constitution")-10)//2
         self.movementSpeed = playerDict.get("movementSpeed")
+        self.spriteCounter = 0
+        self.allItems = allItemsDictionary
+        #######################################
+        ###Weapon Inventory####################
+        #######################################
         self.weapons = [0]*5
         for i in range(len(playerDict.get("weapons"))):
-            self.weapons[i] = playerDict.get("weapons")[i]
+            self.weapons[i] = self.allItems.get(playerDict.get("weapons")[i])
         self.currentWeapon = 0
+        #######################################
+        ###Armor Inventory#####################
+        #######################################
         self.armor = [0]*5
         for i in range(len(playerDict.get("armor"))):
             self.armor[i] = playerDict.get("armor")[i]
+        #######################################
+        ###Miscellaneous Items Inventory#######
+        #######################################
         self.miscItems = [0]*5
         for i in range(len(playerDict.get("miscItems"))):
             self.miscItems[i] = playerDict.get("miscItems")[i]
@@ -105,4 +115,8 @@ class Player:
         pass
     
     def dealDamage(self):
-        return self.strength
+        if self.weapons[self.currentWeapon].itemWeight == 'Light':
+            return self.dexterityModifier + random.randint(1,self.weapons[self.currentWeapon].itemModifierValue)
+        elif self.weapons[self.currentWeapon].itemWeight == 'Heavy':
+            return self.strengthModifier + random.randint(1,self.weapons[self.currentWeapon].itemModifierValue)
+         

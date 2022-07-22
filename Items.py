@@ -11,6 +11,7 @@ class Items:
         self.itemModifier = itemDict.get('itemModifier')
         self.itemModifierValue = itemDict.get('itemModifierValue')
         self.itemImage = itemDict.get('itemImagePath')
+        self.itemWeight = itemDict.get('itemWeight')
         self.item = itemDict
         pass
 
