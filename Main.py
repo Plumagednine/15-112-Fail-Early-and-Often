@@ -29,12 +29,18 @@ def drawSidebar(app, canvas):
     
     #create weapon inventory
     for col in range(len(app.playerCharacter.weapons)):
-        (x0, y0, x1, y1) = getCellBounds(0, col, app.sidebarActualWidth, app.sidebarActualWidth, 5)
+        (x0, y0, x1, y1) = getCellBounds(0, col, app.sidebarActualWidth, app.sidebarActualWidth, len(app.playerCharacter.weapons))
         if col == app.playerCharacter.currentWeapon:
             canvas.create_rectangle(x0+app.sidebarMinWidth, y0+app.sidebarMaxHeight//10+40,
                                 x1+app.sidebarMinWidth, y1+app.sidebarMaxHeight//10+40, fill='#F686BD', width = 1)
         canvas.create_rectangle(x0+app.sidebarMinWidth+10, y0+app.sidebarMaxHeight//10+40+10,
                                 x1+app.sidebarMinWidth-10, y1+app.sidebarMaxHeight//10+40-10, fill='#fffcf9', width = 1)
+        if app.playerCharacter.weapons[col] != 0:
+            canvas.create_image(x0 + (x1-x0)//2 + app.sidebarMinWidth, y0 + (y1-y0)//2 +app.sidebarMaxHeight//10+40,
+                                image=ImageTk.PhotoImage(app.playerCharacter.weapons[col].itemImage))
+            # canvas.create_text(x0+app.sidebarMinWidth+10, (y0+app.sidebarMaxHeight//10+40+y1)//2+10,
+            #                    text=f'{app.playerCharacter.weapons[col].itemName}', fill='#1c0f13', font=(app.font,14), anchor = 'w')
+            
     pass
 
 
@@ -115,7 +121,11 @@ def initDungeon(app, gridSize):
     app.dungeon = level_generation(gridSize)
     pass
 
-def initSidebar(app):
+def initDimensions(app):
+    app.gridWidth = app.width-int(app.height*.5)
+    app.gridHeight = app.height
+    app.sidebarWidth = app.width-app.gridWidth
+    app.sidebarHeight = app.height
     app.sidebarMinWidth = app.gridWidth + app.gridWidth//app.dungeon.getSize()
     app.sidebarMinHeight = app.gridHeight//app.dungeon.getSize()
     app.sidebarMaxWidth = app.width - app.gridWidth//app.dungeon.getSize()
@@ -124,12 +134,17 @@ def initSidebar(app):
     app.sidebarActualHeight = app.sidebarMaxHeight - app.sidebarMinHeight
     pass
 
-def initDimensions(app):
-    app.gridWidth = app.width-int(app.height*.5)
-    app.gridHeight = app.height
-    app.sidebarWidth = app.width-app.gridWidth
-    app.sidebarHeight = app.height
+def initSidebar(app):
+    #get inventory images
+    weapons = app.playerCharacter.weapons
+    for weapon in weapons:
+        if weapon != 0:
+            weaponImage = app.loadImage(weapon.itemImage)
+            weaponImage = weaponImage.resize(((app.sidebarActualWidth)//len(weapons)-20, (app.sidebarActualWidth)//len(weapons)-20), Image.Resampling.NEAREST)
+            weapon.itemImage = weaponImage
     pass
+
+
 
 #######################################
 ###Start Menu Initializers#############
@@ -175,22 +190,28 @@ def appStarted(app): # initialize the model (app.xyz)
     app.turn = 'player'
     pyglet.font.add_file('font\Vecna-oppx.ttf')
     app.font = 'Vecna-oppx'
-    initDimensions(app)
-    
-    #Make Start Menu
-    initStartMenu(app)
-    
     #Make Dungeon
     initDungeon(app, 16)
     app.spawnPoint = app.dungeon.getSpawnPoint()
     app.endPoint = app.dungeon.getEndPoint()
-    initSidebar(app)
+
+    
+    #Make Start Menu
+    initStartMenu(app)
+    
+    #GUI Dimension
+    initDimensions(app)
+    
+
     
     #Make Player
     allItems = loadItems()
     allCharacters = loadPlayerCharacters(allItems)
     app.playerCharacter = allCharacters.get('Default Character')
     initPlayer(app, app.playerCharacter)
+    
+    #make sidebar
+    initSidebar(app)
     pass           
 
 def appStopped(app): # cleanup after app is done running
@@ -245,7 +266,7 @@ def mousePressed(app, event): # use event.x and event.y
         if (row,col) in app.startGameButton:
             app.gameState = 'game'
     elif app.gameState == 'game':
-        print(app.playerCharacter.dealDamage())
+        pass
     pass  
 
 # def mouseReleased(app, event): # use event.x and event.y
@@ -276,9 +297,11 @@ def timerFired(app): # respond to timer events
 
 def sizeChanged(app): # respond to window size changes
     initDimensions(app)
-    app.playerCharacter.updateSprite(updateSpriteDimensions(app, app.playerCharacter.getSprites(), app.gridWidth, app.gridHeight, app.dungeon.getSize()))
-    initSidebar(app)
     initStartMenu(app)
+    app.playerCharacter.updateSprite(updateSpriteDimensions(app, app.playerCharacter.getSprites(), app.gridWidth, app.gridHeight, app.dungeon.getSize()))
+    #update weapon dimensions
+    updateItemDimensions(app, app.playerCharacter, app.sidebarActualWidth, app.sidebarActualWidth, len(app.playerCharacter.weapons))
+
     pass  
 
             

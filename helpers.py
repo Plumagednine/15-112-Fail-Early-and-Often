@@ -55,7 +55,7 @@ def create_elipse(canvas, cx, cy, radius, **options):
                     , **options)
 
 def resizeSprite(sprite, width, height):
-    sprite = sprite.resize((width, height), Image.NEAREST)
+    sprite = sprite.resize((width, height), Image.Resampling.NEAREST)
     return sprite
 
 def updateSpriteDimensions(app, sprites, width, height, gridSize):
@@ -72,6 +72,10 @@ def animateSprite(app, tokenPath, width, height, gridSize):
         sprites.append(sprite)   
     return sprites 
 
+def updateItemDimensions(app, player, width, height, gridSize):
+    for weapon in player.weapons:
+        itemImage = resizeSprite(weapon.getItemImage(), width//gridSize-20, height//gridSize-20)
+        weapon.setItemImage(itemImage)
 #######################################
 ###File Management Functions###########
 #######################################

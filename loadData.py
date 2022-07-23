@@ -3,7 +3,6 @@ from helpers import *
 from Items import *
 from Player import *
 
-
 def loadItems():
     items = loadJSON('gameData\items.JSON')
     allItemsDictionary = {}

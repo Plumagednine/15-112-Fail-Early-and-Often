@@ -6,7 +6,6 @@ class Items:
     def __init__(self, itemDict):
         self.itemName = itemDict.get('itemName')
         self.itemType = itemDict.get('itemType')
-        self.itemDescription = itemDict.get('itemDescription')
         self.maxStackSize = itemDict.get('maxStackSize')
         self.itemModifier = itemDict.get('itemModifier')
         self.itemModifierValue = itemDict.get('itemModifierValue')
@@ -17,3 +16,9 @@ class Items:
     def getItem(self):
         return self.item
         pass
+    
+    def getItemImage(self):
+        return self.itemImage
+
+    def setItemImage(self, image):
+        self.itemImage = image
