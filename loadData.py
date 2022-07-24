@@ -2,6 +2,7 @@ from cmu_112_graphics import *
 from helpers import *
 from Items import *
 from Player import *
+from Monster import *
 
 def loadItems():
     items = loadJSON('gameData\items.JSON')
@@ -18,3 +19,11 @@ def loadPlayerCharacters(allItemsDictionary):
         characterDict = character
         allCharactersDictionary[characterDict.get('characterName')] = Player(characterDict, allItemsDictionary)
     return allCharactersDictionary
+
+def loadMonsters():
+    monsters = loadJSON('gameData\monsters.JSON')
+    allMonstersDictionary = {}
+    for monster in monsters:
+        monsterDict = monster
+        allMonstersDictionary[monsterDict.get('monsterName')] = Monster(monsterDict)
+    return allMonstersDictionary

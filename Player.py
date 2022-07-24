@@ -38,7 +38,6 @@ class Player:
         for i in range(len(playerDict.get("miscItems"))):
             self.miscItems[i] = self.allItems.get(playerDict.get("miscItems")[i])
         self.currentItem = 0
-        print(self.weapons, self.armor, self.miscItems)
         pass
     
 #######################################

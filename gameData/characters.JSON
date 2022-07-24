@@ -15,5 +15,22 @@
         "weapons": ["Basic Dagger"],
         "armor": [],
         "miscItems": []
+    },
+    {
+        "characterName": "Tony",
+        "dungeonRow": 0,
+        "dungeonColumn": 0,
+        "roomRow": 0,
+        "roomColumn": 0,
+        "spriteSheet": "sprites\\tony.png",
+        "spriteCounter": 0,
+        "hitPoints": 45,
+        "strength": 10,
+        "dexterity": 16, 
+        "constitution": 12,
+        "movementSpeed": 40,
+        "weapons": ["Basic Dagger", "Rapier", "Shortsword"],
+        "armor": [],
+        "miscItems": []
     }
 ]

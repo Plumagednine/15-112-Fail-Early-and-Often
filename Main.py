@@ -163,7 +163,7 @@ def initSidebar(app):
     for weapon in weapons:
         if weapon != 0:
             weaponImage = app.loadImage(weapon.itemImage)
-            weaponImage = weaponImage.resize(((app.sidebarActualWidth)//len(weapons)-20, (app.sidebarActualWidth)//len(weapons)-20), Image.Resampling.NEAREST)
+            weaponImage = weaponImage.resize(((app.sidebarActualWidth)//len(weapons)-20, (app.sidebarActualWidth)//len(weapons)-20), Image.Resampling.LANCZOS)
             weapon.itemImage = weaponImage
     pass
 
@@ -230,8 +230,10 @@ def appStarted(app): # initialize the model (app.xyz)
     #Make Player
     allItems = loadItems()
     allCharacters = loadPlayerCharacters(allItems)
-    app.playerCharacter = allCharacters.get('Default Character')
+    app.playerCharacter = allCharacters.get('Tony')
     initPlayer(app, app.playerCharacter)
+    
+    #make monster
     
     #make sidebar
     initSidebar(app)
@@ -289,14 +291,14 @@ def mousePressed(app, event): # use event.x and event.y
         if (row,col) in app.startGameButton:
             app.gameState = 'game'
     elif app.gameState == 'game':
-        (row,col) = getCell(event.x, event.y, app.sidebarActualWidth, app.sidebarActualWidth, len(app.playerCharacter.weapons), app.sidebarMinWidth, app.sidebarMinHeight+(app.gridWidth//app.dungeon.getSize()))
+        (row,col) = getCell(event.x, event.y, app.sidebarActualWidth, app.sidebarActualWidth, len(app.playerCharacter.weapons)
+                            , app.sidebarMinWidth, app.sidebarMinHeight+(app.gridWidth//app.dungeon.getSize()))
         if row == 0:
             app.playerCharacter.currentWeapon = col
         if row == 1:
             app.playerCharacter.currentArmor = col
         if row == 2:
             app.playerCharacter.currentItem = col
-        print(app.playerCharacter.currentWeapon, app.playerCharacter.currentArmor, app.playerCharacter.currentItem)
         pass
     pass
 
@@ -329,7 +331,8 @@ def timerFired(app): # respond to timer events
 def sizeChanged(app): # respond to window size changes
     initDimensions(app)
     initStartMenu(app)
-    app.playerCharacter.updateSprite(updateSpriteDimensions(app, app.playerCharacter.getSprites(), app.gridWidth, app.gridHeight, app.dungeon.getSize()))
+    app.playerCharacter.updateSprite(updateSpriteDimensions(app, app.playerCharacter.getSprites()
+                                                            , app.gridWidth, app.gridHeight, app.dungeon.getSize()))
     #update weapon dimensions
     updateItemDimensions(app, app.playerCharacter, app.sidebarActualWidth, app.sidebarActualWidth, len(app.playerCharacter.weapons))
 
