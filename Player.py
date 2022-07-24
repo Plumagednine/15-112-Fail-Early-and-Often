@@ -30,6 +30,7 @@ class Player:
         self.armor = [0]*5
         for i in range(len(playerDict.get("armor"))):
             self.armor[i] = self.allItems.get(playerDict.get("armor")[i])
+        self.currentArmor = 0
         #######################################
         ###Miscellaneous Items Inventory#######
         #######################################

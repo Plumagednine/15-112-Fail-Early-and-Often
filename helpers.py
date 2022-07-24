@@ -27,11 +27,11 @@ def roundHalfUp(d): #helper-fn
 ###Grid Functions######################
 #######################################
 
-def getCell(x, y, width, height, gridSize):
+def getCell(x, y, width, height, gridSize, xOffset = 0, yOffset = 0):
     cellWidth = width // gridSize
     cellHeight = height // gridSize
-    row =  y//cellHeight
-    col = x//cellWidth
+    row =  (y-yOffset)//cellHeight
+    col = (x-xOffset)//cellWidth
     return (row, col)
 
 def getCellBounds(row, col, width, height, gridSize):

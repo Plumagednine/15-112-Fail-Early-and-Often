@@ -38,8 +38,31 @@ def drawSidebar(app, canvas):
         if app.playerCharacter.weapons[col] != 0:
             canvas.create_image(x0 + (x1-x0)//2 + app.sidebarMinWidth, y0 + (y1-y0)//2 +app.sidebarMaxHeight//10+40,
                                 image=ImageTk.PhotoImage(app.playerCharacter.weapons[col].itemImage))
-            # canvas.create_text(x0+app.sidebarMinWidth+10, (y0+app.sidebarMaxHeight//10+40+y1)//2+10,
-            #                    text=f'{app.playerCharacter.weapons[col].itemName}', fill='#1c0f13', font=(app.font,14), anchor = 'w')
+    
+    #create armor inventory
+    for col in range(len(app.playerCharacter.armor)):
+        (x0, y0, x1, y1) = getCellBounds(1, col, app.sidebarActualWidth, app.sidebarActualWidth, len(app.playerCharacter.armor))
+        if col == app.playerCharacter.currentArmor:
+            canvas.create_rectangle(x0+app.sidebarMinWidth, y0+app.sidebarMaxHeight//10+40,
+                                x1+app.sidebarMinWidth, y1+app.sidebarMaxHeight//10+40, fill='#F686BD', width = 1)
+        canvas.create_rectangle(x0+app.sidebarMinWidth+10, y0+app.sidebarMaxHeight//10+40+10,
+                                x1+app.sidebarMinWidth-10, y1+app.sidebarMaxHeight//10+40-10, fill='#fffcf9', width = 1)
+        if app.playerCharacter.armor[col] != 0:
+            canvas.create_image(x0 + (x1-x0)//2 + app.sidebarMinWidth, y0 + (y1-y0)//2 +app.sidebarMaxHeight//10+40,
+                                image=ImageTk.PhotoImage(app.playerCharacter.armor[col].itemImage))
+    
+    #create potion inventory
+    #create armor inventory
+    for col in range(len(app.playerCharacter.miscItems)):
+        (x0, y0, x1, y1) = getCellBounds(2, col, app.sidebarActualWidth, app.sidebarActualWidth, len(app.playerCharacter.miscItems))
+        if col == app.playerCharacter.currentItem:
+            canvas.create_rectangle(x0+app.sidebarMinWidth, y0+app.sidebarMaxHeight//10+40,
+                                x1+app.sidebarMinWidth, y1+app.sidebarMaxHeight//10+40, fill='#F686BD', width = 1)
+        canvas.create_rectangle(x0+app.sidebarMinWidth+10, y0+app.sidebarMaxHeight//10+40+10,
+                                x1+app.sidebarMinWidth-10, y1+app.sidebarMaxHeight//10+40-10, fill='#fffcf9', width = 1)
+        if app.playerCharacter.miscItems[col] != 0:
+            canvas.create_image(x0 + (x1-x0)//2 + app.sidebarMinWidth, y0 + (y1-y0)//2 +app.sidebarMaxHeight//10+40,
+                                image=ImageTk.PhotoImage(app.playerCharacter.miscItems[col].itemImage))
             
     pass
 
@@ -261,13 +284,21 @@ def keyPressed(app, event): # use event.key
     # pass   
 
 def mousePressed(app, event): # use event.x and event.y
-    (row,col) = getCell(event.x, event.y, app.width, app.height, 10)
     if app.gameState == 'start':
+        (row,col) = getCell(event.x, event.y, app.width, app.height, 10)
         if (row,col) in app.startGameButton:
             app.gameState = 'game'
     elif app.gameState == 'game':
+        (row,col) = getCell(event.x, event.y, app.sidebarActualWidth, app.sidebarActualWidth, len(app.playerCharacter.weapons), app.sidebarMinWidth, app.sidebarMinHeight+(app.gridWidth//app.dungeon.getSize()))
+        if row == 0:
+            app.playerCharacter.currentWeapon = col
+        if row == 1:
+            app.playerCharacter.currentArmor = col
+        if row == 2:
+            app.playerCharacter.currentItem = col
+        print(app.playerCharacter.currentWeapon, app.playerCharacter.currentArmor, app.playerCharacter.currentItem)
         pass
-    pass  
+    pass
 
 # def mouseReleased(app, event): # use event.x and event.y
 #     pass 
