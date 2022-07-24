@@ -3,7 +3,7 @@ import pyglet
 
 from cmu_112_graphics import *
 from helpers import *
-from level_generation import *
+from Dungeon import *
 from Player import *
 from Items import *
 from loadData import *
