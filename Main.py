@@ -112,7 +112,7 @@ def redrawAll(app, canvas): # draw (view) the model in the canvas
     
     #win menu
     if app.gameState == 'win':
-        canvas.create_text(app.width//2, app.height//2, text="You Win!", fill='#fffcf9', font=(app.font,25))
+        # canvas.create_text(app.width//2, app.height//2, text="You Win!", fill='#fffcf9', font=(app.font,25))
         pass
 
     #Draw Game
@@ -130,6 +130,10 @@ def redrawAll(app, canvas): # draw (view) the model in the canvas
 #######################################
 ###Game Initializers###################
 #######################################
+def continueGame(app):
+    initDungeon(app, app.dungeonSize)
+    row,col = app.spawnPoint
+    app.playerCharacter.setDungeonPos(row,col)
 
 def initPlayer(app, player):
     spriteSheet = player.sprites
@@ -142,6 +146,9 @@ def initPlayer(app, player):
 
 def initDungeon(app, gridSize): 
     app.dungeon = level_generation(gridSize)
+    print2dList(app.dungeon.getLayout())
+    app.spawnPoint = app.dungeon.getSpawnPoint()
+    app.endPoint = app.dungeon.getEndPoint()
     pass
 
 def initDimensions(app):
@@ -214,9 +221,8 @@ def appStarted(app): # initialize the model (app.xyz)
     pyglet.font.add_file('font\Vecna-oppx.ttf')
     app.font = 'Vecna-oppx'
     #Make Dungeon
-    initDungeon(app, 16)
-    app.spawnPoint = app.dungeon.getSpawnPoint()
-    app.endPoint = app.dungeon.getEndPoint()
+    app.dungeonSize = 16
+    initDungeon(app, app.dungeonSize)
 
     
     #Make Start Menu
@@ -230,7 +236,7 @@ def appStarted(app): # initialize the model (app.xyz)
     #Make Player
     allItems = loadItems()
     allCharacters = loadPlayerCharacters(allItems)
-    app.playerCharacter = allCharacters.get('Tony')
+    app.playerCharacter = allCharacters.get('Default Character')
     initPlayer(app, app.playerCharacter)
     
     #make monster
@@ -326,6 +332,10 @@ def timerFired(app): # respond to timer events
         if app.animationTimer >= 100:
             app.animationTimer = 0
             app.playerCharacter.animateSprite(app)
+    if app.gameState == 'win':
+        continueGame(app)
+        app.gameState = 'game'
+        pass
     pass           
 
 def sizeChanged(app): # respond to window size changes

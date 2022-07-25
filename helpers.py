@@ -88,3 +88,11 @@ def loadJSON(filePath):
 def loadText(filePath):
     with open(filePath) as f:
         return ast.literal_eval(f.read())
+    
+#######################################
+###Debug Functions#####################
+#######################################
+
+def print2dList(list):
+    for row in list:
+        print(row)
