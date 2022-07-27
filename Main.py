@@ -98,6 +98,23 @@ def drawStartMenu(app, canvas):
     pass
 
 #######################################
+###Pause Menu Draw Functions###########
+#######################################
+def drawPauseMenu(app, canvas):
+    #make interactive grid
+    gridSize = 10
+    # make continue button
+    midIndex = len(app.contineuGameButton)//2
+    tempX0,tempY0,tempX1,tempY1 = getCellBounds(app.contineuGameButton[midIndex][0], app.contineuGameButton[midIndex][1], app.width, app.height, gridSize)
+    canvas.create_text(tempX0,tempY0, text="Continue Game", fill='#fffcf9', font=(app.font,60), anchor = 'n',)
+    
+    # make exit button
+    midIndex = len(app.exitToStartButton)//2
+    tempX0,tempY0,tempX1,tempY1 = getCellBounds(app.exitToStartButton[midIndex][0], app.exitToStartButton[midIndex][1], app.width, app.height, gridSize)
+    canvas.create_text(tempX0,tempY0, text="Exit To Start Menu", fill='#fffcf9', font=(app.font,60), anchor = 'n')
+    pass
+
+#######################################
 ###Redraw All##########################
 #######################################
 def redrawAll(app, canvas): # draw (view) the model in the canvas
@@ -122,6 +139,9 @@ def redrawAll(app, canvas): # draw (view) the model in the canvas
             app.currentRoom.drawRoom(app, canvas)
         app.playerCharacter.drawPlayer(app, canvas, app.map)
         drawSidebar(app, canvas)
+        
+    if app.gameState == 'pauseMenu':
+        drawPauseMenu(app, canvas)
     pass      
 
 #######################################
@@ -222,6 +242,35 @@ def initStartMenu(app):
     pass
 
 #######################################
+###Pause Menu Initializers#############
+#######################################
+        
+def initPauseMenu(app):
+    # create a 10x10 grid
+    gridSize = 10
+    app.pauseMenuGrid = []
+    gridRow = []
+    app.contineuGameButton = [(3,2),(3,3),(3,4),(3,5),(3,6),(3,7)]
+    app.exitToStartButton = [(6,2),(6,3),(6,4),(6,5),(6,6),(6,7)]
+    contineuGameButton = app.contineuGameButton
+    exitToStartButton = app.exitToStartButton
+    for row in range(gridSize):
+        for col in range(gridSize):
+            gridRow.append(0)
+        app.pauseMenuGrid.append(gridRow)
+        gridRow=[]
+        
+    # add buttons
+    for row in range(gridSize):
+        for col in range(gridSize):
+            if (row,col) in contineuGameButton:
+                app.pauseMenuGrid[row][col] = 1
+            elif (row,col) in exitToStartButton:
+                app.pauseMenuGrid[row][col] = 2
+    
+    pass
+
+#######################################
 ###App First Run#######################
 #######################################
 def appStarted(app): # initialize the model (app.xyz)
@@ -269,7 +318,9 @@ def appStarted(app): # initialize the model (app.xyz)
     
     #make sidebar
     initSidebar(app)
-    pass           
+    
+    #make pause menu
+    initPauseMenu(app)    
 
 def appStopped(app): # cleanup after app is done running
     pass           
@@ -279,14 +330,23 @@ def appStopped(app): # cleanup after app is done running
 #######################################
 
 def keyPressed(app, event): # use event.key
-    if app.gameState == 'game':
+    if app.gameState == 'pauseMenu':
+        if event.key == 'Escape':
+            app.gameState = 'game'
+    
+    elif app.gameState == 'game':
         grid = app.dungeon.getLayout()
         playerDungeonPOS = app.playerCharacter.getDungeonPos()
         playerRoomPos = app.playerCharacter.getRoomPos()
         currentRoom = app.dungeon.getRoom(playerDungeonPOS[0], playerDungeonPOS[1]).getLayout()
-        #movement
+
         if event.key == 'm':
             app.map = not app.map
+            
+        elif event.key == 'Escape':
+            app.gameState = 'pauseMenu'
+            
+        #movement
         if app.turn == 'player':
             if event.key == 'w':
                 if app.playerCharacter.getRoomPos()[0] > 0:
@@ -327,22 +387,18 @@ def keyPressed(app, event): # use event.key
                         app.playerCharacter.moveRightDungeon()
                         app.playerCharacter.setRoomPos(playerRoomPos[0], 0)
                 pass
+            
+            #player turns
             # app.playerMovesLeft -= 1
             if app.playerMovesLeft <= 0:
                 app.turn = 'enemy'
                 
-            
+            #update current room
             app.currentRoom = app.dungeon.getRoom(app.playerCharacter.getDungeonPos()[0],app.playerCharacter.getDungeonPos()[1])
+            
         if app.playerCharacter.getDungeonPos() == app.endPointDungeon:
             if app.playerCharacter.getRoomPos() == app.dungeon.getRoom(app.endPointDungeon[0], app.endPointDungeon[1]).getEndPoint():
-                app.gameState = 'win'
-        
-    if app.gameState == 'start':
-        pass
-    
-    if app.gameState == 'win':
-        pass
-        
+                app.gameState = 'win'    
     pass    
 
 # def keyReleased(app, event): # use event.key
@@ -353,17 +409,25 @@ def mousePressed(app, event): # use event.x and event.y
         (row,col) = getCell(event.x, event.y, app.width, app.height, 10)
         if (row,col) in app.startGameButton:
             app.gameState = 'game'
+            
     elif app.gameState == 'game':
         (row,col) = getCell(event.x, event.y, app.sidebarActualWidth, app.sidebarActualWidth, len(app.playerCharacter.weapons)
                             , app.sidebarMinWidth, app.sidebarMinHeight+(app.gridWidth//app.dungeon.getSize()))
-        if row == 0:
+        if row == 0 and (col >= 0 and col < len(app.playerCharacter.weapons)):
             app.playerCharacter.currentWeapon = col
-        if row == 1:
+        if row == 1 and (col >= 0 and col < len(app.playerCharacter.armor)):
             app.playerCharacter.currentArmor = col
-        if row == 2:
+        if row == 2 and (col >= 0 and col < len(app.playerCharacter.miscItems)):
             app.playerCharacter.currentItem = col
+    
+    elif app.gameState == 'pauseMenu':
+        (row,col) = getCell(event.x, event.y, app.width, app.height, 10)
+        if (row, col) in app.exitToStartButton:
+            app.gameState = 'start'
+        elif (row, col) in app.contineuGameButton:
+            app.gameState = 'game'
         pass
-    pass
+    
 
 # def mouseReleased(app, event): # use event.x and event.y
 #     pass 

@@ -6,6 +6,16 @@ from helpers import *
 from Room import *
 
 class level_generation:
+    def setSurroundingWalls(self, row, col):
+        if self.grid[row-1][col] == 1:
+                    self.grid[row][col].setWall(0)
+        if self.grid[row][col-1] == 1:
+                    self.grid[row][col].setWall(1)
+        if self.grid[row+1][col] == 1:
+                    self.grid[row][col].setWall(2)
+        if self.grid[row][col+1] == 1:
+                    self.grid[row][col].setWall(3)
+        pass
     #######################################
     ###Initalizer Function#################
     #######################################
@@ -257,7 +267,9 @@ class level_generation:
                 elif (self.grid[row][col] == 3):
                     self.endpoint = (row, col)
                     self.grid[row][col] = copy.deepcopy(self.allRooms.get(3))
-        
+                # if self.grid[row][col] != 1:
+                #     self.setSurroundingWalls(row, col)
+                
         #######################################
         ###End INIT############################
         #######################################

@@ -48,3 +48,24 @@ class Room:
     def updateGrid(self, row, col, value):
         self.grid[row][col] = value
         return self.grid
+    
+    def setWall(self, wall):
+        #0 == top, 1 == left, 2 == bottom, 3 == right
+        if wall == 0:
+            for i in range(0,self.gridSize):
+                self.updateGrid(0, i, 1)
+            pass
+        elif wall == 1:
+            for i in range(0,self.gridSize):
+                self.updateGrid(i,0, 1)
+            pass
+        elif wall == 2:
+            for i in range(0,self.gridSize):
+                self.updateGrid(self.gridSize-1, i, 1)
+            pass
+        elif wall == 3:
+            for i in range(0,self.gridSize):
+                self.updateGrid(i, self.gridSize-1, 1)
+            pass
+      
+        
