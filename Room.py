@@ -55,19 +55,23 @@ class Room:
         #0 == top, 1 == left, 2 == bottom, 3 == right
         if wall == 0:
             for i in range(0,self.gridSize):
-                self.updateGrid(0, i, 4)
+                if self.grid[0][i] == 0:
+                    self.updateGrid(0, i, 4)
             pass
         elif wall == 1:
             for i in range(0,self.gridSize):
-                self.updateGrid(i,0, 4)
+                if self.grid[i][0] == 0:
+                    self.updateGrid(i,0, 4)
             pass
         elif wall == 2:
             for i in range(0,self.gridSize):
-                self.updateGrid(self.gridSize-1, i, 4)
+                if self.grid[self.gridSize-1][i] == 0:
+                    self.updateGrid(self.gridSize-1, i, 4)
             pass
         elif wall == 3:
             for i in range(0,self.gridSize):
-                self.updateGrid(i, self.gridSize-1, 4)
+                if self.grid[i][self.gridSize-1] == 0:
+                    self.updateGrid(i, self.gridSize-1, 4)
             pass
       
         
