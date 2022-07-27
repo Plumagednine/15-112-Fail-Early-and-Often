@@ -31,6 +31,8 @@ class Room:
                     canvas.create_rectangle(x0, y0, x1, y1, fill='#1b4965', width = 1)
                 elif gridLayout[row][col] == 3:
                     canvas.create_rectangle(x0, y0, x1, y1, fill='#6C7D47', width = 1)
+                elif gridLayout[row][col] == 4:
+                    canvas.create_rectangle(x0, y0, x1, y1, fill='#8E8686', width = 1)
     pass
 
     def getPlayerSpawn(self):
@@ -53,19 +55,19 @@ class Room:
         #0 == top, 1 == left, 2 == bottom, 3 == right
         if wall == 0:
             for i in range(0,self.gridSize):
-                self.updateGrid(0, i, 1)
+                self.updateGrid(0, i, 4)
             pass
         elif wall == 1:
             for i in range(0,self.gridSize):
-                self.updateGrid(i,0, 1)
+                self.updateGrid(i,0, 4)
             pass
         elif wall == 2:
             for i in range(0,self.gridSize):
-                self.updateGrid(self.gridSize-1, i, 1)
+                self.updateGrid(self.gridSize-1, i, 4)
             pass
         elif wall == 3:
             for i in range(0,self.gridSize):
-                self.updateGrid(i, self.gridSize-1, 1)
+                self.updateGrid(i, self.gridSize-1, 4)
             pass
       
         

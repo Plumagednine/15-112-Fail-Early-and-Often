@@ -259,16 +259,16 @@ class level_generation:
         for row in range(0, self.gridSize):
             for col in range(0, self.gridSize):
                 if (self.grid[row][col] == 0):
-                    tempRoom = copy.deepcopy(self.allRooms.get(0))
+                    tempRoom = copy.deepcopy(self.allRooms.get(random.randint(0, len(self.allRooms)-3)))
                     self.grid[row][col] = tempRoom
                 elif (self.grid[row][col] == 2):
                     self.spawnPoint = (row, col)
-                    self.grid[row][col] = copy.deepcopy(self.allRooms.get(2))
+                    self.grid[row][col] = copy.deepcopy(self.allRooms.get(-1))
                 elif (self.grid[row][col] == 3):
                     self.endpoint = (row, col)
-                    self.grid[row][col] = copy.deepcopy(self.allRooms.get(3))
-                # if self.grid[row][col] != 1:
-                #     self.setSurroundingWalls(row, col)
+                    self.grid[row][col] = copy.deepcopy(self.allRooms.get(-2))
+                if self.grid[row][col] != 1:
+                    self.setSurroundingWalls(row, col)
                 
         #######################################
         ###End INIT############################
@@ -282,9 +282,9 @@ class level_generation:
                 (x0, y0, x1, y1) = getCellBounds(row, col, app.gridWidth, app.gridHeight, gridSize)
                 if gridLayout[row][col] == 1:
                     canvas.create_rectangle(x0, y0, x1, y1, fill='#1c0f13', width = 1)
-                elif gridLayout[row][col].id == 2:
+                elif gridLayout[row][col].id == -1:
                     canvas.create_rectangle(x0, y0, x1, y1, fill='#1b4965', width = 1)
-                elif gridLayout[row][col].id == 3:
+                elif gridLayout[row][col].id == -2:
                     canvas.create_rectangle(x0, y0, x1, y1, fill='#6C7D47', width = 1)
                 else:
                     canvas.create_rectangle(x0, y0, x1, y1, fill='#fffcf9', width = 1)
