@@ -278,7 +278,7 @@ class level_generation:
                     canvas.create_rectangle(x0, y0, x1, y1, fill='#fffcf9', width = 1)
         pass
     
-    def getCurrentRoom(self, row, col):
+    def getRoom(self, row, col):
         return self.grid[row][col]
     
     def getSize(self):

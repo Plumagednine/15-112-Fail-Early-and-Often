@@ -134,14 +134,17 @@ def redrawAll(app, canvas): # draw (view) the model in the canvas
 #######################################
 def continueGame(app):
     initDungeon(app, app.allRooms, app.dungeonSize)
-    row,col = app.spawnPoint
-    app.playerCharacter.setDungeonPos(row,col)
+    dungeonRow,dungeonCol = app.spawnPointDungeon
+    roomRow,roomCol = app.dungeon.getRoom(app.dungeon.getSpawnPoint()[0],app.dungeon.getSpawnPoint()[1]).getPlayerSpawn()
+    app.playerCharacter.setDungeonPos(dungeonRow,dungeonCol)
+    app.playerCharacter.setRoomPos(roomRow,roomCol)
 
 def initPlayer(app, player):
     spriteSheet = player.sprites
     app.playerCharacterSprites = animateSprite(app, spriteSheet, app.gridWidth, app.gridHeight, app.dungeon.getSize()) 
     player.sprites = app.playerCharacterSprites
     player.dungeonRow, player.dungeonCol = app.dungeon.getSpawnPoint()
+    player.roomRow, player.roomCol = app.dungeon.getRoom(app.dungeon.getSpawnPoint()[0],app.dungeon.getSpawnPoint()[1]).getPlayerSpawn()
     app.playerMaxMoves = player.movementSpeed//10
     app.playerMovesLeft = app.playerMaxMoves
     pass
@@ -156,10 +159,9 @@ def initMonster(app, monster):
 def initDungeon(app, allRooms, gridSize): 
     app.dungeon = level_generation(allRooms, gridSize)
     print2dList(app.dungeon.getLayout())
-    app.spawnPoint = app.dungeon.getSpawnPoint()
-    app.endPoint = app.dungeon.getEndPoint()
-    print(app.spawnPoint)
-    app.currentRoom = app.dungeon.getCurrentRoom(app.spawnPoint[0], app.spawnPoint[1])
+    app.spawnPointDungeon = app.dungeon.getSpawnPoint()
+    app.endPointDungeon = app.dungeon.getEndPoint()
+    app.currentRoom = app.dungeon.getRoom(app.spawnPointDungeon[0], app.spawnPointDungeon[1])
     pass
 
 def initDimensions(app):
@@ -281,33 +283,59 @@ def keyPressed(app, event): # use event.key
         grid = app.dungeon.getLayout()
         playerDungeonPOS = app.playerCharacter.getDungeonPos()
         playerRoomPos = app.playerCharacter.getRoomPos()
+        currentRoom = app.dungeon.getRoom(playerDungeonPOS[0], playerDungeonPOS[1]).getLayout()
         #movement
         if event.key == 'm':
             app.map = not app.map
         if app.turn == 'player':
-            if event.key == 'w' and app.playerCharacter.getDungeonPos()[0] > 0:
-                if grid[playerDungeonPOS[0]-1][playerDungeonPOS[1]] != 1:
-                    app.playerCharacter.moveUpDungeon()
-
-            elif event.key == 'a' and app.playerCharacter.getDungeonPos()[1] > 0:
-                if grid[playerDungeonPOS[0]][playerDungeonPOS[1]-1] != 1:
-                    app.playerCharacter.moveLeftDungeon()
-
-            elif event.key == 's' and app.playerCharacter.getDungeonPos()[0] < app.dungeon.getSize()-1:
-                if grid[playerDungeonPOS[0]+1][playerDungeonPOS[1]] != 1:
-                    app.playerCharacter.moveDownDungeon()
-
-            elif event.key == 'd' and (app.playerCharacter.getDungeonPos()[1]) < app.dungeon.getSize()-1:
-                if grid[playerDungeonPOS[0]][playerDungeonPOS[1]+1] != 1:
-                    app.playerCharacter.moveRightDungeon()
+            if event.key == 'w':
+                if app.playerCharacter.getRoomPos()[0] > 0:
+                    if currentRoom[playerRoomPos[0]-1][playerRoomPos[1]] != 1:
+                        app.playerCharacter.moveUpRoom()
+                else:
+                    if grid[playerDungeonPOS[0]-1][playerDungeonPOS[1]] != 1:
+                        app.playerCharacter.moveUpDungeon()
+                        app.playerCharacter.setRoomPos(app.dungeon.getRoom(playerDungeonPOS[0]-1, playerDungeonPOS[1]).getSize()-1, playerRoomPos[1])
+                pass
+            
+            elif event.key == 'a':
+                if app.playerCharacter.getRoomPos()[1] > 0:
+                    if currentRoom[playerRoomPos[0]][playerRoomPos[1]-1] != 1:
+                        app.playerCharacter.moveLeftRoom()
+                else:
+                    if grid[playerDungeonPOS[0]][playerDungeonPOS[1]-1] != 1:
+                        app.playerCharacter.moveLeftDungeon()
+                        app.playerCharacter.setRoomPos(playerRoomPos[0], app.dungeon.getRoom(playerDungeonPOS[0], playerDungeonPOS[1]-1).getSize()-1)
+                pass
+            
+            elif event.key == 's':
+                if app.playerCharacter.getRoomPos()[0] < app.dungeon.getRoom(playerDungeonPOS[0], playerDungeonPOS[1]).getSize()-1:
+                    if currentRoom[playerRoomPos[0]+1][playerRoomPos[1]] != 1:
+                        app.playerCharacter.moveDownRoom()
+                else:
+                    if grid[playerDungeonPOS[0]+1][playerDungeonPOS[1]] != 1:
+                        app.playerCharacter.moveDownDungeon()
+                        app.playerCharacter.setRoomPos(0, playerRoomPos[1])
+                pass
+            
+            elif event.key == 'd':
+                if app.playerCharacter.getRoomPos()[1] < app.dungeon.getRoom(playerDungeonPOS[0], playerDungeonPOS[1]).getSize()-1:
+                    if currentRoom[playerRoomPos[0]][playerRoomPos[1]+1] != 1:
+                        app.playerCharacter.moveRightRoom()
+                else:
+                    if grid[playerDungeonPOS[0]][playerDungeonPOS[1]+1] != 1:
+                        app.playerCharacter.moveRightDungeon()
+                        app.playerCharacter.setRoomPos(playerRoomPos[0], 0)
+                pass
             # app.playerMovesLeft -= 1
             if app.playerMovesLeft <= 0:
                 app.turn = 'enemy'
                 
             
-            app.currentRoom = app.dungeon.getCurrentRoom(app.playerCharacter.getDungeonPos()[0],app.playerCharacter.getDungeonPos()[1])
-        if app.playerCharacter.getDungeonPos() == app.endPoint:
-            app.gameState = 'win'
+            app.currentRoom = app.dungeon.getRoom(app.playerCharacter.getDungeonPos()[0],app.playerCharacter.getDungeonPos()[1])
+        if app.playerCharacter.getDungeonPos() == app.endPointDungeon:
+            if app.playerCharacter.getRoomPos() == app.dungeon.getRoom(app.endPointDungeon[0], app.endPointDungeon[1]).getEndPoint():
+                app.gameState = 'win'
         
     if app.gameState == 'start':
         pass

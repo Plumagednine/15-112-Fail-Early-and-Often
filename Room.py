@@ -9,6 +9,12 @@ class Room:
         self.id = roomDict.get("roomId")
         self.grid = roomDict.get("roomLayout")
         self.gridSize = len(self.grid)
+        for row in range(self.gridSize):
+            for col in range(self.gridSize):
+                if self.grid[row][col] == 2:
+                    self.playerSpawn = (row, col)
+                elif self.grid[row][col] == 3:
+                    self.playerExit = (row, col)
         pass
     
     def drawRoom(self, app, canvas):
@@ -27,21 +33,11 @@ class Room:
                     canvas.create_rectangle(x0, y0, x1, y1, fill='#6C7D47', width = 1)
     pass
 
-    def drawRoom(self, app, canvas):
-        gridSize = self.getSize()
-        gridLayout = self.getLayout()
-        for row in range(gridSize):
-            for col in range(gridSize):
-                (x0, y0, x1, y1) = getCellBounds(row, col, app.gridWidth, app.gridHeight, gridSize)
-                if gridLayout[row][col] == 1:
-                    canvas.create_rectangle(x0, y0, x1, y1, fill='#1c0f13', width = 1)
-                elif gridLayout[row][col] == 2:
-                    canvas.create_rectangle(x0, y0, x1, y1, fill='#1b4965', width = 1)
-                elif gridLayout[row][col] == 3:
-                    canvas.create_rectangle(x0, y0, x1, y1, fill='#6C7D47', width = 1)
-                else:
-                    canvas.create_rectangle(x0, y0, x1, y1, fill='#fffcf9', width = 1)
-        pass
+    def getPlayerSpawn(self):
+        return self.playerSpawn
+        
+    def getEndPoint(self):
+        return self.playerExit
         
     def getSize(self):
         return self.gridSize
