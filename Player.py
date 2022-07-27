@@ -6,16 +6,16 @@ class Player:
     def __init__(self, playerDict, allItemsDictionary):
         self.sprites = playerDict.get("spriteSheet")
         self.dungeonRow = playerDict.get("dungeonRow")
-        self.dungeonCol = playerDict.get("dungeonCol")
+        self.dungeonCol = playerDict.get("dungeonColumn")
         self.roomRow = playerDict.get("roomRow")
-        self.roomCol = playerDict.get("roomCol")
+        self.roomCol = playerDict.get("roomColumn")
         self.totalHP = playerDict.get("hitPoints")
         self.currentHP = playerDict.get("hitPoints")
         self.strengthModifier = (playerDict.get("strength")-10)//2
         self.dexterityModifier = (playerDict.get("dexterity")-10)//2
         self.constitutionModifier = (playerDict.get("constitution")-10)//2
         self.movementSpeed = playerDict.get("movementSpeed")
-        self.spriteCounter = 0
+        self.spriteCounter = playerDict.get("spriteCounter")
         self.allItems = allItemsDictionary
         #######################################
         ###Weapon Inventory####################
@@ -44,10 +44,15 @@ class Player:
 ###Graphics Functions##################
 #######################################
 
-    def drawPlayer(self, app, canvas):
-        (x, y) = self.getDungeonPos()
-        (x0, y0, x1, y1) = getCellBounds(x, y, app.gridWidth, app.gridHeight, app.dungeon.getSize())
-        canvas.create_image(x0 + (x1-x0)//2, y0 + (y1-y0)//2, image=ImageTk.PhotoImage(self.getImage()))
+    def drawPlayer(self, app, canvas, mapShowing):
+        if mapShowing:
+            (x, y) = self.getDungeonPos()
+            (x0, y0, x1, y1) = getCellBounds(x, y, app.gridWidth, app.gridHeight, app.dungeon.getSize())
+            canvas.create_image(x0 + (x1-x0)//2, y0 + (y1-y0)//2, image=ImageTk.PhotoImage(self.getImage()))
+        else:
+            (x, y) = self.getRoomPos()
+            (x0, y0, x1, y1) = getCellBounds(x, y, app.gridWidth, app.gridHeight, app.dungeon.getSize())
+            canvas.create_image(x0 + (x1-x0)//2, y0 + (y1-y0)//2, image=ImageTk.PhotoImage(self.getImage()))
         pass
     
     def animateSprite(self, app):
@@ -94,7 +99,7 @@ class Player:
     
       
 ###############################################
-###Dungeon Movement and Location Functions#####
+###Room Movement and Location Functions########
 ###############################################
     
     def getRoomPos(self):
@@ -150,4 +155,4 @@ class Player:
             return self.dexterityModifier + random.randint(1,self.weapons[self.currentWeapon].itemModifierValue)
         elif self.weapons[self.currentWeapon].itemModifier == 'Strength':
             return self.strengthModifier + random.randint(1,self.weapons[self.currentWeapon].itemModifierValue)
-         
+      

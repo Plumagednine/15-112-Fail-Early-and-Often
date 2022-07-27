@@ -5,7 +5,7 @@
         "maxStackSize": 1,
         "itemModifier": "Dexterity",
         "itemModifierValue": 4,
-        "itemImagePath": "textures\\Weapons\\Dagger_01.png"
+        "itemImagePath": "textures/Weapons/Dagger_01.png"
     },
     {
         "itemName": "Rapier",
@@ -13,7 +13,7 @@
         "maxStackSize": 1,
         "itemModifier": "Dexterity",
         "itemModifierValue": 8,
-        "itemImagePath": "textures\\Weapons\\Rapier_01.png"
+        "itemImagePath": "textures/Weapons/Rapier_01.png"
     },
     {
         "itemName": "Shortsword",
@@ -21,7 +21,7 @@
         "maxStackSize": 1,
         "itemModifier": "Dexterity",
         "itemModifierValue": 8,
-        "itemImagePath": "textures\\Weapons\\Shortsword_01.png"
+        "itemImagePath": "textures/Weapons/Shortsword_01.png"
     },
     {
         "itemName": "Warhammer",
@@ -29,7 +29,7 @@
         "maxStackSize": 1,
         "itemModifier": "Strength",
         "itemModifierValue": 8,
-        "itemImagePath": "textures\\Weapons\\Warhammer_01.png"
+        "itemImagePath": "textures/Weapons/Warhammer_01.png"
     },
     {
         "itemName": "Morningstar",
@@ -37,6 +37,6 @@
         "maxStackSize": 1,
         "itemModifier": "Strength",
         "itemModifierValue": 8,
-        "itemImagePath": "textures\\Weapons\\Morningstar_01.png"
+        "itemImagePath": "textures/Weapons/Morningstar_01.png"
     }
 ]

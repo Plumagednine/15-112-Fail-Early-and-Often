@@ -1,0 +1,11 @@
+[
+    {
+        "monsterName": "Default Monster",
+        "roomRow": 1,
+        "roomColumn": 1,
+        "spriteSheet": "monsterSprites/demon2hand-1x1.png",
+        "spriteCounter": 0,
+        "hitPoints": 100,
+        "strength": 11
+    }
+]

@@ -3,9 +3,10 @@ from helpers import *
 from Items import *
 from Player import *
 from Monster import *
+from Room import *
 
 def loadItems():
-    items = loadJSON('gameData\items.JSON')
+    items = loadJSON('gameData/items.JSON')
     allItemsDictionary = {}
     for item in items:
         itemDict = item
@@ -13,7 +14,7 @@ def loadItems():
     return allItemsDictionary
 
 def loadPlayerCharacters(allItemsDictionary):
-    characters = loadJSON('gameData\characters.JSON')
+    characters = loadJSON('gameData/characters.JSON')
     allCharactersDictionary = {}
     for character in characters:
         characterDict = character
@@ -21,9 +22,17 @@ def loadPlayerCharacters(allItemsDictionary):
     return allCharactersDictionary
 
 def loadMonsters():
-    monsters = loadJSON('gameData\monsters.JSON')
+    monsters = loadJSON('gameData/monsters.JSON')
     allMonstersDictionary = {}
     for monster in monsters:
         monsterDict = monster
         allMonstersDictionary[monsterDict.get('monsterName')] = Monster(monsterDict)
     return allMonstersDictionary
+
+def loadRooms():
+    rooms = loadJSON('gameData/rooms.JSON')
+    allRoomsDictionary = {}
+    for room in rooms:
+        roomDict = room
+        allRoomsDictionary[roomDict.get('roomId')] = Room(roomDict)
+    return allRoomsDictionary

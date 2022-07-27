@@ -1,18 +1,21 @@
 import decimal
 from cmu_112_graphics import *
 import random
+import copy
 from helpers import *
+from Room import *
+
 class level_generation:
-
-
     #######################################
     ###Initalizer Function#################
     #######################################
-    def __init__(self, gridSize = 5):
+    def __init__(self, allRoomsDictionary, gridSize = 16,):
+        self.allRooms = allRoomsDictionary
         self.gridSize = gridSize
         self.grid=[]
         self.gridRow=[]
         self.spawnPoint = random.randint(0,gridSize-1), random.randint(0,gridSize-1)
+        self.endpoint = self.spawnPoint
         #######################################
         ###Generating Maze Code################
         #######################################
@@ -239,7 +242,21 @@ class level_generation:
                 if self.grid[tempEndingRow][tempEndingCol] == 0:
                     endingRow, endingCol = tempEndingRow, tempEndingCol
         self.grid[endingRow][endingCol] = 3
-        pass
+        
+        #######################################
+        ###Fill With Rooms#####################
+        #######################################
+        for row in range(0, self.gridSize):
+            for col in range(0, self.gridSize):
+                if (self.grid[row][col] == 0):
+                    tempRoom = copy.deepcopy(self.allRooms.get(0))
+                    self.grid[row][col] = tempRoom
+                elif (self.grid[row][col] == 2):
+                    self.spawnPoint = (row, col)
+                    self.grid[row][col] = copy.deepcopy(self.allRooms.get(2))
+                elif (self.grid[row][col] == 3):
+                    self.endpoint = (row, col)
+                    self.grid[row][col] = copy.deepcopy(self.allRooms.get(3))
         
         #######################################
         ###End INIT############################
@@ -251,15 +268,18 @@ class level_generation:
         for row in range(gridSize):
             for col in range(gridSize):
                 (x0, y0, x1, y1) = getCellBounds(row, col, app.gridWidth, app.gridHeight, gridSize)
-                if gridLayout[row][col] == 0:
-                    canvas.create_rectangle(x0, y0, x1, y1, fill='#fffcf9', width = 1)
-                elif gridLayout[row][col] == 1:
+                if gridLayout[row][col] == 1:
                     canvas.create_rectangle(x0, y0, x1, y1, fill='#1c0f13', width = 1)
-                elif gridLayout[row][col] == 2:
+                elif gridLayout[row][col].id == 2:
                     canvas.create_rectangle(x0, y0, x1, y1, fill='#1b4965', width = 1)
-                elif gridLayout[row][col] == 3:
+                elif gridLayout[row][col].id == 3:
                     canvas.create_rectangle(x0, y0, x1, y1, fill='#6C7D47', width = 1)
+                else:
+                    canvas.create_rectangle(x0, y0, x1, y1, fill='#fffcf9', width = 1)
         pass
+    
+    def getCurrentRoom(self, row, col):
+        return self.grid[row][col]
     
     def getSize(self):
         return self.gridSize
@@ -268,16 +288,10 @@ class level_generation:
         return self.grid
     
     def getSpawnPoint(self):
-        for row in range(self.gridSize):
-            for col in range(self.gridSize):
-                if self.grid[row][col] == 2:
-                    return (row, col)
+        return self.spawnPoint
     
     def getEndPoint(self):
-        for row in range(self.gridSize):
-            for col in range(self.gridSize):
-                if self.grid[row][col] == 3:
-                    return (row, col)
+        return self.endpoint
     
     def updateGrid(self, row, col, value):
         self.grid[row][col] = value

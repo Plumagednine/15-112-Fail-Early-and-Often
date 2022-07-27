@@ -17,6 +17,7 @@ from loadData import *
 #######################################
 ###Game Draw Functions#################
 #######################################
+
 def drawSidebar(app, canvas):
     canvas.create_text(app.sidebarMinWidth, app.sidebarMinHeight, text="Player Stats and Inventory:", fill='#fffcf9', font=(app.font,14), anchor = 'nw')
     # create health bar
@@ -51,8 +52,7 @@ def drawSidebar(app, canvas):
             canvas.create_image(x0 + (x1-x0)//2 + app.sidebarMinWidth, y0 + (y1-y0)//2 +app.sidebarMaxHeight//10+40,
                                 image=ImageTk.PhotoImage(app.playerCharacter.armor[col].itemImage))
     
-    #create potion inventory
-    #create armor inventory
+    #create misc item inventory
     for col in range(len(app.playerCharacter.miscItems)):
         (x0, y0, x1, y1) = getCellBounds(2, col, app.sidebarActualWidth, app.sidebarActualWidth, len(app.playerCharacter.miscItems))
         if col == app.playerCharacter.currentItem:
@@ -62,8 +62,7 @@ def drawSidebar(app, canvas):
                                 x1+app.sidebarMinWidth-10, y1+app.sidebarMaxHeight//10+40-10, fill='#fffcf9', width = 1)
         if app.playerCharacter.miscItems[col] != 0:
             canvas.create_image(x0 + (x1-x0)//2 + app.sidebarMinWidth, y0 + (y1-y0)//2 +app.sidebarMaxHeight//10+40,
-                                image=ImageTk.PhotoImage(app.playerCharacter.miscItems[col].itemImage))
-            
+                                image=ImageTk.PhotoImage(app.playerCharacter.miscItems[col].itemImage))      
     pass
 
 
@@ -117,8 +116,11 @@ def redrawAll(app, canvas): # draw (view) the model in the canvas
 
     #Draw Game
     if app.gameState == 'game':
-        app.dungeon.drawDungeon(app, canvas)
-        app.playerCharacter.drawPlayer(app, canvas)
+        if app.map:
+            app.dungeon.drawDungeon(app, canvas)
+        else:
+            app.currentRoom.drawRoom(app, canvas)
+        app.playerCharacter.drawPlayer(app, canvas, app.map)
         drawSidebar(app, canvas)
     pass      
 
@@ -131,7 +133,7 @@ def redrawAll(app, canvas): # draw (view) the model in the canvas
 ###Game Initializers###################
 #######################################
 def continueGame(app):
-    initDungeon(app, app.dungeonSize)
+    initDungeon(app, app.allRooms, app.dungeonSize)
     row,col = app.spawnPoint
     app.playerCharacter.setDungeonPos(row,col)
 
@@ -144,11 +146,20 @@ def initPlayer(app, player):
     app.playerMovesLeft = app.playerMaxMoves
     pass
 
-def initDungeon(app, gridSize): 
-    app.dungeon = level_generation(gridSize)
+def initMonster(app, monster):
+    spriteSheet = monster.sprites
+    app.monsterCharacterSprites = animateSprite(app, spriteSheet, app.gridWidth, app.gridHeight, app.dungeon.getSize()) 
+    monster.sprites = app.monsterCharacterSprites
+    monster.dungeonRow, monster.dungeonCol = app.dungeon.getSpawnPoint()
+    pass
+
+def initDungeon(app, allRooms, gridSize): 
+    app.dungeon = level_generation(allRooms, gridSize)
     print2dList(app.dungeon.getLayout())
     app.spawnPoint = app.dungeon.getSpawnPoint()
     app.endPoint = app.dungeon.getEndPoint()
+    print(app.spawnPoint)
+    app.currentRoom = app.dungeon.getCurrentRoom(app.spawnPoint[0], app.spawnPoint[1])
     pass
 
 def initDimensions(app):
@@ -216,30 +227,43 @@ def appStarted(app): # initialize the model (app.xyz)
     app.framerate = 30
     app.timerDelay = 1000//app.framerate
     app.animationTimer = 0
+    
     app.gameState = 'start'
     app.turn = 'player'
+    app.currentLevel = 1
+    app.currentCharacter = 'Default Character'
+    app.map = False
+    
+    #font stuff
     pyglet.font.add_file('font\Vecna-oppx.ttf')
     app.font = 'Vecna-oppx'
+    
+    # #make monster
+    allMonsters = loadMonsters()
+    # app.testMonster = allMonsters.get('Default Monster')
+    # initMonster(app, app.testMonster)
+    
+    #make items
+    app.allItems = loadItems()
+    
+    #make rooms
+    app.allRooms = loadRooms()
+    # allRooms = {}
+
     #Make Dungeon
     app.dungeonSize = 16
-    initDungeon(app, app.dungeonSize)
-
+    initDungeon(app, app.allRooms, app.dungeonSize)
     
     #Make Start Menu
     initStartMenu(app)
     
-    #GUI Dimension
+    #GUI Dimensions
     initDimensions(app)
     
-
-    
     #Make Player
-    allItems = loadItems()
-    allCharacters = loadPlayerCharacters(allItems)
-    app.playerCharacter = allCharacters.get('Default Character')
+    allCharacters = loadPlayerCharacters(app.allItems)
+    app.playerCharacter = allCharacters.get(app.currentCharacter)
     initPlayer(app, app.playerCharacter)
-    
-    #make monster
     
     #make sidebar
     initSidebar(app)
@@ -256,7 +280,10 @@ def keyPressed(app, event): # use event.key
     if app.gameState == 'game':
         grid = app.dungeon.getLayout()
         playerDungeonPOS = app.playerCharacter.getDungeonPos()
+        playerRoomPos = app.playerCharacter.getRoomPos()
         #movement
+        if event.key == 'm':
+            app.map = not app.map
         if app.turn == 'player':
             if event.key == 'w' and app.playerCharacter.getDungeonPos()[0] > 0:
                 if grid[playerDungeonPOS[0]-1][playerDungeonPOS[1]] != 1:
@@ -276,7 +303,9 @@ def keyPressed(app, event): # use event.key
             # app.playerMovesLeft -= 1
             if app.playerMovesLeft <= 0:
                 app.turn = 'enemy'
-
+                
+            
+            app.currentRoom = app.dungeon.getCurrentRoom(app.playerCharacter.getDungeonPos()[0],app.playerCharacter.getDungeonPos()[1])
         if app.playerCharacter.getDungeonPos() == app.endPoint:
             app.gameState = 'win'
         
@@ -321,6 +350,9 @@ def mousePressed(app, event): # use event.x and event.y
 #######################################
 ###System Changes######################
 #######################################
+def doAnimations(app):
+    app.playerCharacter.animateSprite(app)
+    
 
 def timerFired(app): # respond to timer events
     if app.gameState == 'game':
@@ -331,7 +363,7 @@ def timerFired(app): # respond to timer events
         app.animationTimer += app.framerate
         if app.animationTimer >= 100:
             app.animationTimer = 0
-            app.playerCharacter.animateSprite(app)
+            doAnimations(app)
     if app.gameState == 'win':
         continueGame(app)
         app.gameState = 'game'
@@ -341,6 +373,7 @@ def timerFired(app): # respond to timer events
 def sizeChanged(app): # respond to window size changes
     initDimensions(app)
     initStartMenu(app)
+    doAnimations(app)
     app.playerCharacter.updateSprite(updateSpriteDimensions(app, app.playerCharacter.getSprites()
                                                             , app.gridWidth, app.gridHeight, app.dungeon.getSize()))
     #update weapon dimensions
