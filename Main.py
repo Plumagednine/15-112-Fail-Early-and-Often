@@ -18,7 +18,15 @@ from loadData import *
 ###Game Draw Functions#################
 #######################################
 
+
+
 def drawSidebar(app, canvas):
+    # """
+    # It draws the sidebar.
+
+    # :param app: the app object
+    # :param canvas: the canvas to draw on
+    # """
     canvas.create_text(app.sidebarMinWidth, app.sidebarMinHeight, text="Player Stats and Inventory:", fill='#fffcf9', font=(app.font,14), anchor = 'nw')
     # create health bar
     healthBarMultiplier = app.playerCharacter.getHealthMultiplyer()
@@ -26,7 +34,7 @@ def drawSidebar(app, canvas):
     canvas.create_rectangle(app.sidebarMinWidth, app.sidebarMinHeight+20, app.sidebarMaxWidth, app.sidebarMaxHeight//10+20, fill='#f71735')
     canvas.create_rectangle(app.sidebarMinWidth, app.sidebarMinHeight+20, app.sidebarMinWidth + healthBarSize, app.sidebarMaxHeight//10+20, fill='#44af69')
     canvas.create_text(app.sidebarMinWidth+10, (app.sidebarMinHeight+app.sidebarMaxHeight//10)//2+20
-                       , text=f'Health: {app.playerCharacter.getHealth()}', fill='#fffcf9', font=(app.font,14), anchor = 'w')
+                    , text=f'Health: {app.playerCharacter.getHealth()}', fill='#fffcf9', font=(app.font,14), anchor = 'w')
     
     #create weapon inventory
     for col in range(len(app.playerCharacter.weapons)):
@@ -70,6 +78,12 @@ def drawSidebar(app, canvas):
 ###Start Menu Draw Functions###########
 #######################################
 def drawStartMenu(app, canvas):
+    # """
+    # This function draws the start menu of the game
+    
+    # :param app: the app object
+    # :param canvas: the canvas that you're drawing on
+    # """
     #make interactive grid
     gridSize = 10
     startButton = []
