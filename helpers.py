@@ -67,7 +67,7 @@ def animateSprite(app, tokenPath, width, height, gridSize):
     spritestrip = app.loadImage(tokenPath)
     sprites = []
     for i in range(4):
-        sprite = spritestrip.crop((960*i, 0, 960+960*i, 960))
+        sprite = spritestrip.crop(((spritestrip.size[0]//4)*i, 0, (spritestrip.size[0]//4)+(spritestrip.size[0]//4)*i, spritestrip.size[1]))
         sprite = resizeSprite(sprite, width//gridSize, height//gridSize)
         sprites.append(sprite)   
     return sprites 
