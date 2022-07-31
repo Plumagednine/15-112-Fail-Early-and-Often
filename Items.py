@@ -22,3 +22,6 @@ class Items:
 
     def setItemImage(self, image):
         self.itemImage = image
+    
+    def getItemType(self):
+        return self.itemType

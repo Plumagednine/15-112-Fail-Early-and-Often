@@ -33,7 +33,8 @@ class Room:
                     canvas.create_rectangle(x0, y0, x1, y1, fill='#6C7D47', width = 1)
                 elif gridLayout[row][col] == 4:
                     canvas.create_rectangle(x0, y0, x1, y1, fill='#8E8686', width = 1)
-    pass
+                elif isinstance(gridLayout[row][col],Items):
+                    canvas.create_image(x0 + (x1-x0)//2, y0 + (y1-y0)//2, image = ImageTk.PhotoImage(gridLayout[row][col].getItemImage()))
 
     def getPlayerSpawn(self):
         return self.playerSpawn

@@ -129,6 +129,29 @@ def drawPauseMenu(app, canvas):
     pass
 
 #######################################
+###Continue Menu Draw Functions########
+#######################################
+def drawContinueMenu(app, canvas):
+    #make interactive grid
+    gridSize = 10
+    
+    # make continue button
+    midIndex = len(app.levelCounter)//2
+    tempX0,tempY0,tempX1,tempY1 = getCellBounds(app.levelCounter[midIndex][0], app.levelCounter[midIndex][1], app.width, app.height, gridSize)
+    canvas.create_text(tempX0,tempY0, text=f"Level: {app.currentLevel-1} Completed", fill='#fffcf9', font=(app.font,60), anchor = 'n',)
+    
+    # make continue button
+    midIndex = len(app.contineuGameButton)//2
+    tempX0,tempY0,tempX1,tempY1 = getCellBounds(app.contineuGameButton[midIndex][0], app.contineuGameButton[midIndex][1], app.width, app.height, gridSize)
+    canvas.create_text(tempX0,tempY0, text="Continue Game", fill='#fffcf9', font=(app.font,60), anchor = 'n',)
+    
+    # make exit button
+    midIndex = len(app.exitToStartButton)//2
+    tempX0,tempY0,tempX1,tempY1 = getCellBounds(app.exitToStartButton[midIndex][0], app.exitToStartButton[midIndex][1], app.width, app.height, gridSize)
+    canvas.create_text(tempX0,tempY0, text="Exit To Start Menu", fill='#fffcf9', font=(app.font,60), anchor = 'n')
+    pass
+
+#######################################
 ###Redraw All##########################
 #######################################
 def redrawAll(app, canvas): # draw (view) the model in the canvas
@@ -156,6 +179,9 @@ def redrawAll(app, canvas): # draw (view) the model in the canvas
         
     if app.gameState == 'pauseMenu':
         drawPauseMenu(app, canvas)
+    
+    if app.gameState == 'continueMenu':
+        drawContinueMenu(app, canvas)
     pass      
 
 #######################################
@@ -167,6 +193,7 @@ def redrawAll(app, canvas): # draw (view) the model in the canvas
 ###Game Initializers###################
 #######################################
 def continueGame(app):
+    app.currentLevel += 1
     initDungeon(app, app.allRooms, app.dungeonSize)
     dungeonRow,dungeonCol = app.spawnPointDungeon
     roomRow,roomCol = app.dungeon.getRoom(app.dungeon.getSpawnPoint()[0],app.dungeon.getSpawnPoint()[1]).getPlayerSpawn()
@@ -219,6 +246,18 @@ def initSidebar(app):
             weaponImage = app.loadImage(weapon.itemImage)
             weaponImage = weaponImage.resize(((app.sidebarActualWidth)//len(weapons)-20, (app.sidebarActualWidth)//len(weapons)-20), Image.Resampling.LANCZOS)
             weapon.itemImage = weaponImage
+    armors = app.playerCharacter.armor
+    for armor in armors:
+        if armor != 0:
+            armorImage = app.loadImage(armor.itemImage)
+            armorImage = armorImage.resize(((app.sidebarActualWidth)//len(armors)-20, (app.sidebarActualWidth)//len(armors)-20), Image.Resampling.LANCZOS)
+            armor.itemImage = armorImage
+    miscItems = app.playerCharacter.miscItems
+    for item in miscItems:
+        if item != 0:
+            itemImage = app.loadImage(item.itemImage)
+            itemImage = itemImage.resize(((app.sidebarActualWidth)//len(miscItems)-20, (app.sidebarActualWidth)//len(miscItems)-20), Image.Resampling.LANCZOS)
+            item.itemImage = itemImage
     pass
 
 
@@ -281,8 +320,34 @@ def initPauseMenu(app):
                 app.pauseMenuGrid[row][col] = 1
             elif (row,col) in exitToStartButton:
                 app.pauseMenuGrid[row][col] = 2
-    
-    pass
+                
+#######################################
+###Continue Menu Initializers##########
+#######################################
+        
+def initContinueMenu(app):
+    # create a 10x10 grid
+    gridSize = 10
+    app.pauseMenuGrid = []
+    gridRow = []
+    app.levelCounter = [(1,2),(1,3),(1,4),(1,5),(1,6),(1,7)]
+    app.contineuGameButton = [(4,2),(4,3),(4,4),(4,5),(4,6),(4,7)]
+    app.exitToStartButton = [(7,2),(7,3),(7,4),(7,5),(7,6),(7,7)]
+    contineuGameButton = app.contineuGameButton
+    exitToStartButton = app.exitToStartButton
+    for row in range(gridSize):
+        for col in range(gridSize):
+            gridRow.append(0)
+        app.pauseMenuGrid.append(gridRow)
+        gridRow=[]
+        
+    # add buttons
+    for row in range(gridSize):
+        for col in range(gridSize):
+            if (row,col) in contineuGameButton:
+                app.pauseMenuGrid[row][col] = 1
+            elif (row,col) in exitToStartButton:
+                app.pauseMenuGrid[row][col] = 2
 
 #######################################
 ###App First Run#######################
@@ -334,7 +399,10 @@ def appStarted(app): # initialize the model (app.xyz)
     initSidebar(app)
     
     #make pause menu
-    initPauseMenu(app)    
+    initPauseMenu(app)  
+    
+    #make continue menu
+    initContinueMenu(app)  
 
 def appStopped(app): # cleanup after app is done running
     pass           
@@ -401,6 +469,45 @@ def keyPressed(app, event): # use event.key
                         app.playerCharacter.moveRightDungeon()
                         app.playerCharacter.setRoomPos(playerRoomPos[0], 0)
                 pass
+                
+            #pickup/drop item using e
+            elif event.key == 'e':
+                if app.playerCharacter.currentWeapon != None:
+                    if app.playerCharacter.weapons[app.playerCharacter.currentWeapon] == 0 and isinstance(currentRoom[playerRoomPos[0]][playerRoomPos[1]], Items):
+                        weapons = app.playerCharacter.weapons
+                        itemImage = currentRoom[playerRoomPos[0]][playerRoomPos[1]].itemImage
+                        itemImage = itemImage.resize(((app.sidebarActualWidth)//len(weapons)-20, (app.sidebarActualWidth)//len(weapons)-20), Image.Resampling.LANCZOS)
+                        currentRoom[playerRoomPos[0]][playerRoomPos[1]].itemImage = itemImage
+                        app.playerCharacter.pickupItem(currentRoom[playerRoomPos[0]][playerRoomPos[1]])
+                        currentRoom[playerRoomPos[0]][playerRoomPos[1]] = 0
+                    else:
+                        currentRoom[playerRoomPos[0]][playerRoomPos[1]] = app.playerCharacter.weapons[app.playerCharacter.currentWeapon]
+                        app.playerCharacter.weapons[app.playerCharacter.currentWeapon] = 0
+                        
+                elif app.playerCharacter.currentArmor != None:
+                    if app.playerCharacter.armor[app.playerCharacter.currentArmor] == 0 and isinstance(currentRoom[playerRoomPos[0]][playerRoomPos[1]], Items):
+                        armor = app.playerCharacter.armor
+                        itemImage = currentRoom[playerRoomPos[0]][playerRoomPos[1]].itemImage
+                        itemImage = itemImage.resize(((app.sidebarActualWidth)//len(armor)-20, (app.sidebarActualWidth)//len(armor)-20), Image.Resampling.LANCZOS)
+                        currentRoom[playerRoomPos[0]][playerRoomPos[1]].itemImage = itemImage
+                        app.playerCharacter.pickupItem(currentRoom[playerRoomPos[0]][playerRoomPos[1]])
+                        currentRoom[playerRoomPos[0]][playerRoomPos[1]] = 0
+                    else:
+                        currentRoom[playerRoomPos[0]][playerRoomPos[1]] = app.playerCharacter.armor[app.playerCharacter.currentArmor]
+                        app.playerCharacter.armor[app.playerCharacter.currentArmor] = 0
+                        
+                elif app.playerCharacter.currentItem != None:
+                    if app.playerCharacter.miscItems[app.playerCharacter.currentItem] == 0 and isinstance(currentRoom[playerRoomPos[0]][playerRoomPos[1]], Items):
+                        miscItems = app.playerCharacter.miscItems
+                        itemImage = currentRoom[playerRoomPos[0]][playerRoomPos[1]].itemImage
+                        itemImage = itemImage.resize(((app.sidebarActualWidth)//len(miscItems)-20, (app.sidebarActualWidth)//len(miscItems)-20), Image.Resampling.LANCZOS)
+                        currentRoom[playerRoomPos[0]][playerRoomPos[1]].itemImage = itemImage
+                        app.playerCharacter.pickupItem(currentRoom[playerRoomPos[0]][playerRoomPos[1]])
+                        currentRoom[playerRoomPos[0]][playerRoomPos[1]] = 0
+                    else:
+                        currentRoom[playerRoomPos[0]][playerRoomPos[1]] = app.playerCharacter.miscItems[app.playerCharacter.currentItem]
+                        app.playerCharacter.miscItems[app.playerCharacter.currentItem] = 0
+                
             
             #player turns
             # app.playerMovesLeft -= 1
@@ -428,13 +535,30 @@ def mousePressed(app, event): # use event.x and event.y
         (row,col) = getCell(event.x, event.y, app.sidebarActualWidth, app.sidebarActualWidth, len(app.playerCharacter.weapons)
                             , app.sidebarMinWidth, app.sidebarMinHeight+(app.gridWidth//app.dungeon.getSize()))
         if row == 0 and (col >= 0 and col < len(app.playerCharacter.weapons)):
-            app.playerCharacter.currentWeapon = col
+            if app.playerCharacter.currentWeapon == col:
+                app.playerCharacter.currentWeapon = None
+            else:
+                app.playerCharacter.currentWeapon = col
         if row == 1 and (col >= 0 and col < len(app.playerCharacter.armor)):
-            app.playerCharacter.currentArmor = col
+            if app.playerCharacter.currentArmor == col:
+                app.playerCharacter.currentArmor = None
+            else:
+                app.playerCharacter.currentArmor = col
         if row == 2 and (col >= 0 and col < len(app.playerCharacter.miscItems)):
-            app.playerCharacter.currentItem = col
+            if app.playerCharacter.currentItem == col:
+                app.playerCharacter.currentItem = None
+            else:
+                app.playerCharacter.currentItem = col
     
     elif app.gameState == 'pauseMenu':
+        (row,col) = getCell(event.x, event.y, app.width, app.height, 10)
+        if (row, col) in app.exitToStartButton:
+            app.gameState = 'start'
+        elif (row, col) in app.contineuGameButton:
+            app.gameState = 'game'
+        pass
+    
+    elif app.gameState == 'continueMenu':
         (row,col) = getCell(event.x, event.y, app.width, app.height, 10)
         if (row, col) in app.exitToStartButton:
             app.gameState = 'start'
@@ -472,7 +596,7 @@ def timerFired(app): # respond to timer events
             doAnimations(app)
     if app.gameState == 'win':
         continueGame(app)
-        app.gameState = 'game'
+        app.gameState = 'continueMenu'
         pass
     pass           
 

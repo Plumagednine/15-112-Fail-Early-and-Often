@@ -23,21 +23,21 @@ class Player:
         self.weapons = [0]*5
         for i in range(len(playerDict.get("weapons"))):
             self.weapons[i] = self.allItems.get(playerDict.get("weapons")[i])
-        self.currentWeapon = 0
+        self.currentWeapon = None
         #######################################
         ###Armor Inventory#####################
         #######################################
         self.armor = [0]*5
         for i in range(len(playerDict.get("armor"))):
             self.armor[i] = self.allItems.get(playerDict.get("armor")[i])
-        self.currentArmor = 0
+        self.currentArmor = None
         #######################################
         ###Miscellaneous Items Inventory#######
         #######################################
         self.miscItems = [0]*5
         for i in range(len(playerDict.get("miscItems"))):
             self.miscItems[i] = self.allItems.get(playerDict.get("miscItems")[i])
-        self.currentItem = 0
+        self.currentItem = None
         pass
     
 #######################################
@@ -125,6 +125,20 @@ class Player:
     def moveRightRoom(self):
         self.roomCol += 1
         pass
+#######################################
+###Item Functions######################
+#######################################
+    def pickupItem(self, item):
+        if item.getItemType() == 'Weapon':
+            self.weapons[self.currentWeapon] = item
+        elif item.getItemType() == 'Armor':
+            self.armor[self.currentArmor] = item
+        elif item.getItemType() == 'Misc':
+            self.miscItems[self.currentItem] = item
+    
+    def dropItem(self):
+        return (self.weapons[self.currentWeapon], self.armor[self.currentArmor], self.miscItems[self.currentItem])
+        
 
 #######################################
 ###Health and Damage Functions#########
