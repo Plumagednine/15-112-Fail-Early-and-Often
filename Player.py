@@ -14,7 +14,7 @@ class Player:
         self.strengthModifier = (playerDict.get("strength")-10)//2
         self.dexterityModifier = (playerDict.get("dexterity")-10)//2
         self.constitutionModifier = (playerDict.get("constitution")-10)//2
-        self.movementSpeed = playerDict.get("movementSpeed")
+        self.movementSpeed = playerDict.get("movementSpeed")//10
         self.spriteCounter = playerDict.get("spriteCounter")
         self.allItems = allItemsDictionary
         #######################################

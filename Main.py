@@ -206,7 +206,7 @@ def initPlayer(app, player):
     player.sprites = app.playerCharacterSprites
     player.dungeonRow, player.dungeonCol = app.dungeon.getSpawnPoint()
     player.roomRow, player.roomCol = app.dungeon.getRoom(app.dungeon.getSpawnPoint()[0],app.dungeon.getSpawnPoint()[1]).getPlayerSpawn()
-    app.playerMaxMoves = player.movementSpeed//10
+    app.playerMaxMoves = player.movementSpeed
     app.playerMovesLeft = app.playerMaxMoves
     pass
 
@@ -560,7 +560,7 @@ def mousePressed(app, event): # use event.x and event.y
                     app.playerCharacter.currentItem = col
         elif event.x <= app.gridWidth:
             (row,col) = getCell(event.x, event.y, app.gridWidth, app.gridHeight, app.currentRoom.getSize())
-            if distance(row, col, app.playerCharacter.getRoomPos()[0], app.playerCharacter.getRoomPos()[1]) <= roundHalfUp(app.playerCharacter.movementSpeed/app.currentRoom.gridSize):
+            if distance(row, col, app.playerCharacter.getRoomPos()[0], app.playerCharacter.getRoomPos()[1]) <= app.playerCharacter.movementSpeed:
                 if app.playerCharacter.currentWeapon != None:
                     if isinstance(app.currentRoom.getLayout()[row][col], Monster):
                         app.currentRoom.getLayout()[row][col].takeDamage(app.playerCharacter.dealDamage())
