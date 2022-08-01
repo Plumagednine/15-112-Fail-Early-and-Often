@@ -21,6 +21,11 @@ class Monster:
     def drawMonster(self, app, canvas, roomSize):
         (x, y) = self.getRoomPos()
         (x0, y0, x1, y1) = getCellBounds(x, y, app.gridWidth, app.gridHeight, roomSize)
+        cellWidth = app.gridWidth // roomSize
+        cellHeight = app.gridHeight // roomSize
+        healthBarMultiplier = self.currentHP/self.totalHP
+        canvas.create_rectangle(x0,y0,x1,y0+cellHeight//10, fill='#f71735')
+        canvas.create_rectangle(x0,y0,x0+(cellWidth*healthBarMultiplier),y0+cellHeight//10, fill='#44af69')
         canvas.create_image(x0 + (x1-x0)//2, y0 + (y1-y0)//2, image=ImageTk.PhotoImage(self.getImage()))
         pass
     

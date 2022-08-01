@@ -13,7 +13,7 @@
         "constitution": 10,
         "movementSpeed": 30,
         "weapons": ["Basic Dagger"],
-        "armor": [],
+        "armor": ["Basic Gloves"],
         "miscItems": []
     },
     {

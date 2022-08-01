@@ -5,7 +5,7 @@
         "maxStackSize": 1,
         "itemModifier": "Dexterity",
         "itemModifierValue": 4,
-        "itemImagePath": "textures/Weapons/Dagger_01.png"
+        "itemImagePath": "textures/Weapons/Dagger01.png"
     },
     {
         "itemName": "Rapier",
@@ -13,7 +13,7 @@
         "maxStackSize": 1,
         "itemModifier": "Dexterity",
         "itemModifierValue": 8,
-        "itemImagePath": "textures/Weapons/Rapier_01.png"
+        "itemImagePath": "textures/Weapons/Rapier01.png"
     },
     {
         "itemName": "Shortsword",
@@ -21,7 +21,7 @@
         "maxStackSize": 1,
         "itemModifier": "Dexterity",
         "itemModifierValue": 8,
-        "itemImagePath": "textures/Weapons/Shortsword_01.png"
+        "itemImagePath": "textures/Weapons/Shortsword01.png"
     },
     {
         "itemName": "Warhammer",
@@ -29,7 +29,7 @@
         "maxStackSize": 1,
         "itemModifier": "Strength",
         "itemModifierValue": 8,
-        "itemImagePath": "textures/Weapons/Warhammer_01.png"
+        "itemImagePath": "textures/Weapons/Warhammer01.png"
     },
     {
         "itemName": "Morningstar",
@@ -37,7 +37,7 @@
         "maxStackSize": 1,
         "itemModifier": "Strength",
         "itemModifierValue": 8,
-        "itemImagePath": "textures/Weapons/Morningstar_01.png"
+        "itemImagePath": "textures/Weapons/Morningstar01.png"
     },
     {
         "itemName": "Health Potion",
@@ -52,7 +52,1287 @@
         "itemType": "Armor",
         "maxStackSize": 1,
         "itemModifier": "Constitution",
-        "itemModifierValue": 8,
+        "itemModifierValue": 4,
         "itemImagePath": "textures/armor/Gloves/Glove_Cloth_White_B1_1x1.png"
+    },
+    {
+        "itemName": "ChainmailBoots",
+        "itemType": "Armor",
+        "maxStackSize": 1,
+        "itemModifier": "none",
+        "itemModifierValue": 9,
+        "itemImagePath": "textures/armor/MinecraftTextures/ChainmailBoots.png"
+    },
+    {
+        "itemName": "ChainmailChestplate",
+        "itemType": "Armor",
+        "maxStackSize": 1,
+        "itemModifier": "none",
+        "itemModifierValue": 9,
+        "itemImagePath": "textures/armor/MinecraftTextures/ChainmailChestplate.png"
+    },
+    {
+        "itemName": "ChainmailHelmet",
+        "itemType": "Armor",
+        "maxStackSize": 1,
+        "itemModifier": "none",
+        "itemModifierValue": 8,
+        "itemImagePath": "textures/armor/MinecraftTextures/ChainmailHelmet.png"
+    },
+    {
+        "itemName": "ChainmailLeggings",
+        "itemType": "Armor",
+        "maxStackSize": 1,
+        "itemModifier": "none",
+        "itemModifierValue": 4,
+        "itemImagePath": "textures/armor/MinecraftTextures/ChainmailLeggings.png"
+    },
+    {
+        "itemName": "DiamondBoots",
+        "itemType": "Armor",
+        "maxStackSize": 1,
+        "itemModifier": "none",
+        "itemModifierValue": 5,
+        "itemImagePath": "textures/armor/MinecraftTextures/DiamondBoots.png"
+    },
+    {
+        "itemName": "DiamondChestplate",
+        "itemType": "Armor",
+        "maxStackSize": 1,
+        "itemModifier": "none",
+        "itemModifierValue": 2,
+        "itemImagePath": "textures/armor/MinecraftTextures/DiamondChestplate.png"
+    },
+    {
+        "itemName": "DiamondHelmet",
+        "itemType": "Armor",
+        "maxStackSize": 1,
+        "itemModifier": "none",
+        "itemModifierValue": 8,
+        "itemImagePath": "textures/armor/MinecraftTextures/DiamondHelmet.png"
+    },
+    {
+        "itemName": "DiamondLeggings",
+        "itemType": "Armor",
+        "maxStackSize": 1,
+        "itemModifier": "none",
+        "itemModifierValue": 5,
+        "itemImagePath": "textures/armor/MinecraftTextures/DiamondLeggings.png"
+    },
+    {
+        "itemName": "GoldenBoots",
+        "itemType": "Armor",
+        "maxStackSize": 1,
+        "itemModifier": "none",
+        "itemModifierValue": 8,
+        "itemImagePath": "textures/armor/MinecraftTextures/GoldenBoots.png"
+    },
+    {
+        "itemName": "GoldenChestplate",
+        "itemType": "Armor",
+        "maxStackSize": 1,
+        "itemModifier": "none",
+        "itemModifierValue": 10,
+        "itemImagePath": "textures/armor/MinecraftTextures/GoldenChestplate.png"
+    },
+    {
+        "itemName": "GoldenHelmet",
+        "itemType": "Armor",
+        "maxStackSize": 1,
+        "itemModifier": "none",
+        "itemModifierValue": 3,
+        "itemImagePath": "textures/armor/MinecraftTextures/GoldenHelmet.png"
+    },
+    {
+        "itemName": "GoldenLeggings",
+        "itemType": "Armor",
+        "maxStackSize": 1,
+        "itemModifier": "none",
+        "itemModifierValue": 6,
+        "itemImagePath": "textures/armor/MinecraftTextures/GoldenLeggings.png"
+    },
+    {
+        "itemName": "IronBoots",
+        "itemType": "Armor",
+        "maxStackSize": 1,
+        "itemModifier": "none",
+        "itemModifierValue": 7,
+        "itemImagePath": "textures/armor/MinecraftTextures/IronBoots.png"
+    },
+    {
+        "itemName": "IronChestplate",
+        "itemType": "Armor",
+        "maxStackSize": 1,
+        "itemModifier": "none",
+        "itemModifierValue": 1,
+        "itemImagePath": "textures/armor/MinecraftTextures/IronChestplate.png"
+    },
+    {
+        "itemName": "IronHelmet",
+        "itemType": "Armor",
+        "maxStackSize": 1,
+        "itemModifier": "none",
+        "itemModifierValue": 10,
+        "itemImagePath": "textures/armor/MinecraftTextures/IronHelmet.png"
+    },
+    {
+        "itemName": "IronLeggings",
+        "itemType": "Armor",
+        "maxStackSize": 1,
+        "itemModifier": "none",
+        "itemModifierValue": 6,
+        "itemImagePath": "textures/armor/MinecraftTextures/IronLeggings.png"
+    },
+    {
+        "itemName": "NetheriteBoots",
+        "itemType": "Armor",
+        "maxStackSize": 1,
+        "itemModifier": "none",
+        "itemModifierValue": 7,
+        "itemImagePath": "textures/armor/MinecraftTextures/NetheriteBoots.png"
+    },
+    {
+        "itemName": "NetheriteChestplate",
+        "itemType": "Armor",
+        "maxStackSize": 1,
+        "itemModifier": "none",
+        "itemModifierValue": 7,
+        "itemImagePath": "textures/armor/MinecraftTextures/NetheriteChestplate.png"
+    },
+    {
+        "itemName": "NetheriteHelmet",
+        "itemType": "Armor",
+        "maxStackSize": 1,
+        "itemModifier": "none",
+        "itemModifierValue": 6,
+        "itemImagePath": "textures/armor/MinecraftTextures/NetheriteHelmet.png"
+    },
+    {
+        "itemName": "NetheriteLeggings",
+        "itemType": "Armor",
+        "maxStackSize": 1,
+        "itemModifier": "none",
+        "itemModifierValue": 10,
+        "itemImagePath": "textures/armor/MinecraftTextures/NetheriteLeggings.png"
+    },
+    {
+        "itemName": "PurpleBoots",
+        "itemType": "Armor",
+        "maxStackSize": 1,
+        "itemModifier": "none",
+        "itemModifierValue": 9,
+        "itemImagePath": "textures/armor/MinecraftTextures/PurpleBoots.png"
+    },
+    {
+        "itemName": "PurpleChestplate",
+        "itemType": "Armor",
+        "maxStackSize": 1,
+        "itemModifier": "none",
+        "itemModifierValue": 9,
+        "itemImagePath": "textures/armor/MinecraftTextures/PurpleChestplate.png"
+    },
+    {
+        "itemName": "PurpleHelmet",
+        "itemType": "Armor",
+        "maxStackSize": 1,
+        "itemModifier": "none",
+        "itemModifierValue": 6,
+        "itemImagePath": "textures/armor/MinecraftTextures/PurpleHelmet.png"
+    },
+    {
+        "itemName": "PurpleLeggings",
+        "itemType": "Armor",
+        "maxStackSize": 1,
+        "itemModifier": "none",
+        "itemModifierValue": 4,
+        "itemImagePath": "textures/armor/MinecraftTextures/PurpleLeggings.png"
+    },
+    {
+        "itemName": "WhiteBoots",
+        "itemType": "Armor",
+        "maxStackSize": 1,
+        "itemModifier": "none",
+        "itemModifierValue": 10,
+        "itemImagePath": "textures/armor/MinecraftTextures/WhiteBoots.png"
+    },
+    {
+        "itemName": "WhiteChestplate",
+        "itemType": "Armor",
+        "maxStackSize": 1,
+        "itemModifier": "none",
+        "itemModifierValue": 5,
+        "itemImagePath": "textures/armor/MinecraftTextures/WhiteChestplate.png"
+    },
+    {
+        "itemName": "WhiteHelmet",
+        "itemType": "Armor",
+        "maxStackSize": 1,
+        "itemModifier": "none",
+        "itemModifierValue": 8,
+        "itemImagePath": "textures/armor/MinecraftTextures/WhiteHelmet.png"
+    },
+    {
+        "itemName": "WhiteLeggings",
+        "itemType": "Armor",
+        "maxStackSize": 1,
+        "itemModifier": "none",
+        "itemModifierValue": 1,
+        "itemImagePath": "textures/armor/MinecraftTextures/WhiteLeggings.png"
+    },
+    {
+        "itemName": "Battleaxe01",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Strength",
+        "itemModifierValue": 4,
+        "itemImagePath": "textures/Weapons/Battleaxe01.png"
+    },
+    {
+        "itemName": "Battleaxe02",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Strength",
+        "itemModifierValue": 5,
+        "itemImagePath": "textures/Weapons/Battleaxe02.png"
+    },
+    {
+        "itemName": "Battleaxe03",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Strength",
+        "itemModifierValue": 9,
+        "itemImagePath": "textures/Weapons/Battleaxe03.png"
+    },
+    {
+        "itemName": "Battleaxe04",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Dexterity",
+        "itemModifierValue": 3,
+        "itemImagePath": "textures/Weapons/Battleaxe04.png"
+    },
+    {
+        "itemName": "Club01",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Dexterity",
+        "itemModifierValue": 5,
+        "itemImagePath": "textures/Weapons/Club01.png"
+    },
+    {
+        "itemName": "Club02",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Dexterity",
+        "itemModifierValue": 7,
+        "itemImagePath": "textures/Weapons/Club02.png"
+    },
+    {
+        "itemName": "Club03",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Dexterity",
+        "itemModifierValue": 2,
+        "itemImagePath": "textures/Weapons/Club03.png"
+    },
+    {
+        "itemName": "Club04",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Dexterity",
+        "itemModifierValue": 1,
+        "itemImagePath": "textures/Weapons/Club04.png"
+    },
+    {
+        "itemName": "CrossbowHand01",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Dexterity",
+        "itemModifierValue": 10,
+        "itemImagePath": "textures/Weapons/CrossbowHand01.png"
+    },
+    {
+        "itemName": "CrossbowHand02",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Dexterity",
+        "itemModifierValue": 6,
+        "itemImagePath": "textures/Weapons/CrossbowHand02.png"
+    },
+    {
+        "itemName": "CrossbowHand03",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Dexterity",
+        "itemModifierValue": 9,
+        "itemImagePath": "textures/Weapons/CrossbowHand03.png"
+    },
+    {
+        "itemName": "CrossbowHand04",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Dexterity",
+        "itemModifierValue": 1,
+        "itemImagePath": "textures/Weapons/CrossbowHand04.png"
+    },
+    {
+        "itemName": "CrossbowHeavy01",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Dexterity",
+        "itemModifierValue": 7,
+        "itemImagePath": "textures/Weapons/CrossbowHeavy01.png"
+    },
+    {
+        "itemName": "CrossbowHeavy02",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Dexterity",
+        "itemModifierValue": 10,
+        "itemImagePath": "textures/Weapons/CrossbowHeavy02.png"
+    },
+    {
+        "itemName": "CrossbowHeavy03",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Strength",
+        "itemModifierValue": 2,
+        "itemImagePath": "textures/Weapons/CrossbowHeavy03.png"
+    },
+    {
+        "itemName": "CrossbowHeavy04",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Dexterity",
+        "itemModifierValue": 10,
+        "itemImagePath": "textures/Weapons/CrossbowHeavy04.png"
+    },
+    {
+        "itemName": "CrossbowLight01",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Strength",
+        "itemModifierValue": 2,
+        "itemImagePath": "textures/Weapons/CrossbowLight01.png"
+    },
+    {
+        "itemName": "CrossbowLight02",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Dexterity",
+        "itemModifierValue": 8,
+        "itemImagePath": "textures/Weapons/CrossbowLight02.png"
+    },
+    {
+        "itemName": "CrossbowLight03",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Dexterity",
+        "itemModifierValue": 9,
+        "itemImagePath": "textures/Weapons/CrossbowLight03.png"
+    },
+    {
+        "itemName": "CrossbowLight04",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Dexterity",
+        "itemModifierValue": 4,
+        "itemImagePath": "textures/Weapons/CrossbowLight04.png"
+    },
+    {
+        "itemName": "Dagger01",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Dexterity",
+        "itemModifierValue": 8,
+        "itemImagePath": "textures/Weapons/Dagger01.png"
+    },
+    {
+        "itemName": "Dagger02",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Dexterity",
+        "itemModifierValue": 6,
+        "itemImagePath": "textures/Weapons/Dagger02.png"
+    },
+    {
+        "itemName": "Dagger03",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Strength",
+        "itemModifierValue": 5,
+        "itemImagePath": "textures/Weapons/Dagger03.png"
+    },
+    {
+        "itemName": "Dagger04",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Strength",
+        "itemModifierValue": 5,
+        "itemImagePath": "textures/Weapons/Dagger04.png"
+    },
+    {
+        "itemName": "Flail01",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Dexterity",
+        "itemModifierValue": 8,
+        "itemImagePath": "textures/Weapons/Flail01.png"
+    },
+    {
+        "itemName": "Flail02",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Dexterity",
+        "itemModifierValue": 10,
+        "itemImagePath": "textures/Weapons/Flail02.png"
+    },
+    {
+        "itemName": "Flail03",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Strength",
+        "itemModifierValue": 5,
+        "itemImagePath": "textures/Weapons/Flail03.png"
+    },
+    {
+        "itemName": "Flail04",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Dexterity",
+        "itemModifierValue": 9,
+        "itemImagePath": "textures/Weapons/Flail04.png"
+    },
+    {
+        "itemName": "GlaiveA01",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Dexterity",
+        "itemModifierValue": 4,
+        "itemImagePath": "textures/Weapons/GlaiveA01.png"
+    },
+    {
+        "itemName": "GlaiveB01",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Strength",
+        "itemModifierValue": 4,
+        "itemImagePath": "textures/Weapons/GlaiveB01.png"
+    },
+    {
+        "itemName": "GlaiveC01",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Dexterity",
+        "itemModifierValue": 1,
+        "itemImagePath": "textures/Weapons/GlaiveC01.png"
+    },
+    {
+        "itemName": "GlaiveD01",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Dexterity",
+        "itemModifierValue": 7,
+        "itemImagePath": "textures/Weapons/GlaiveD01.png"
+    },
+    {
+        "itemName": "GreataxeA01",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Dexterity",
+        "itemModifierValue": 10,
+        "itemImagePath": "textures/Weapons/GreataxeA01.png"
+    },
+    {
+        "itemName": "GreataxeB01",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Strength",
+        "itemModifierValue": 8,
+        "itemImagePath": "textures/Weapons/GreataxeB01.png"
+    },
+    {
+        "itemName": "GreataxeC01",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Dexterity",
+        "itemModifierValue": 8,
+        "itemImagePath": "textures/Weapons/GreataxeC01.png"
+    },
+    {
+        "itemName": "GreataxeD01",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Strength",
+        "itemModifierValue": 2,
+        "itemImagePath": "textures/Weapons/GreataxeD01.png"
+    },
+    {
+        "itemName": "Greatclub01",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Dexterity",
+        "itemModifierValue": 4,
+        "itemImagePath": "textures/Weapons/Greatclub01.png"
+    },
+    {
+        "itemName": "Greatclub02",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Dexterity",
+        "itemModifierValue": 1,
+        "itemImagePath": "textures/Weapons/Greatclub02.png"
+    },
+    {
+        "itemName": "Greatclub03",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Strength",
+        "itemModifierValue": 2,
+        "itemImagePath": "textures/Weapons/Greatclub03.png"
+    },
+    {
+        "itemName": "Greatclub04",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Strength",
+        "itemModifierValue": 9,
+        "itemImagePath": "textures/Weapons/Greatclub04.png"
+    },
+    {
+        "itemName": "Greatsword01",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Dexterity",
+        "itemModifierValue": 6,
+        "itemImagePath": "textures/Weapons/Greatsword01.png"
+    },
+    {
+        "itemName": "Greatsword02",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Strength",
+        "itemModifierValue": 4,
+        "itemImagePath": "textures/Weapons/Greatsword02.png"
+    },
+    {
+        "itemName": "Greatsword03",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Dexterity",
+        "itemModifierValue": 7,
+        "itemImagePath": "textures/Weapons/Greatsword03.png"
+    },
+    {
+        "itemName": "Greatsword04",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Dexterity",
+        "itemModifierValue": 8,
+        "itemImagePath": "textures/Weapons/Greatsword04.png"
+    },
+    {
+        "itemName": "HalberdA01",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Strength",
+        "itemModifierValue": 1,
+        "itemImagePath": "textures/Weapons/HalberdA01.png"
+    },
+    {
+        "itemName": "HalberdB01",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Strength",
+        "itemModifierValue": 3,
+        "itemImagePath": "textures/Weapons/HalberdB01.png"
+    },
+    {
+        "itemName": "HalberdC01",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Dexterity",
+        "itemModifierValue": 4,
+        "itemImagePath": "textures/Weapons/HalberdC01.png"
+    },
+    {
+        "itemName": "HalberdD01",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Strength",
+        "itemModifierValue": 6,
+        "itemImagePath": "textures/Weapons/HalberdD01.png"
+    },
+    {
+        "itemName": "HandAxe01",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Strength",
+        "itemModifierValue": 1,
+        "itemImagePath": "textures/Weapons/HandAxe01.png"
+    },
+    {
+        "itemName": "HandAxe02",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Strength",
+        "itemModifierValue": 4,
+        "itemImagePath": "textures/Weapons/HandAxe02.png"
+    },
+    {
+        "itemName": "HandAxe03",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Strength",
+        "itemModifierValue": 5,
+        "itemImagePath": "textures/Weapons/HandAxe03.png"
+    },
+    {
+        "itemName": "HandAxe04",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Dexterity",
+        "itemModifierValue": 5,
+        "itemImagePath": "textures/Weapons/HandAxe04.png"
+    },
+    {
+        "itemName": "Javelin01",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Dexterity",
+        "itemModifierValue": 8,
+        "itemImagePath": "textures/Weapons/Javelin01.png"
+    },
+    {
+        "itemName": "Javelin02",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Strength",
+        "itemModifierValue": 9,
+        "itemImagePath": "textures/Weapons/Javelin02.png"
+    },
+    {
+        "itemName": "Javelin03",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Dexterity",
+        "itemModifierValue": 5,
+        "itemImagePath": "textures/Weapons/Javelin03.png"
+    },
+    {
+        "itemName": "Javelin04",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Strength",
+        "itemModifierValue": 3,
+        "itemImagePath": "textures/Weapons/Javelin04.png"
+    },
+    {
+        "itemName": "LanceA01",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Strength",
+        "itemModifierValue": 6,
+        "itemImagePath": "textures/Weapons/LanceA01.png"
+    },
+    {
+        "itemName": "LanceB01",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Dexterity",
+        "itemModifierValue": 5,
+        "itemImagePath": "textures/Weapons/LanceB01.png"
+    },
+    {
+        "itemName": "LanceC01",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Dexterity",
+        "itemModifierValue": 6,
+        "itemImagePath": "textures/Weapons/LanceC01.png"
+    },
+    {
+        "itemName": "LanceD01",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Dexterity",
+        "itemModifierValue": 6,
+        "itemImagePath": "textures/Weapons/LanceD01.png"
+    },
+    {
+        "itemName": "LightHammer01",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Strength",
+        "itemModifierValue": 1,
+        "itemImagePath": "textures/Weapons/LightHammer01.png"
+    },
+    {
+        "itemName": "LightHammer02",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Dexterity",
+        "itemModifierValue": 3,
+        "itemImagePath": "textures/Weapons/LightHammer02.png"
+    },
+    {
+        "itemName": "LightHammer03",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Strength",
+        "itemModifierValue": 4,
+        "itemImagePath": "textures/Weapons/LightHammer03.png"
+    },
+    {
+        "itemName": "LightHammer04",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Dexterity",
+        "itemModifierValue": 8,
+        "itemImagePath": "textures/Weapons/LightHammer04.png"
+    },
+    {
+        "itemName": "Longbow01",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Dexterity",
+        "itemModifierValue": 9,
+        "itemImagePath": "textures/Weapons/Longbow01.png"
+    },
+    {
+        "itemName": "Longbow02",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Dexterity",
+        "itemModifierValue": 10,
+        "itemImagePath": "textures/Weapons/Longbow02.png"
+    },
+    {
+        "itemName": "Longbow03",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Dexterity",
+        "itemModifierValue": 2,
+        "itemImagePath": "textures/Weapons/Longbow03.png"
+    },
+    {
+        "itemName": "Longbow04",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Strength",
+        "itemModifierValue": 5,
+        "itemImagePath": "textures/Weapons/Longbow04.png"
+    },
+    {
+        "itemName": "Longsword01",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Strength",
+        "itemModifierValue": 5,
+        "itemImagePath": "textures/Weapons/Longsword01.png"
+    },
+    {
+        "itemName": "Longsword02",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Dexterity",
+        "itemModifierValue": 7,
+        "itemImagePath": "textures/Weapons/Longsword02.png"
+    },
+    {
+        "itemName": "Longsword03",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Strength",
+        "itemModifierValue": 6,
+        "itemImagePath": "textures/Weapons/Longsword03.png"
+    },
+    {
+        "itemName": "Longsword04",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Strength",
+        "itemModifierValue": 10,
+        "itemImagePath": "textures/Weapons/Longsword04.png"
+    },
+    {
+        "itemName": "Mace01",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Dexterity",
+        "itemModifierValue": 3,
+        "itemImagePath": "textures/Weapons/Mace01.png"
+    },
+    {
+        "itemName": "Mace02",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Dexterity",
+        "itemModifierValue": 3,
+        "itemImagePath": "textures/Weapons/Mace02.png"
+    },
+    {
+        "itemName": "Mace03",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Dexterity",
+        "itemModifierValue": 2,
+        "itemImagePath": "textures/Weapons/Mace03.png"
+    },
+    {
+        "itemName": "Mace04",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Dexterity",
+        "itemModifierValue": 5,
+        "itemImagePath": "textures/Weapons/Mace04.png"
+    },
+    {
+        "itemName": "Maul01",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Dexterity",
+        "itemModifierValue": 2,
+        "itemImagePath": "textures/Weapons/Maul01.png"
+    },
+    {
+        "itemName": "Maul02",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Dexterity",
+        "itemModifierValue": 4,
+        "itemImagePath": "textures/Weapons/Maul02.png"
+    },
+    {
+        "itemName": "Maul03",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Dexterity",
+        "itemModifierValue": 6,
+        "itemImagePath": "textures/Weapons/Maul03.png"
+    },
+    {
+        "itemName": "Maul04",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Strength",
+        "itemModifierValue": 10,
+        "itemImagePath": "textures/Weapons/Maul04.png"
+    },
+    {
+        "itemName": "Morningstar01",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Strength",
+        "itemModifierValue": 1,
+        "itemImagePath": "textures/Weapons/Morningstar01.png"
+    },
+    {
+        "itemName": "Morningstar02",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Strength",
+        "itemModifierValue": 3,
+        "itemImagePath": "textures/Weapons/Morningstar02.png"
+    },
+    {
+        "itemName": "Morningstar03",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Dexterity",
+        "itemModifierValue": 1,
+        "itemImagePath": "textures/Weapons/Morningstar03.png"
+    },
+    {
+        "itemName": "Morningstar04",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Dexterity",
+        "itemModifierValue": 8,
+        "itemImagePath": "textures/Weapons/Morningstar04.png"
+    },
+    {
+        "itemName": "Pike01",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Strength",
+        "itemModifierValue": 10,
+        "itemImagePath": "textures/Weapons/Pike01.png"
+    },
+    {
+        "itemName": "Pike02",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Dexterity",
+        "itemModifierValue": 6,
+        "itemImagePath": "textures/Weapons/Pike02.png"
+    },
+    {
+        "itemName": "Pike03",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Dexterity",
+        "itemModifierValue": 5,
+        "itemImagePath": "textures/Weapons/Pike03.png"
+    },
+    {
+        "itemName": "Pike04",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Dexterity",
+        "itemModifierValue": 10,
+        "itemImagePath": "textures/Weapons/Pike04.png"
+    },
+    {
+        "itemName": "Quarterstaff01",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Strength",
+        "itemModifierValue": 1,
+        "itemImagePath": "textures/Weapons/Quarterstaff01.png"
+    },
+    {
+        "itemName": "Quarterstaff02",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Dexterity",
+        "itemModifierValue": 3,
+        "itemImagePath": "textures/Weapons/Quarterstaff02.png"
+    },
+    {
+        "itemName": "Quarterstaff03",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Strength",
+        "itemModifierValue": 10,
+        "itemImagePath": "textures/Weapons/Quarterstaff03.png"
+    },
+    {
+        "itemName": "Quarterstaff04",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Strength",
+        "itemModifierValue": 6,
+        "itemImagePath": "textures/Weapons/Quarterstaff04.png"
+    },
+    {
+        "itemName": "Rapier01",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Strength",
+        "itemModifierValue": 1,
+        "itemImagePath": "textures/Weapons/Rapier01.png"
+    },
+    {
+        "itemName": "Rapier02",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Dexterity",
+        "itemModifierValue": 1,
+        "itemImagePath": "textures/Weapons/Rapier02.png"
+    },
+    {
+        "itemName": "Rapier03",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Dexterity",
+        "itemModifierValue": 2,
+        "itemImagePath": "textures/Weapons/Rapier03.png"
+    },
+    {
+        "itemName": "Rapier04",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Strength",
+        "itemModifierValue": 9,
+        "itemImagePath": "textures/Weapons/Rapier04.png"
+    },
+    {
+        "itemName": "Scimitar01",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Strength",
+        "itemModifierValue": 8,
+        "itemImagePath": "textures/Weapons/Scimitar01.png"
+    },
+    {
+        "itemName": "Scimitar02",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Dexterity",
+        "itemModifierValue": 4,
+        "itemImagePath": "textures/Weapons/Scimitar02.png"
+    },
+    {
+        "itemName": "Scimitar03",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Strength",
+        "itemModifierValue": 1,
+        "itemImagePath": "textures/Weapons/Scimitar03.png"
+    },
+    {
+        "itemName": "Scimitar04",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Dexterity",
+        "itemModifierValue": 3,
+        "itemImagePath": "textures/Weapons/Scimitar04.png"
+    },
+    {
+        "itemName": "Shortbow01",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Dexterity",
+        "itemModifierValue": 9,
+        "itemImagePath": "textures/Weapons/Shortbow01.png"
+    },
+    {
+        "itemName": "Shortbow02",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Dexterity",
+        "itemModifierValue": 9,
+        "itemImagePath": "textures/Weapons/Shortbow02.png"
+    },
+    {
+        "itemName": "Shortbow03",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Strength",
+        "itemModifierValue": 7,
+        "itemImagePath": "textures/Weapons/Shortbow03.png"
+    },
+    {
+        "itemName": "Shortbow04",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Dexterity",
+        "itemModifierValue": 1,
+        "itemImagePath": "textures/Weapons/Shortbow04.png"
+    },
+    {
+        "itemName": "Shortsword01",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Strength",
+        "itemModifierValue": 8,
+        "itemImagePath": "textures/Weapons/Shortsword01.png"
+    },
+    {
+        "itemName": "Shortsword02",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Dexterity",
+        "itemModifierValue": 2,
+        "itemImagePath": "textures/Weapons/Shortsword02.png"
+    },
+    {
+        "itemName": "Shortsword03",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Dexterity",
+        "itemModifierValue": 1,
+        "itemImagePath": "textures/Weapons/Shortsword03.png"
+    },
+    {
+        "itemName": "Shortsword04",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Strength",
+        "itemModifierValue": 7,
+        "itemImagePath": "textures/Weapons/Shortsword04.png"
+    },
+    {
+        "itemName": "Sickle01",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Dexterity",
+        "itemModifierValue": 5,
+        "itemImagePath": "textures/Weapons/Sickle01.png"
+    },
+    {
+        "itemName": "Sickle02",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Dexterity",
+        "itemModifierValue": 2,
+        "itemImagePath": "textures/Weapons/Sickle02.png"
+    },
+    {
+        "itemName": "Sickle03",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Strength",
+        "itemModifierValue": 2,
+        "itemImagePath": "textures/Weapons/Sickle03.png"
+    },
+    {
+        "itemName": "Sickle04",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Dexterity",
+        "itemModifierValue": 4,
+        "itemImagePath": "textures/Weapons/Sickle04.png"
+    },
+    {
+        "itemName": "SpearA01",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Dexterity",
+        "itemModifierValue": 6,
+        "itemImagePath": "textures/Weapons/SpearA01.png"
+    },
+    {
+        "itemName": "SpearB01",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Dexterity",
+        "itemModifierValue": 3,
+        "itemImagePath": "textures/Weapons/SpearB01.png"
+    },
+    {
+        "itemName": "SpearC01",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Strength",
+        "itemModifierValue": 7,
+        "itemImagePath": "textures/Weapons/SpearC01.png"
+    },
+    {
+        "itemName": "SpearD01",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Dexterity",
+        "itemModifierValue": 4,
+        "itemImagePath": "textures/Weapons/SpearD01.png"
+    },
+    {
+        "itemName": "Trident01",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Dexterity",
+        "itemModifierValue": 1,
+        "itemImagePath": "textures/Weapons/Trident01.png"
+    },
+    {
+        "itemName": "Trident02",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Dexterity",
+        "itemModifierValue": 6,
+        "itemImagePath": "textures/Weapons/Trident02.png"
+    },
+    {
+        "itemName": "Trident03",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Dexterity",
+        "itemModifierValue": 2,
+        "itemImagePath": "textures/Weapons/Trident03.png"
+    },
+    {
+        "itemName": "Trident04",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Dexterity",
+        "itemModifierValue": 7,
+        "itemImagePath": "textures/Weapons/Trident04.png"
+    },
+    {
+        "itemName": "Warhammer01",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Strength",
+        "itemModifierValue": 9,
+        "itemImagePath": "textures/Weapons/Warhammer01.png"
+    },
+    {
+        "itemName": "Warhammer02",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Strength",
+        "itemModifierValue": 2,
+        "itemImagePath": "textures/Weapons/Warhammer02.png"
+    },
+    {
+        "itemName": "Warhammer03",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Strength",
+        "itemModifierValue": 10,
+        "itemImagePath": "textures/Weapons/Warhammer03.png"
+    },
+    {
+        "itemName": "Warhammer04",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Strength",
+        "itemModifierValue": 1,
+        "itemImagePath": "textures/Weapons/Warhammer04.png"
+    },
+    {
+        "itemName": "WarPick01",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Dexterity",
+        "itemModifierValue": 3,
+        "itemImagePath": "textures/Weapons/WarPick01.png"
+    },
+    {
+        "itemName": "WarPick02",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Dexterity",
+        "itemModifierValue": 1,
+        "itemImagePath": "textures/Weapons/WarPick02.png"
+    },
+    {
+        "itemName": "WarPick03",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Dexterity",
+        "itemModifierValue": 8,
+        "itemImagePath": "textures/Weapons/WarPick03.png"
+    },
+    {
+        "itemName": "WarPick04",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Dexterity",
+        "itemModifierValue": 4,
+        "itemImagePath": "textures/Weapons/WarPick04.png"
+    },
+    {
+        "itemName": "Whip01",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Strength",
+        "itemModifierValue": 2,
+        "itemImagePath": "textures/Weapons/Whip01.png"
+    },
+    {
+        "itemName": "Whip02",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Dexterity",
+        "itemModifierValue": 5,
+        "itemImagePath": "textures/Weapons/Whip02.png"
+    },
+    {
+        "itemName": "Whip03",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Strength",
+        "itemModifierValue": 5,
+        "itemImagePath": "textures/Weapons/Whip03.png"
+    },
+    {
+        "itemName": "Whip04",
+        "itemType": "Weapon",
+        "maxStackSize": 1,
+        "itemModifier": "Dexterity",
+        "itemModifierValue": 4,
+        "itemImagePath": "textures/Weapons/Whip04.png"
     }
 ]

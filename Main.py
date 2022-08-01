@@ -34,7 +34,7 @@ def drawSidebar(app, canvas):
     canvas.create_rectangle(app.sidebarMinWidth, app.sidebarMinHeight+20, app.sidebarMaxWidth, app.sidebarMaxHeight//10+20, fill='#f71735')
     canvas.create_rectangle(app.sidebarMinWidth, app.sidebarMinHeight+20, app.sidebarMinWidth + healthBarSize, app.sidebarMaxHeight//10+20, fill='#44af69')
     canvas.create_text(app.sidebarMinWidth+10, (app.sidebarMinHeight+app.sidebarMaxHeight//10)//2+20
-                    , text=f'Health: {app.playerCharacter.getHealth()}', fill='#fffcf9', font=(app.font,14), anchor = 'w')
+                    , text=f'Health: {app.playerCharacter.getHealth():.0f}', fill='#fffcf9', font=(app.font,14), anchor = 'w')
     
     #create weapon inventory
     for col in range(len(app.playerCharacter.weapons)):
@@ -152,6 +152,28 @@ def drawContinueMenu(app, canvas):
     pass
 
 #######################################
+###Death Screen Draw Functions#########
+#######################################
+def drawDeathScreen(app, canvas):
+    #make interactive grid
+    gridSize = 10
+    
+    # make continue button
+    midIndex = len(app.levelCounter)//2
+    tempX0,tempY0,tempX1,tempY1 = getCellBounds(app.levelCounter[midIndex][0], app.levelCounter[midIndex][1], app.width, app.height, gridSize)
+    canvas.create_text(tempX0,tempY0, text=f"You Made it to Level: {app.currentLevel}", fill='#fffcf9', font=(app.font,60), anchor = 'n',)
+    
+    # make continue button
+    midIndex = len(app.youDiedText)//2
+    tempX0,tempY0,tempX1,tempY1 = getCellBounds(app.youDiedText[midIndex][0], app.youDiedText[midIndex][1], app.width, app.height, gridSize)
+    canvas.create_text(tempX0,tempY0, text="You Died", fill='#fffcf9', font=(app.font,60), anchor = 'n',)
+    
+    # make exit button
+    midIndex = len(app.exitToStartButton)//2
+    tempX0,tempY0,tempX1,tempY1 = getCellBounds(app.exitToStartButton[midIndex][0], app.exitToStartButton[midIndex][1], app.width, app.height, gridSize)
+    canvas.create_text(tempX0,tempY0, text="Exit To Start Menu", fill='#fffcf9', font=(app.font,60), anchor = 'n')
+    pass
+#######################################
 ###Redraw All##########################
 #######################################
 def redrawAll(app, canvas): # draw (view) the model in the canvas
@@ -182,6 +204,9 @@ def redrawAll(app, canvas): # draw (view) the model in the canvas
     
     if app.gameState == 'continueMenu':
         drawContinueMenu(app, canvas)
+    
+    if app.gameState == 'deathScreen':
+        drawDeathScreen(app, canvas)
     pass      
 
 #######################################
@@ -348,7 +373,32 @@ def initContinueMenu(app):
                 app.pauseMenuGrid[row][col] = 1
             elif (row,col) in exitToStartButton:
                 app.pauseMenuGrid[row][col] = 2
-
+                
+#######################################
+###Death Screen Initializers##########
+#######################################
+        
+def initDeathScreen(app):
+    # create a 10x10 grid
+    gridSize = 10
+    app.pauseMenuGrid = []
+    gridRow = []
+    app.youDiedText = [(1,2),(1,3),(1,4),(1,5),(1,6),(1,7)]
+    app.levelCounter = [(4,2),(4,3),(4,4),(4,5),(4,6),(4,7)]
+    app.exitToStartButton = [(7,2),(7,3),(7,4),(7,5),(7,6),(7,7)]
+    youDiedText = app.youDiedText
+    exitToStartButton = app.exitToStartButton
+    for row in range(gridSize):
+        for col in range(gridSize):
+            gridRow.append(0)
+        app.pauseMenuGrid.append(gridRow)
+        gridRow=[]
+        
+    # add buttons
+    for row in range(gridSize):
+        for col in range(gridSize):
+            if (row,col) in exitToStartButton:
+                app.pauseMenuGrid[row][col] = 1
 #######################################
 ###App First Run#######################
 #######################################
@@ -402,6 +452,9 @@ def appStarted(app): # initialize the model (app.xyz)
     
     #make continue menu
     initContinueMenu(app)  
+    
+    #make death screen menu
+    initDeathScreen(app)  
 
 def appStopped(app): # cleanup after app is done running
     pass           
@@ -584,6 +637,11 @@ def mousePressed(app, event): # use event.x and event.y
             app.gameState = 'game'
         pass
     
+    elif app.gameState == 'deathScreen':
+        (row,col) = getCell(event.x, event.y, app.width, app.height, 10)
+        if (row, col) in app.exitToStartButton:
+            app.gameState = 'start'
+    
 
 # def mouseReleased(app, event): # use event.x and event.y
 #     pass 
@@ -605,6 +663,8 @@ def doAnimations(app):
 
 def timerFired(app): # respond to timer events
     if app.gameState == 'game':
+        if app.playerCharacter.getHealth() <= 0:
+            app.gameState = 'deathScreen'
         #monster turns
         if app.turn == 'enemy':
             pass

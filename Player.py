@@ -154,7 +154,14 @@ class Player:
         if self.currentHP - damage <= 0:
             self.currentHP = 0
         else:
-            self.currentHP -= damage
+            totalOffset, maxOffset = 0,0
+            for item in self.armor:
+                if item != 0:
+                    if item.itemModifier == 'Constitution':
+                        totalOffset += random.randint(0, item.itemModifierValue)
+                        maxOffset += item.itemModifierValue
+            print(damage*(totalOffset/maxOffset)-self.constitutionModifier)
+            self.currentHP -= damage*(totalOffset/maxOffset) - self.constitutionModifier
         pass
             
     def heal(self, heal):

@@ -40,7 +40,6 @@ class Room:
                     self.grid[row][col] = tempMonster
                 elif self.grid[row][col] == 6:
                     tempItem = copy.deepcopy(self.allItems.get(random.choice(list(random.choice(self.allItemsList)))))
-                    # tempItem = copy.deepcopy(self.allItems.get(random.choice(list(self.allItems))))
                     itemImage = app.loadImage(tempItem.itemImage)
                     itemImage = resizeSprite(itemImage, app.gridWidth//self.gridSize, app.gridHeight//self.gridSize)
                     tempItem.itemImage = itemImage
@@ -54,6 +53,7 @@ class Room:
         for row in range(gridSize):
             for col in range(gridSize):
                 (x0, y0, x1, y1) = getCellBounds(row, col, app.gridWidth, app.gridHeight, gridSize)
+                canvas.create_rectangle(x0, y0, x1, y1, fill='#fffcf9', width = 1)
                 if gridLayout[row][col] == 0:
                     canvas.create_rectangle(x0, y0, x1, y1, fill='#fffcf9', width = 1)
                 elif gridLayout[row][col] == 1:
@@ -65,10 +65,8 @@ class Room:
                 elif gridLayout[row][col] == 4:
                     canvas.create_rectangle(x0, y0, x1, y1, fill='#8E8686', width = 1)
                 elif isinstance(gridLayout[row][col],Items):
-                    canvas.create_rectangle(x0, y0, x1, y1, fill='#E09F3E', width = 1)
                     canvas.create_image(x0 + (x1-x0)//2, y0 + (y1-y0)//2, image = ImageTk.PhotoImage(gridLayout[row][col].getItemImage()))
                 elif isinstance(gridLayout[row][col],Monster):
-                    canvas.create_rectangle(x0, y0, x1, y1, fill='#FE6D73', width = 1)
                     gridLayout[row][col].drawMonster(app, canvas, self.gridSize)
                     
     def animateRoom(self):
