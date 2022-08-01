@@ -470,43 +470,51 @@ def keyPressed(app, event): # use event.key
                 pass
                 
             #pickup/drop item using e
-            elif event.key == 'e':
-                if isinstance(currentRoom[playerRoomPos[0]][playerRoomPos[1]], Items):
-                    if app.playerCharacter.currentWeapon != None:
-                        if app.playerCharacter.weapons[app.playerCharacter.currentWeapon] == 0:
+            elif event.key == 'q':
+                if app.playerCharacter.currentWeapon != None:
+                    if isinstance(currentRoom[playerRoomPos[0]][playerRoomPos[1]], Items):
+                        if app.playerCharacter.weapons[app.playerCharacter.currentWeapon] == 0 and currentRoom[playerRoomPos[0]][playerRoomPos[1]].itemType == 'Weapon':
                             weapons = app.playerCharacter.weapons
                             itemImage = currentRoom[playerRoomPos[0]][playerRoomPos[1]].itemImage
                             itemImage = itemImage.resize(((app.sidebarActualWidth)//len(weapons)-20, (app.sidebarActualWidth)//len(weapons)-20), Image.Resampling.LANCZOS)
                             currentRoom[playerRoomPos[0]][playerRoomPos[1]].itemImage = itemImage
                             app.playerCharacter.pickupItem(currentRoom[playerRoomPos[0]][playerRoomPos[1]])
                             currentRoom[playerRoomPos[0]][playerRoomPos[1]] = 0
-                        else:
-                            currentRoom[playerRoomPos[0]][playerRoomPos[1]] = app.playerCharacter.weapons[app.playerCharacter.currentWeapon]
-                            app.playerCharacter.weapons[app.playerCharacter.currentWeapon] = 0
-                            
-                    elif app.playerCharacter.currentArmor != None:
-                        if app.playerCharacter.armor[app.playerCharacter.currentArmor] == 0:
+                    else:
+                        currentRoom[playerRoomPos[0]][playerRoomPos[1]] = app.playerCharacter.weapons[app.playerCharacter.currentWeapon]
+                        app.playerCharacter.weapons[app.playerCharacter.currentWeapon] = 0
+                        
+                elif app.playerCharacter.currentArmor != None:
+                    if isinstance(currentRoom[playerRoomPos[0]][playerRoomPos[1]], Items):
+                        if app.playerCharacter.armor[app.playerCharacter.currentArmor] == 0 and currentRoom[playerRoomPos[0]][playerRoomPos[1]].itemType == 'Armor':
                             armor = app.playerCharacter.armor
                             itemImage = currentRoom[playerRoomPos[0]][playerRoomPos[1]].itemImage
                             itemImage = itemImage.resize(((app.sidebarActualWidth)//len(armor)-20, (app.sidebarActualWidth)//len(armor)-20), Image.Resampling.LANCZOS)
                             currentRoom[playerRoomPos[0]][playerRoomPos[1]].itemImage = itemImage
                             app.playerCharacter.pickupItem(currentRoom[playerRoomPos[0]][playerRoomPos[1]])
                             currentRoom[playerRoomPos[0]][playerRoomPos[1]] = 0
-                        else:
-                            currentRoom[playerRoomPos[0]][playerRoomPos[1]] = app.playerCharacter.armor[app.playerCharacter.currentArmor]
-                            app.playerCharacter.armor[app.playerCharacter.currentArmor] = 0
-                            
-                    elif app.playerCharacter.currentItem != None:
-                        if app.playerCharacter.miscItems[app.playerCharacter.currentItem] == 0:
+                    else:
+                        currentRoom[playerRoomPos[0]][playerRoomPos[1]] = app.playerCharacter.armor[app.playerCharacter.currentArmor]
+                        app.playerCharacter.armor[app.playerCharacter.currentArmor] = 0
+                        
+                elif app.playerCharacter.currentItem != None:
+                    if isinstance(currentRoom[playerRoomPos[0]][playerRoomPos[1]], Items):
+                        if app.playerCharacter.miscItems[app.playerCharacter.currentItem] == 0 and currentRoom[playerRoomPos[0]][playerRoomPos[1]].itemType == 'MiscItem':
                             miscItems = app.playerCharacter.miscItems
                             itemImage = currentRoom[playerRoomPos[0]][playerRoomPos[1]].itemImage
                             itemImage = itemImage.resize(((app.sidebarActualWidth)//len(miscItems)-20, (app.sidebarActualWidth)//len(miscItems)-20), Image.Resampling.LANCZOS)
                             currentRoom[playerRoomPos[0]][playerRoomPos[1]].itemImage = itemImage
                             app.playerCharacter.pickupItem(currentRoom[playerRoomPos[0]][playerRoomPos[1]])
                             currentRoom[playerRoomPos[0]][playerRoomPos[1]] = 0
-                        else:
-                            currentRoom[playerRoomPos[0]][playerRoomPos[1]] = app.playerCharacter.miscItems[app.playerCharacter.currentItem]
-                            app.playerCharacter.miscItems[app.playerCharacter.currentItem] = 0
+                    else:
+                        currentRoom[playerRoomPos[0]][playerRoomPos[1]] = app.playerCharacter.miscItems[app.playerCharacter.currentItem]
+                        app.playerCharacter.miscItems[app.playerCharacter.currentItem] = 0
+                        
+            elif event.key == 'e':
+                if app.playerCharacter.currentItem != None:
+                    app.playerCharacter.useItem()
+            elif event.key == 'Space':
+                app.playerCharacter.takeDamage(10)
                 
             
             #player turns

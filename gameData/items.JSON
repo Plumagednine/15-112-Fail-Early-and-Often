@@ -38,5 +38,21 @@
         "itemModifier": "Strength",
         "itemModifierValue": 8,
         "itemImagePath": "textures/Weapons/Morningstar_01.png"
+    },
+    {
+        "itemName": "Health Potion",
+        "itemType": "MiscItem",
+        "maxStackSize": 1,
+        "itemModifier": "Health",
+        "itemModifierValue": 8,
+        "itemImagePath": "textures/miscItems/health_potion.png"
+    },
+    {
+        "itemName": "Basic Gloves",
+        "itemType": "Armor",
+        "maxStackSize": 1,
+        "itemModifier": "Constitution",
+        "itemModifierValue": 8,
+        "itemImagePath": "textures/armor/Gloves/Glove_Cloth_White_B1_1x1.png"
     }
 ]

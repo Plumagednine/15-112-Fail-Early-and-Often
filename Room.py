@@ -11,6 +11,18 @@ class Room:
         self.grid = roomDict.get("roomLayout")
         self.gridSize = len(self.grid)
         self.allItems = allItems
+        self.allWeapons = {}
+        self.allArmor = {}
+        self.allMiscItems = {}
+        for item in allItems:
+            tempItem = allItems.get(item)
+            if tempItem.getItemType() == "Weapon":
+                self.allWeapons[item] = allItems.get(item)
+            elif tempItem.getItemType() == "Armor":
+                self.allArmor[item] = allItems.get(item)
+            elif tempItem.getItemType() == "MiscItem":
+                self.allMiscItems[item] = allItems.get(item)
+        self.allItemsList = [self.allWeapons, self.allArmor, self.allMiscItems]
         self.allMonsters = allMonsters
         # app.gridWidth = app.width-int(app.height*.5)
         # app.gridHeight = app.height
@@ -26,9 +38,9 @@ class Room:
                     tempMonster.sprites = animateSprite(app, spriteSheet, app.gridWidth, app.gridHeight, self.gridSize) 
                     tempMonster.setRoomPos(row, col)
                     self.grid[row][col] = tempMonster
-                    
                 elif self.grid[row][col] == 6:
-                    tempItem = copy.deepcopy(self.allItems.get(random.choice(list(self.allItems))))
+                    tempItem = copy.deepcopy(self.allItems.get(random.choice(list(random.choice(self.allItemsList)))))
+                    # tempItem = copy.deepcopy(self.allItems.get(random.choice(list(self.allItems))))
                     itemImage = app.loadImage(tempItem.itemImage)
                     itemImage = resizeSprite(itemImage, app.gridWidth//self.gridSize, app.gridHeight//self.gridSize)
                     tempItem.itemImage = itemImage

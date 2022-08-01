@@ -133,7 +133,7 @@ class Player:
             self.weapons[self.currentWeapon] = item
         elif item.getItemType() == 'Armor':
             self.armor[self.currentArmor] = item
-        elif item.getItemType() == 'Misc':
+        elif item.getItemType() == 'MiscItem':
             self.miscItems[self.currentItem] = item
     
     def dropItem(self):
@@ -163,6 +163,12 @@ class Player:
         else:
             self.currentHP += heal
         pass
+    
+    def useItem(self):
+        useageInfo = self.miscItems[self.currentItem].useItem()
+        if useageInfo[0] == 'Health':
+            self.heal(useageInfo[1])
+        self.miscItems[self.currentItem] = 0
     
     def dealDamage(self):
         if self.weapons[self.currentWeapon].itemModifier == 'Dexterity':

@@ -25,3 +25,6 @@ class Items:
     
     def getItemType(self):
         return self.itemType
+
+    def useItem(self):
+        return self.itemModifier, self.itemModifierValue
