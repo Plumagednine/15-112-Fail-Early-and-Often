@@ -29,10 +29,10 @@ def loadMonsters():
         allMonstersDictionary[monsterDict.get('monsterName')] = Monster(monsterDict)
     return allMonstersDictionary
 
-def loadRooms():
+def loadRooms(app, allMonstersDictionary, allItemsDictionary):
     rooms = loadJSON('gameData/rooms.JSON')
     allRoomsDictionary = {}
     for room in rooms:
         roomDict = room
-        allRoomsDictionary[roomDict.get('roomId')] = Room(roomDict)
+        allRoomsDictionary[roomDict.get('roomId')] = Room(app, roomDict, allMonstersDictionary, allItemsDictionary)
     return allRoomsDictionary

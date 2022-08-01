@@ -11,19 +11,20 @@ class Monster:
         self.strengthModifier = (monsterDict.get("strength")-10)//2
         self.movementSpeed = monsterDict.get("movementSpeed")
         self.spriteCounter = monsterDict.get("spriteCounter")
+        self.monsterName = monsterDict.get("monsterName")
     
     
 #######################################
 ###Graphics Functions##################
 #######################################
 
-    def drawMonster(self, app, canvas):
+    def drawMonster(self, app, canvas, roomSize):
         (x, y) = self.getRoomPos()
-        (x0, y0, x1, y1) = getCellBounds(x, y, app.gridWidth, app.gridHeight, app.dungeon.getSize())
+        (x0, y0, x1, y1) = getCellBounds(x, y, app.gridWidth, app.gridHeight, roomSize)
         canvas.create_image(x0 + (x1-x0)//2, y0 + (y1-y0)//2, image=ImageTk.PhotoImage(self.getImage()))
         pass
     
-    def animateSprite(self, app):
+    def animateSprite(self):
         self.spriteCounter = (1 + self.spriteCounter) % len(self.sprites)
         pass
     

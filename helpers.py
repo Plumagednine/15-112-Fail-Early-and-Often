@@ -1,7 +1,9 @@
 import ast
 import decimal
+from operator import indexOf
 from cmu_112_graphics import *
 import random
+import math
 import json
     
 #######################################
@@ -26,6 +28,8 @@ def roundHalfUp(d): #helper-fn
 #######################################
 ###Grid Functions######################
 #######################################
+def distance(x1, y1, x2, y2):
+    return math.sqrt((x2 - x1)**2 + (y2 - y1)**2)
 
 def getCell(x, y, width, height, gridSize, xOffset = 0, yOffset = 0):
     cellWidth = width // gridSize

@@ -23,7 +23,7 @@ class Player:
         self.weapons = [0]*5
         for i in range(len(playerDict.get("weapons"))):
             self.weapons[i] = self.allItems.get(playerDict.get("weapons")[i])
-        self.currentWeapon = None
+        self.currentWeapon = 0
         #######################################
         ###Armor Inventory#####################
         #######################################
@@ -55,7 +55,7 @@ class Player:
             canvas.create_image(x0 + (x1-x0)//2, y0 + (y1-y0)//2, image=ImageTk.PhotoImage(self.getImage()))
         pass
     
-    def animateSprite(self, app):
+    def animateSprite(self):
         self.spriteCounter = (1 + self.spriteCounter) % len(self.sprites)
         pass
     

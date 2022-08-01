@@ -230,10 +230,10 @@ def initDimensions(app):
     app.gridHeight = app.height
     app.sidebarWidth = app.width-app.gridWidth
     app.sidebarHeight = app.height
-    app.sidebarMinWidth = app.gridWidth + app.gridWidth//app.dungeon.getSize()
-    app.sidebarMinHeight = app.gridHeight//app.dungeon.getSize()
-    app.sidebarMaxWidth = app.width - app.gridWidth//app.dungeon.getSize()
-    app.sidebarMaxHeight = app.height - app.gridHeight//app.dungeon.getSize()
+    app.sidebarMinWidth = app.gridWidth + app.gridWidth//app.dungeonSize
+    app.sidebarMinHeight = app.gridHeight//app.dungeonSize
+    app.sidebarMaxWidth = app.width - app.gridWidth//app.dungeonSize
+    app.sidebarMaxHeight = app.height - app.gridHeight//app.dungeonSize
     app.sidebarActualWidth = app.sidebarMaxWidth - app.sidebarMinWidth
     app.sidebarActualHeight = app.sidebarMaxHeight - app.sidebarMinHeight
     pass
@@ -358,6 +358,7 @@ def appStarted(app): # initialize the model (app.xyz)
     app.timerDelay = 1000//app.framerate
     app.animationTimer = 0
     
+    app.dungeonSize = 16
     app.gameState = 'start'
     app.turn = 'player'
     app.currentLevel = 1
@@ -367,9 +368,12 @@ def appStarted(app): # initialize the model (app.xyz)
     #font stuff
     pyglet.font.add_file('font\Vecna-oppx.ttf')
     app.font = 'Vecna-oppx'
+        
+    #GUI Dimensions
+    initDimensions(app)
     
     # #make monster
-    allMonsters = loadMonsters()
+    app.allMonsters = loadMonsters()
     # app.testMonster = allMonsters.get('Default Monster')
     # initMonster(app, app.testMonster)
     
@@ -377,18 +381,13 @@ def appStarted(app): # initialize the model (app.xyz)
     app.allItems = loadItems()
     
     #make rooms
-    app.allRooms = loadRooms()
-    # allRooms = {}
+    app.allRooms = loadRooms(app, app.allItems, app.allMonsters)
 
     #Make Dungeon
-    app.dungeonSize = 16
     initDungeon(app, app.allRooms, app.dungeonSize)
     
     #Make Start Menu
     initStartMenu(app)
-    
-    #GUI Dimensions
-    initDimensions(app)
     
     #Make Player
     allCharacters = loadPlayerCharacters(app.allItems)
@@ -472,41 +471,42 @@ def keyPressed(app, event): # use event.key
                 
             #pickup/drop item using e
             elif event.key == 'e':
-                if app.playerCharacter.currentWeapon != None:
-                    if app.playerCharacter.weapons[app.playerCharacter.currentWeapon] == 0 and isinstance(currentRoom[playerRoomPos[0]][playerRoomPos[1]], Items):
-                        weapons = app.playerCharacter.weapons
-                        itemImage = currentRoom[playerRoomPos[0]][playerRoomPos[1]].itemImage
-                        itemImage = itemImage.resize(((app.sidebarActualWidth)//len(weapons)-20, (app.sidebarActualWidth)//len(weapons)-20), Image.Resampling.LANCZOS)
-                        currentRoom[playerRoomPos[0]][playerRoomPos[1]].itemImage = itemImage
-                        app.playerCharacter.pickupItem(currentRoom[playerRoomPos[0]][playerRoomPos[1]])
-                        currentRoom[playerRoomPos[0]][playerRoomPos[1]] = 0
-                    else:
-                        currentRoom[playerRoomPos[0]][playerRoomPos[1]] = app.playerCharacter.weapons[app.playerCharacter.currentWeapon]
-                        app.playerCharacter.weapons[app.playerCharacter.currentWeapon] = 0
-                        
-                elif app.playerCharacter.currentArmor != None:
-                    if app.playerCharacter.armor[app.playerCharacter.currentArmor] == 0 and isinstance(currentRoom[playerRoomPos[0]][playerRoomPos[1]], Items):
-                        armor = app.playerCharacter.armor
-                        itemImage = currentRoom[playerRoomPos[0]][playerRoomPos[1]].itemImage
-                        itemImage = itemImage.resize(((app.sidebarActualWidth)//len(armor)-20, (app.sidebarActualWidth)//len(armor)-20), Image.Resampling.LANCZOS)
-                        currentRoom[playerRoomPos[0]][playerRoomPos[1]].itemImage = itemImage
-                        app.playerCharacter.pickupItem(currentRoom[playerRoomPos[0]][playerRoomPos[1]])
-                        currentRoom[playerRoomPos[0]][playerRoomPos[1]] = 0
-                    else:
-                        currentRoom[playerRoomPos[0]][playerRoomPos[1]] = app.playerCharacter.armor[app.playerCharacter.currentArmor]
-                        app.playerCharacter.armor[app.playerCharacter.currentArmor] = 0
-                        
-                elif app.playerCharacter.currentItem != None:
-                    if app.playerCharacter.miscItems[app.playerCharacter.currentItem] == 0 and isinstance(currentRoom[playerRoomPos[0]][playerRoomPos[1]], Items):
-                        miscItems = app.playerCharacter.miscItems
-                        itemImage = currentRoom[playerRoomPos[0]][playerRoomPos[1]].itemImage
-                        itemImage = itemImage.resize(((app.sidebarActualWidth)//len(miscItems)-20, (app.sidebarActualWidth)//len(miscItems)-20), Image.Resampling.LANCZOS)
-                        currentRoom[playerRoomPos[0]][playerRoomPos[1]].itemImage = itemImage
-                        app.playerCharacter.pickupItem(currentRoom[playerRoomPos[0]][playerRoomPos[1]])
-                        currentRoom[playerRoomPos[0]][playerRoomPos[1]] = 0
-                    else:
-                        currentRoom[playerRoomPos[0]][playerRoomPos[1]] = app.playerCharacter.miscItems[app.playerCharacter.currentItem]
-                        app.playerCharacter.miscItems[app.playerCharacter.currentItem] = 0
+                if isinstance(currentRoom[playerRoomPos[0]][playerRoomPos[1]], Items):
+                    if app.playerCharacter.currentWeapon != None:
+                        if app.playerCharacter.weapons[app.playerCharacter.currentWeapon] == 0:
+                            weapons = app.playerCharacter.weapons
+                            itemImage = currentRoom[playerRoomPos[0]][playerRoomPos[1]].itemImage
+                            itemImage = itemImage.resize(((app.sidebarActualWidth)//len(weapons)-20, (app.sidebarActualWidth)//len(weapons)-20), Image.Resampling.LANCZOS)
+                            currentRoom[playerRoomPos[0]][playerRoomPos[1]].itemImage = itemImage
+                            app.playerCharacter.pickupItem(currentRoom[playerRoomPos[0]][playerRoomPos[1]])
+                            currentRoom[playerRoomPos[0]][playerRoomPos[1]] = 0
+                        else:
+                            currentRoom[playerRoomPos[0]][playerRoomPos[1]] = app.playerCharacter.weapons[app.playerCharacter.currentWeapon]
+                            app.playerCharacter.weapons[app.playerCharacter.currentWeapon] = 0
+                            
+                    elif app.playerCharacter.currentArmor != None:
+                        if app.playerCharacter.armor[app.playerCharacter.currentArmor] == 0:
+                            armor = app.playerCharacter.armor
+                            itemImage = currentRoom[playerRoomPos[0]][playerRoomPos[1]].itemImage
+                            itemImage = itemImage.resize(((app.sidebarActualWidth)//len(armor)-20, (app.sidebarActualWidth)//len(armor)-20), Image.Resampling.LANCZOS)
+                            currentRoom[playerRoomPos[0]][playerRoomPos[1]].itemImage = itemImage
+                            app.playerCharacter.pickupItem(currentRoom[playerRoomPos[0]][playerRoomPos[1]])
+                            currentRoom[playerRoomPos[0]][playerRoomPos[1]] = 0
+                        else:
+                            currentRoom[playerRoomPos[0]][playerRoomPos[1]] = app.playerCharacter.armor[app.playerCharacter.currentArmor]
+                            app.playerCharacter.armor[app.playerCharacter.currentArmor] = 0
+                            
+                    elif app.playerCharacter.currentItem != None:
+                        if app.playerCharacter.miscItems[app.playerCharacter.currentItem] == 0:
+                            miscItems = app.playerCharacter.miscItems
+                            itemImage = currentRoom[playerRoomPos[0]][playerRoomPos[1]].itemImage
+                            itemImage = itemImage.resize(((app.sidebarActualWidth)//len(miscItems)-20, (app.sidebarActualWidth)//len(miscItems)-20), Image.Resampling.LANCZOS)
+                            currentRoom[playerRoomPos[0]][playerRoomPos[1]].itemImage = itemImage
+                            app.playerCharacter.pickupItem(currentRoom[playerRoomPos[0]][playerRoomPos[1]])
+                            currentRoom[playerRoomPos[0]][playerRoomPos[1]] = 0
+                        else:
+                            currentRoom[playerRoomPos[0]][playerRoomPos[1]] = app.playerCharacter.miscItems[app.playerCharacter.currentItem]
+                            app.playerCharacter.miscItems[app.playerCharacter.currentItem] = 0
                 
             
             #player turns
@@ -532,23 +532,33 @@ def mousePressed(app, event): # use event.x and event.y
             app.gameState = 'game'
             
     elif app.gameState == 'game':
-        (row,col) = getCell(event.x, event.y, app.sidebarActualWidth, app.sidebarActualWidth, len(app.playerCharacter.weapons)
-                            , app.sidebarMinWidth, app.sidebarMinHeight+(app.gridWidth//app.dungeon.getSize()))
-        if row == 0 and (col >= 0 and col < len(app.playerCharacter.weapons)):
-            if app.playerCharacter.currentWeapon == col:
-                app.playerCharacter.currentWeapon = None
-            else:
-                app.playerCharacter.currentWeapon = col
-        if row == 1 and (col >= 0 and col < len(app.playerCharacter.armor)):
-            if app.playerCharacter.currentArmor == col:
-                app.playerCharacter.currentArmor = None
-            else:
-                app.playerCharacter.currentArmor = col
-        if row == 2 and (col >= 0 and col < len(app.playerCharacter.miscItems)):
-            if app.playerCharacter.currentItem == col:
-                app.playerCharacter.currentItem = None
-            else:
-                app.playerCharacter.currentItem = col
+        if event.x > app.gridWidth:
+            (row,col) = getCell(event.x, event.y, app.sidebarActualWidth, app.sidebarActualWidth, len(app.playerCharacter.weapons)
+                                , app.sidebarMinWidth, app.sidebarMinHeight+(app.gridWidth//app.dungeon.getSize()))
+            if row == 0 and (col >= 0 and col < len(app.playerCharacter.weapons)):
+                if app.playerCharacter.currentWeapon == col:
+                    app.playerCharacter.currentWeapon = None
+                else:
+                    app.playerCharacter.currentWeapon = col
+            if row == 1 and (col >= 0 and col < len(app.playerCharacter.armor)):
+                if app.playerCharacter.currentArmor == col:
+                    app.playerCharacter.currentArmor = None
+                else:
+                    app.playerCharacter.currentArmor = col
+            if row == 2 and (col >= 0 and col < len(app.playerCharacter.miscItems)):
+                if app.playerCharacter.currentItem == col:
+                    app.playerCharacter.currentItem = None
+                else:
+                    app.playerCharacter.currentItem = col
+        elif event.x <= app.gridWidth:
+            (row,col) = getCell(event.x, event.y, app.gridWidth, app.gridHeight, app.currentRoom.getSize())
+            if distance(row, col, app.playerCharacter.getRoomPos()[0], app.playerCharacter.getRoomPos()[1]) <= roundHalfUp(app.playerCharacter.movementSpeed/app.currentRoom.gridSize):
+                if app.playerCharacter.currentWeapon != None:
+                    if isinstance(app.currentRoom.getLayout()[row][col], Monster):
+                        app.currentRoom.getLayout()[row][col].takeDamage(app.playerCharacter.dealDamage())
+                        if app.currentRoom.getLayout()[row][col].getHealth() <= 0:
+                            app.currentRoom.updateGrid(row, col, 0)
+        
     
     elif app.gameState == 'pauseMenu':
         (row,col) = getCell(event.x, event.y, app.width, app.height, 10)
@@ -581,7 +591,8 @@ def mousePressed(app, event): # use event.x and event.y
 ###System Changes######################
 #######################################
 def doAnimations(app):
-    app.playerCharacter.animateSprite(app)
+    app.playerCharacter.animateSprite()
+    app.currentRoom.animateRoom()
     
 
 def timerFired(app): # respond to timer events
