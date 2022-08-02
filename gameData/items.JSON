@@ -1043,7 +1043,7 @@
         "itemName": "Rapier04",
         "itemType": "Weapon",
         "maxStackSize": 1,
-        "itemModifier": "Strength",
+        "itemModifier": "Dexterity",
         "itemModifierValue": 9,
         "itemImagePath": "textures/Weapons/Rapier04.png"
     },
