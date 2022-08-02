@@ -28,8 +28,8 @@ def roundHalfUp(d): #helper-fn
 #######################################
 ###Grid Functions######################
 #######################################
-def distance(x1, y1, x2, y2):
-    return math.sqrt((x2 - x1)**2 + (y2 - y1)**2)
+def distance(x0, y0, x1, y1):
+    return math.sqrt((x1 - x0)**2 + (y1 - y0)**2)
 
 def getCell(x, y, width, height, gridSize, xOffset = 0, yOffset = 0):
     cellWidth = width // gridSize
@@ -100,3 +100,51 @@ def loadText(filePath):
 def print2dList(list):
     for row in list:
         print(row)
+        
+#######################################
+###Algorithms##########################
+#######################################
+def lineOfSight(startPoint,endPoint,grid):
+    x0, y0 = startPoint
+    x1, y1 = endPoint
+    rise = y1 - y0
+    run = x1 - x0
+    if run == 0:
+        y0, y1 = y1, y0
+        for y in range(y0, y1 + 1):
+            if grid[y][x0] == 1:
+                return False
+    else:
+        #run greater than rise
+        slope = rise / run
+        adjust = 1 if slope > 0 else -1
+        offset = 0
+        threshold = 0.5
+        if slope <= 1 and slope >= -1:
+            slope = abs(slope)
+            y = y0
+            if x1 < x0:
+                x0, x1 = x1, x0
+                y = y1
+            for x in range(x0, x1 + 1):
+                if grid[x][y] == 1:
+                    return False
+                offset += slope
+                if offset >= threshold:
+                    y += adjust
+                    threshold += 1
+        else:
+            #run less than rise
+            slope = abs(run/rise)
+            x = x0
+            if y1 < y0:
+                y0, y1 = y1, y0
+                x = x1
+            for y in range(y0, y1 + 1):
+                if grid[x][y] == 1:
+                    return False
+                offset += slope
+                if offset >= threshold:
+                    x += adjust
+                    threshold += 1
+    return True

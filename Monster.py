@@ -88,3 +88,12 @@ class Monster:
     
     def dealDamage(self):
         return self.strengthModifier + random.randint(1, 3)
+    
+#######################################
+###Tick Functions######################
+#######################################
+
+    def tick(self, playerPos, roomLayout):
+        if lineOfSight(self.getRoomPos(), playerPos, roomLayout):
+            print("Monster is in line of sight")
+        

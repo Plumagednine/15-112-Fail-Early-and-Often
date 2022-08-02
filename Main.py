@@ -663,6 +663,7 @@ def doAnimations(app):
 
 def timerFired(app): # respond to timer events
     if app.gameState == 'game':
+        app.currentRoom.tick(app.playerCharacter.getRoomPos())
         if app.playerCharacter.getHealth() <= 0:
             app.gameState = 'deathScreen'
         #monster turns
