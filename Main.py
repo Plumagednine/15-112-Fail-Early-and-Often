@@ -171,7 +171,7 @@ def drawDeathScreen(app, canvas):
     tempX0,tempY0,tempX1,tempY1 = getCellBounds(app.levelCounter[midIndex][0], app.levelCounter[midIndex][1], app.width, app.height, gridSize)
     canvas.create_text(tempX0,tempY0, text=f"You Made it to Level: {app.currentLevel}", fill='#fffcf9', font=(app.font,60), anchor = 'n',)
     
-    # make continue button
+    # make death text button
     midIndex = len(app.youDiedText)//2
     tempX0,tempY0,tempX1,tempY1 = getCellBounds(app.youDiedText[midIndex][0], app.youDiedText[midIndex][1], app.width, app.height, gridSize)
     canvas.create_text(tempX0,tempY0, text="You Died", fill='#fffcf9', font=(app.font,60), anchor = 'n',)
@@ -182,9 +182,66 @@ def drawDeathScreen(app, canvas):
     canvas.create_text(tempX0,tempY0, text="Exit To Start Menu", fill='#fffcf9', font=(app.font,60), anchor = 'n')
     pass
 
+#######################################
+###Loading Screen Draw Functions#######
+#######################################
 def drawLoadingScreen(app, canvas):
     canvas.create_rectangle(0,0,app.width,app.height, fill='#1c0f13', width = 0)
     canvas.create_text(app.width//2,app.height//2, text="Loading...", fill='#fffcf9', font=(app.font,60), anchor = 'n')
+    
+    
+#######################################
+###Character Selection Draw Functions##
+#######################################
+                
+def drawCharacterSelection(app, canvas):
+    #make interactive grid
+    gridSize = 10
+    exitToStartButton = []
+    changeCharacterButton = []
+    characterText = []
+    for row in range(gridSize):
+        for col in range(gridSize):
+            (x0, y0, x1, y1) = getCellBounds(row, col, app.width, app.height, gridSize)
+            canvas.create_rectangle(x0, y0, x1, y1, fill='#1c0f13', width = 0)
+            if app.charcterSelectionGrid[row][col] == 1: 
+                exitToStartButton.append((row,col))
+            if app.charcterSelectionGrid[row][col] == 2:
+                characterText.append((row,col))
+            if app.charcterSelectionGrid[row][col] == 3: 
+                changeCharacterButton.append((row,col))
+    
+    # make current character text
+    midIndex = len(characterText)//2
+    tempX0,tempY0,tempX1,tempY1 = getCellBounds(characterText[midIndex][0], characterText[midIndex][1], app.width, app.height, gridSize)
+    canvas.create_text(tempX0,tempY0, text=f"Current Character: {app.currentCharacter}", fill='#fffcf9', font=(app.font,45), anchor = 'n',)
+    
+    # make start button
+    midIndex = len(changeCharacterButton)//2
+    tempX0,tempY0,tempX1,tempY1 = getCellBounds(changeCharacterButton[midIndex][0], changeCharacterButton[midIndex][1], app.width, app.height, gridSize)
+    canvas.create_text(tempX0,tempY0, text="Change Character", fill='#fffcf9', font=(app.font,60), anchor = 'n')
+    
+    # make characterSelect button
+    midIndex = len(exitToStartButton)//2
+    tempX0,tempY0,tempX1,tempY1 = getCellBounds(exitToStartButton[midIndex][0], exitToStartButton[midIndex][1], app.width, app.height, gridSize)
+    canvas.create_text(tempX0,tempY0, text="Exit To Start Menu", fill='#fffcf9', font=(app.font,60), anchor = 'n')
+    # pass
+
+#######################################
+###Pause Menu Draw Functions###########
+#######################################
+def drawPauseMenu(app, canvas):
+    #make interactive grid
+    gridSize = 10
+    # make continue button
+    midIndex = len(app.contineuGameButton)//2
+    tempX0,tempY0,tempX1,tempY1 = getCellBounds(app.contineuGameButton[midIndex][0], app.contineuGameButton[midIndex][1], app.width, app.height, gridSize)
+    canvas.create_text(tempX0,tempY0, text="Continue Game", fill='#fffcf9', font=(app.font,60), anchor = 'n',)
+    
+    # make exit button
+    midIndex = len(app.exitToStartButton)//2
+    tempX0,tempY0,tempX1,tempY1 = getCellBounds(app.exitToStartButton[midIndex][0], app.exitToStartButton[midIndex][1], app.width, app.height, gridSize)
+    canvas.create_text(tempX0,tempY0, text="Exit To Start Menu", fill='#fffcf9', font=(app.font,60), anchor = 'n')
     
 #######################################
 ###Redraw All##########################
@@ -220,6 +277,9 @@ def redrawAll(app, canvas): # draw (view) the model in the canvas
     
     if app.gameState == 'deathScreen':
         drawDeathScreen(app, canvas)
+    
+    if app.gameState == 'characterSelection':
+        drawCharacterSelection(app, canvas)
     pass      
 
 #######################################
@@ -403,7 +463,6 @@ def initDeathScreen(app):
     app.youDiedText = [(1,2),(1,3),(1,4),(1,5),(1,6),(1,7)]
     app.levelCounter = [(4,2),(4,3),(4,4),(4,5),(4,6),(4,7)]
     app.exitToStartButton = [(7,2),(7,3),(7,4),(7,5),(7,6),(7,7)]
-    youDiedText = app.youDiedText
     exitToStartButton = app.exitToStartButton
     for row in range(gridSize):
         for col in range(gridSize):
@@ -416,6 +475,37 @@ def initDeathScreen(app):
         for col in range(gridSize):
             if (row,col) in exitToStartButton:
                 app.pauseMenuGrid[row][col] = 1
+                
+#######################################
+###Character Selection Initializers####
+#######################################
+        
+def initCharacterSelectionScreen(app):
+    # create a 10x10 grid
+    gridSize = 10
+    app.charcterSelectionGrid = []
+    gridRow = []
+    characterText = [(1,2),(1,3),(1,4),(1,5),(1,6),(1,7)]
+    app.changeCharacterButton = [(3,2),(3,3),(3,4),(3,5),(3,6),(3,7)]
+    app.exitToStartButton = [(7,2),(7,3),(7,4),(7,5),(7,6),(7,7)]
+    exitToStartButton = app.exitToStartButton
+    for row in range(gridSize):
+        for col in range(gridSize):
+            gridRow.append(0)
+        app.charcterSelectionGrid.append(gridRow)
+        gridRow=[]
+        
+    # add buttons
+    for row in range(gridSize):
+        for col in range(gridSize):
+            if (row,col) in exitToStartButton:
+                app.charcterSelectionGrid[row][col] = 1
+            if (row,col) in characterText:
+                app.charcterSelectionGrid[row][col] = 2
+            if (row,col) in app.changeCharacterButton:
+                app.charcterSelectionGrid[row][col] = 3
+            
+                
 #######################################
 ###App First Run#######################
 #######################################
@@ -455,10 +545,11 @@ def appStarted(app, character = 'Default Character'): # initialize the model (ap
     
     #Make Start Menu
     initStartMenu(app)
+    initCharacterSelectionScreen(app)
     
     #Make Player
-    allCharacters = loadPlayerCharacters(app.allItems)
-    app.playerCharacter = allCharacters.get(app.currentCharacter)
+    app.allCharacters = loadPlayerCharacters(app.allItems)
+    app.playerCharacter = app.allCharacters.get(app.currentCharacter)
     initPlayer(app, app.playerCharacter)
     
     #make sidebar
@@ -610,7 +701,6 @@ def mousePressed(app, event): # use event.x and event.y
             app.gameState = 'game'
         if (row,col) in app.characterSelectionButton:
             app.gameState = 'characterSelection'
-            print('character selection')
             
     elif app.gameState == 'game':
         if event.x > app.gridWidth:
@@ -664,6 +754,16 @@ def mousePressed(app, event): # use event.x and event.y
         if (row, col) in app.exitToStartButton:
             app.gameState = 'loadingScreen'
             appStarted(app, app.currentCharacter)
+    
+    elif app.gameState == 'characterSelection':
+        characters = ['Default Character', 'Tony', 'Rinn', 'Drahkhan', 'Ruisheart']
+        (row,col) = getCell(event.x, event.y, app.width, app.height, 10)
+        if (row, col) in app.exitToStartButton:
+            appStarted(app, app.currentCharacter)
+        if app.charcterSelectionGrid[row][col] == 3:
+            currentCharacterIndex = characters.index(app.currentCharacter)
+            app.currentCharacter = characters[(currentCharacterIndex+1)%len(characters)]
+        pass
     
 
 # def mouseReleased(app, event): # use event.x and event.y
