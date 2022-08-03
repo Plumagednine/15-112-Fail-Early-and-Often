@@ -46,27 +46,27 @@
 
 ## :dart: About ##
 
-Describe your project
+15-112: Fail Early and Often is my term project for Carnegie Mellon University's 15-112 course.
+It is a roguelite game that I made because I love the genre and I thought it would be fun to make.
+In total this project took aproximately 25 hours to make.
 
-## :sparkles: Features ##
+## :sparkles: Controls ##
+You control the player using "WASD".
+If you are within range of a monster you will be able to attack it by clicking on it.
+If you stand on top of an item you can pick it up by selecting the correct inventory slot and pressing "E".
+If you have a potion selected you can use it by pressing "Q".
 
-:heavy_check_mark: Feature 1;\
-:heavy_check_mark: Feature 2;\
-:heavy_check_mark: Feature 3;
 
 ## :rocket: Technologies ##
 
 The following tools were used in this project:
 
-- [Expo](https://expo.io/)
-- [Node.js](https://nodejs.org/en/)
-- [React](https://pt-br.reactjs.org/)
-- [React Native](https://reactnative.dev/)
-- [TypeScript](https://www.typescriptlang.org/)
+- [Python](https://https://www.python.org/)
+- [CMU 112 Graphics](https://www.cs.cmu.edu/~112/notes/cmu_112_graphics.py)
 
 ## :white_check_mark: Requirements ##
 
-Before starting :checkered_flag:, you need to have [Git](https://git-scm.com) and [Node](https://nodejs.org/en/) installed.
+Before starting :checkered_flag:, you need to have [Git](https://git-scm.com) and [Python 3.9](https://https://www.python.org/) installed.
 
 ## :checkered_flag: Starting ##
 
@@ -76,14 +76,31 @@ $ git clone https://github.com/sbalbale/15-112-fail-early-and-often
 
 # Access
 $ cd 15-112-fail-early-and-often
+
+# Run
+$ python main.py
 ```
+
+## Sources ##
+
+  - [A* Search Algorithm Wikipedia](https://en.wikipedia.org/wiki/A*_search_algorithm)
+  - [A* Search Algorithm Geeks For Geeks](https://www.geeksforgeeks.org/a-search-algorithm/)
+  - [A* Search Algorithm YouTube](https://www.youtube.com/watch?v=i0x5fj4PqP4)
+  - [Bresenham's line algorithm Wikipedia](https://en.wikipedia.org/wiki/Bresenham's_line_algorithm)
+  - [Bresenham's line algorithm Geeks For Geeks](https://www.geeksforgeeks.org/bresenhams-line-generation-algorithm/)
+  - [Bresenham's line algorithm YouTube](https://www.youtube.com/watch?v=lKVo6oLsCXs&t=39s)
+  - [Prims Algorithm Wikipedia](https://en.wikipedia.org/wiki/Prim%27s_algorithm)
+  - [Prims Algorithm Geeks For Geeks](https://www.geeksforgeeks.org/prims-minimum-spanning-tree-mst-greedy-algo-5/)
+  - [Prims Algorithm YouTube](https://www.youtube.com/watch?v=xthRL0lcx2w)
+  - [Dungeon Loot Images](https://www.forgotten-adventures.net/product-category/map-making/)
+  - [Sprite Images](https://www.patreon.com/haasio)
 
 ## :memo: License ##
 
 This project is under license from MIT. For more details, see the [LICENSE](LICENSE.md) file.
 
 
-Made with :heart: by <a href="https://github.com/sbalbale" target="_blank">{{YOUR_NAME}}</a>
+Made with :heart: by <a href="https://github.com/sbalbale" target="_blank">Sean Balbale</a>
 
 &#xa0;
 
