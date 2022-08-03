@@ -173,6 +173,10 @@ def drawDeathScreen(app, canvas):
     tempX0,tempY0,tempX1,tempY1 = getCellBounds(app.exitToStartButton[midIndex][0], app.exitToStartButton[midIndex][1], app.width, app.height, gridSize)
     canvas.create_text(tempX0,tempY0, text="Exit To Start Menu", fill='#fffcf9', font=(app.font,60), anchor = 'n')
     pass
+
+def drawLoadingScreen(app, canvas):
+    canvas.create_rectangle(0,0,app.width,app.height, fill='#1c0f13', width = 0)
+    
 #######################################
 ###Redraw All##########################
 #######################################

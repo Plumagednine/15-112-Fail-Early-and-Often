@@ -82,7 +82,10 @@ $ git clone https://github.com/sbalbale/15-112-fail-early-and-often
 $ cd 15-112-fail-early-and-often
 
 # Run
-$ python main.py
+pip install -r requirements.txt
+
+# Run the game
+$ python Main.py
 ```
 
 ## Sources ##
