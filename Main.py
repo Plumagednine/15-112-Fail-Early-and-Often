@@ -176,6 +176,7 @@ def drawDeathScreen(app, canvas):
 
 def drawLoadingScreen(app, canvas):
     canvas.create_rectangle(0,0,app.width,app.height, fill='#1c0f13', width = 0)
+    canvas.create_text(app.width//2,app.height//2, text="Loading...", fill='#fffcf9', font=(app.font,60), anchor = 'n')
     
 #######################################
 ###Redraw All##########################
@@ -190,8 +191,8 @@ def redrawAll(app, canvas): # draw (view) the model in the canvas
         pass
     
     #win menu
-    if app.gameState == 'win':
-        # canvas.create_text(app.width//2, app.height//2, text="You Win!", fill='#fffcf9', font=(app.font,25))
+    if app.gameState == 'loadingScreen':
+        drawLoadingScreen(app, canvas)
         pass
 
     #Draw Game
@@ -643,6 +644,7 @@ def mousePressed(app, event): # use event.x and event.y
     elif app.gameState == 'deathScreen':
         (row,col) = getCell(event.x, event.y, app.width, app.height, 10)
         if (row, col) in app.exitToStartButton:
+            app.gameState = 'loadingScreen'
             appStarted(app)
     
 
@@ -659,6 +661,20 @@ def mousePressed(app, event): # use event.x and event.y
 #######################################
 ###System Changes######################
 #######################################
+def updateRoomDimensions(app, room, width, height):
+    for row in range(room.gridSize):
+        for col in range(room.gridSize):
+            if isinstance(room.grid[row][col],Monster):
+                tempMonster = room.grid[row][col]
+                spriteSheet = tempMonster.sprites
+                tempMonster.sprites = updateSpriteDimensions(app, spriteSheet, app.gridWidth, app.gridHeight, room.gridSize) 
+                # room.grid[row][col] = tempMonster
+            elif isinstance(room.grid[row][col],Items):
+                tempItem = room.grid[row][col]
+                itemImage = resizeSprite(tempItem.itemImage, app.gridWidth//room.gridSize, app.gridHeight//room.gridSize)
+                tempItem.itemImage = itemImage
+    pass
+
 def doAnimations(app):
     app.playerCharacter.animateSprite()
     app.currentRoom.animateRoom()
@@ -690,6 +706,7 @@ def sizeChanged(app): # respond to window size changes
                                                             , app.gridWidth, app.gridHeight, app.dungeon.getSize()))
     #update weapon dimensions
     updateItemDimensions(app, app.playerCharacter, app.sidebarActualWidth, app.sidebarActualWidth, len(app.playerCharacter.weapons))
+    updateRoomDimensions(app, app.currentRoom, app.gridWidth, app.gridHeight)
 
     pass  
 

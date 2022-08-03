@@ -70,16 +70,6 @@
         "movementSpeed": 16
     },
     {
-        "monsterName": "tabaxifighter",
-        "roomRow": 1,
-        "roomColumn": 1,
-        "spriteSheet": "monsterSprites//tabaxifighter.-1x1.png",
-        "spriteCounter": 0,
-        "hitPoints": 20,
-        "strength": 12,
-        "movementSpeed": 19
-    },
-    {
         "monsterName": "zombie3-1x1",
         "roomRow": 1,
         "roomColumn": 1,

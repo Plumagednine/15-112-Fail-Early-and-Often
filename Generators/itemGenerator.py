@@ -6,15 +6,15 @@ from helpers import *
 allItemImagePaths = []
 newItemsDictionary = []
 weaponModifiers = ["Strength", "Dexterity"]
-basePath = "textures/Weapons"
+basePath = "textures/armor/Gloves"
 for path in os.scandir(basePath):
     if path.is_file():
         allItemImagePaths.append(basePath+path.name)
         newItemsDictionary.append(
             {'itemName': path.name.split(".")[0], 
-            'itemType': 'Weapon', 
+            'itemType': 'Armor', 
             'maxStackSize': 1, 
-            'itemModifier': random.choice(weaponModifiers), 
+            'itemModifier': 'Constitution', 
             'itemModifierValue': random.randint(1,10), 
             'itemImagePath': basePath+"/"+path.name}
         )

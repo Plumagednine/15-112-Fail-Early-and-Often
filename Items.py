@@ -1,7 +1,12 @@
 from cmu_112_graphics import *
 from helpers import *
 
+# It's a class that creates an item object that can be used in the game.
+# """
+# It takes a dictionary and assigns the values to the variables.
 
+# :param itemDict: A dictionary containing all the information about the item
+# """
 class Items:
     def __init__(self, itemDict):
         self.itemName = itemDict.get('itemName')

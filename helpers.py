@@ -81,6 +81,7 @@ def updateItemDimensions(app, player, width, height, gridSize):
         if weapon != 0:
             itemImage = resizeSprite(weapon.getItemImage(), width//gridSize-20, height//gridSize-20)
             weapon.setItemImage(itemImage)
+    
 #######################################
 ###File Management Functions###########
 #######################################
@@ -177,7 +178,7 @@ def lineOfSight(startPoint,endPoint,grid):
     # """
 #Create a node class
 #Easier to work with than a dictionary or list
-class Node():
+class Node:
     def __init__(self, parent=None, pos=None):
         self.parent = parent
         self.position = pos
@@ -277,13 +278,4 @@ def aStar(start, end, grid):
         else:
             openList = updateOpenList(currentPoint, openList, closedList, startPoint, endPoint, grid)
 
-
-start = (0, 0)
-end = (4, 4)
-grid = [[0, 0, 0, 0, 1],
-        [0, 0, 0, 0, 0],
-        [0, 1, 1, 1, 0],
-        [0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0]]
-print(aStar(start, end, grid))
 

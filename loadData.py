@@ -5,6 +5,11 @@ from Player import *
 from Monster import *
 from Room import *
 
+# """
+# It takes a JSON file, converts it to a dictionary, and then creates an object for each item in the
+# dictionary
+# :return: A dictionary of all the things in the game.
+# """
 def loadItems():
     items = loadJSON('gameData/items.JSON')
     allItemsDictionary = {}

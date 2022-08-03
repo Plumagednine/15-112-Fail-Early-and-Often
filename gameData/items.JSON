@@ -1334,5 +1334,197 @@
         "itemModifier": "Dexterity",
         "itemModifierValue": 4,
         "itemImagePath": "textures/Weapons/Whip04.png"
+    },
+    {
+        "itemName": "Glove_Cloth_Bloodied_A1_1x1",
+        "itemType": "Armor",
+        "maxStackSize": 1,
+        "itemModifier": "Constitution",
+        "itemModifierValue": 2,
+        "itemImagePath": "textures/armor/Gloves/Glove_Cloth_Bloodied_A1_1x1.png"
+    },
+    {
+        "itemName": "Glove_Cloth_Bloodied_A2_1x1",
+        "itemType": "Armor",
+        "maxStackSize": 1,
+        "itemModifier": "Constitution",
+        "itemModifierValue": 7,
+        "itemImagePath": "textures/armor/Gloves/Glove_Cloth_Bloodied_A2_1x1.png"
+    },
+    {
+        "itemName": "Glove_Cloth_Bloodied_B1_1x1",
+        "itemType": "Armor",
+        "maxStackSize": 1,
+        "itemModifier": "Constitution",
+        "itemModifierValue": 6,
+        "itemImagePath": "textures/armor/Gloves/Glove_Cloth_Bloodied_B1_1x1.png"
+    },
+    {
+        "itemName": "Glove_Cloth_White_A1_1x1",
+        "itemType": "Armor",
+        "maxStackSize": 1,
+        "itemModifier": "Constitution",
+        "itemModifierValue": 7,
+        "itemImagePath": "textures/armor/Gloves/Glove_Cloth_White_A1_1x1.png"
+    },
+    {
+        "itemName": "Glove_Cloth_White_A2_1x1",
+        "itemType": "Armor",
+        "maxStackSize": 1,
+        "itemModifier": "Constitution",
+        "itemModifierValue": 6,
+        "itemImagePath": "textures/armor/Gloves/Glove_Cloth_White_A2_1x1.png"
+    },
+    {
+        "itemName": "Glove_Cloth_White_B1_1x1",
+        "itemType": "Armor",
+        "maxStackSize": 1,
+        "itemModifier": "Constitution",
+        "itemModifierValue": 3,
+        "itemImagePath": "textures/armor/Gloves/Glove_Cloth_White_B1_1x1.png"
+    },
+    {
+        "itemName": "Glove_Leather_Black_A1_1x1",
+        "itemType": "Armor",
+        "maxStackSize": 1,
+        "itemModifier": "Constitution",
+        "itemModifierValue": 10,
+        "itemImagePath": "textures/armor/Gloves/Glove_Leather_Black_A1_1x1.png"
+    },
+    {
+        "itemName": "Glove_Leather_Black_A2_1x1",
+        "itemType": "Armor",
+        "maxStackSize": 1,
+        "itemModifier": "Constitution",
+        "itemModifierValue": 7,
+        "itemImagePath": "textures/armor/Gloves/Glove_Leather_Black_A2_1x1.png"
+    },
+    {
+        "itemName": "Glove_Leather_Black_B1_1x1",
+        "itemType": "Armor",
+        "maxStackSize": 1,
+        "itemModifier": "Constitution",
+        "itemModifierValue": 7,
+        "itemImagePath": "textures/armor/Gloves/Glove_Leather_Black_B1_1x1.png"
+    },
+    {
+        "itemName": "Glove_Leather_Brown_A1_1x1",
+        "itemType": "Armor",
+        "maxStackSize": 1,
+        "itemModifier": "Constitution",
+        "itemModifierValue": 3,
+        "itemImagePath": "textures/armor/Gloves/Glove_Leather_Brown_A1_1x1.png"
+    },
+    {
+        "itemName": "Glove_Leather_Brown_A2_1x1",
+        "itemType": "Armor",
+        "maxStackSize": 1,
+        "itemModifier": "Constitution",
+        "itemModifierValue": 5,
+        "itemImagePath": "textures/armor/Gloves/Glove_Leather_Brown_A2_1x1.png"
+    },
+    {
+        "itemName": "Glove_Leather_Brown_B1_1x1",
+        "itemType": "Armor",
+        "maxStackSize": 1,
+        "itemModifier": "Constitution",
+        "itemModifierValue": 5,
+        "itemImagePath": "textures/armor/Gloves/Glove_Leather_Brown_B1_1x1.png"
+    },
+    {
+        "itemName": "Glove_Leather_Gray_A1_1x1",
+        "itemType": "Armor",
+        "maxStackSize": 1,
+        "itemModifier": "Constitution",
+        "itemModifierValue": 7,
+        "itemImagePath": "textures/armor/Gloves/Glove_Leather_Gray_A1_1x1.png"
+    },
+    {
+        "itemName": "Glove_Leather_Gray_A2_1x1",
+        "itemType": "Armor",
+        "maxStackSize": 1,
+        "itemModifier": "Constitution",
+        "itemModifierValue": 5,
+        "itemImagePath": "textures/armor/Gloves/Glove_Leather_Gray_A2_1x1.png"
+    },
+    {
+        "itemName": "Glove_Leather_Gray_B1_1x1",
+        "itemType": "Armor",
+        "maxStackSize": 1,
+        "itemModifier": "Constitution",
+        "itemModifierValue": 4,
+        "itemImagePath": "textures/armor/Gloves/Glove_Leather_Gray_B1_1x1.png"
+    },
+    {
+        "itemName": "Glove_Leather_Green_A1_1x1",
+        "itemType": "Armor",
+        "maxStackSize": 1,
+        "itemModifier": "Constitution",
+        "itemModifierValue": 4,
+        "itemImagePath": "textures/armor/Gloves/Glove_Leather_Green_A1_1x1.png"
+    },
+    {
+        "itemName": "Glove_Leather_Green_A2_1x1",
+        "itemType": "Armor",
+        "maxStackSize": 1,
+        "itemModifier": "Constitution",
+        "itemModifierValue": 3,
+        "itemImagePath": "textures/armor/Gloves/Glove_Leather_Green_A2_1x1.png"
+    },
+    {
+        "itemName": "Glove_Leather_Green_B1_1x1",
+        "itemType": "Armor",
+        "maxStackSize": 1,
+        "itemModifier": "Constitution",
+        "itemModifierValue": 1,
+        "itemImagePath": "textures/armor/Gloves/Glove_Leather_Green_B1_1x1.png"
+    },
+    {
+        "itemName": "Glove_Leather_Red_A1_1x1",
+        "itemType": "Armor",
+        "maxStackSize": 1,
+        "itemModifier": "Constitution",
+        "itemModifierValue": 4,
+        "itemImagePath": "textures/armor/Gloves/Glove_Leather_Red_A1_1x1.png"
+    },
+    {
+        "itemName": "Glove_Leather_Red_A2_1x1",
+        "itemType": "Armor",
+        "maxStackSize": 1,
+        "itemModifier": "Constitution",
+        "itemModifierValue": 4,
+        "itemImagePath": "textures/armor/Gloves/Glove_Leather_Red_A2_1x1.png"
+    },
+    {
+        "itemName": "Glove_Leather_Red_B1_1x1",
+        "itemType": "Armor",
+        "maxStackSize": 1,
+        "itemModifier": "Constitution",
+        "itemModifierValue": 8,
+        "itemImagePath": "textures/armor/Gloves/Glove_Leather_Red_B1_1x1.png"
+    },
+    {
+        "itemName": "Glove_Leather_Tan_A1_1x1",
+        "itemType": "Armor",
+        "maxStackSize": 1,
+        "itemModifier": "Constitution",
+        "itemModifierValue": 8,
+        "itemImagePath": "textures/armor/Gloves/Glove_Leather_Tan_A1_1x1.png"
+    },
+    {
+        "itemName": "Glove_Leather_Tan_A2_1x1",
+        "itemType": "Armor",
+        "maxStackSize": 1,
+        "itemModifier": "Constitution",
+        "itemModifierValue": 4,
+        "itemImagePath": "textures/armor/Gloves/Glove_Leather_Tan_A2_1x1.png"
+    },
+    {
+        "itemName": "Glove_Leather_Tan_B1_1x1",
+        "itemType": "Armor",
+        "maxStackSize": 1,
+        "itemModifier": "Constitution",
+        "itemModifierValue": 10,
+        "itemImagePath": "textures/armor/Gloves/Glove_Leather_Tan_B1_1x1.png"
     }
 ]

@@ -2,6 +2,14 @@ from cmu_112_graphics import *
 from helpers import *
 from Items import *
 
+# It's a class that represents the player in the game.
+    # """
+    # It takes a dictionary of player information and a dictionary of all items in the game and
+    # creates a player object.
+    
+    # :param playerDict: A dictionary containing all of the player's stats
+    # :param allItemsDictionary: A dictionary of all the items in the game
+    # """
 class Player:
     def __init__(self, playerDict, allItemsDictionary):
         self.sprites = playerDict.get("spriteSheet")

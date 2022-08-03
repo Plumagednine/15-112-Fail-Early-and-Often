@@ -1,6 +1,11 @@
 from cmu_112_graphics import *
 from helpers import *
+# It's a class that represents a monster in the game.
+# """
+# It takes a dictionary of monster attributes and assigns them to the monster object
 
+# :param monsterDict: A dictionary containing all the information about the monster
+# """
 class Monster:
     def __init__(self, monsterDict):
         self.sprites = monsterDict.get("spriteSheet")
@@ -108,7 +113,7 @@ class Monster:
             self.step = 0
             self.tickCounter = 0
             
-        if path and self.tickCounter/offset == 1:
+        if path and self.tickCounter == 1:
             if self.step >= len(path):
                 self.step = 0
             move = path[self.step]

@@ -4,6 +4,17 @@ from Monster import *
 from Items import *
 from helpers import *
 
+# It's a class that creates a room object that contains a grid of the room, the player's spawn point,
+# the player's exit point, and the items and monsters in the room.
+# """
+# It takes a dictionary of rooms, a dictionary of items, and a dictionary of monsters, and creates
+# a room object with a grid of monsters and items.
+
+# :param app: the app object
+# :param roomDict: A dictionary containing the room's name, id, and layout
+# :param allItems: a dictionary of all items in the game
+# :param allMonsters: a dictionary of all the monsters in the game
+# """
 class Room:
     def __init__(self, app, roomDict, allItems, allMonsters):
         self.name = roomDict.get("roomName")

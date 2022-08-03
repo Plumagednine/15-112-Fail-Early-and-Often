@@ -5,6 +5,14 @@ import copy
 from helpers import *
 from Room import *
 
+# This class is used to generate a level for the game.
+# """
+# It generates a maze, fills it with rooms, and sets the surrounding walls of each room.
+
+# :param allRoomsDictionary: a dictionary of all the rooms in the game. The keys are the room
+# numbers, and the values are the room objects
+# :param gridSize: the size of the grid, defaults to 16 (optional)
+# """
 class level_generation:
     def setSurroundingWalls(self, row, col):
         if self.grid[row-1][col] == 1:
