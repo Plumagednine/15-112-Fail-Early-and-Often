@@ -88,27 +88,35 @@ def drawStartMenu(app, canvas):
     gridSize = 10
     startButton = []
     title = []
+    characterSelect = []
     for row in range(gridSize):
         for col in range(gridSize):
             (x0, y0, x1, y1) = getCellBounds(row, col, app.width, app.height, gridSize)
-            canvas.create_rectangle(x0, y0, x1, y1, fill='#fffcf9', width = 0)
+            canvas.create_rectangle(x0, y0, x1, y1, fill='#1c0f13', width = 0)
             if app.startMenuGrid[row][col] == 1: 
                 title.append((row,col))
             if app.startMenuGrid[row][col] == 2:
                 startButton.append((row,col))
+            if app.startMenuGrid[row][col] == 3:
+                characterSelect.append((row,col))
     
     #make background image
-    canvas.create_image(app.width//2,0,anchor = 'n', pilImage = app.startMenuBackground)
+    # canvas.create_image(app.width//2,0,anchor = 'n', pilImage = app.startMenuBackground)
     
     # make title
     midIndex = len(title)//2
     tempX0,tempY0,tempX1,tempY1 = getCellBounds(title[midIndex][0], title[midIndex][1], app.width, app.height, gridSize)
-    canvas.create_text(tempX0,tempY0, text="15-112: Fail Early and Often", fill='#1c0f13', font=(app.font,60), anchor = 'n',)
+    canvas.create_text(tempX0,tempY0, text="15-112: Fail Early and Often", fill='#fffcf9', font=(app.font,60), anchor = 'n',)
     
     # make start button
     midIndex = len(startButton)//2
     tempX0,tempY0,tempX1,tempY1 = getCellBounds(startButton[midIndex][0], startButton[midIndex][1], app.width, app.height, gridSize)
-    canvas.create_text(tempX0,tempY0, text="Start Game", fill='#1c0f13', font=(app.font,60), anchor = 'n')
+    canvas.create_text(tempX0,tempY0, text="Start Game", fill='#fffcf9', font=(app.font,60), anchor = 'n')
+    
+    # make characterSelect button
+    midIndex = len(startButton)//2
+    tempX0,tempY0,tempX1,tempY1 = getCellBounds(characterSelect[midIndex][0], characterSelect[midIndex][1], app.width, app.height, gridSize)
+    canvas.create_text(tempX0,tempY0, text="Select Character", fill='#fffcf9', font=(app.font,60), anchor = 'n')
     pass
 
 #######################################
@@ -299,16 +307,18 @@ def initSidebar(app):
 def initStartMenu(app):
     # create a 10x10 grid
     gridSize = 10
-    app.startMenuGrid = []
+    app.startMenuGrid = [[0 for row in range(gridSize)] for col in range(gridSize)]
     gridRow = []
     app.startGameButton = [(2,3),(2,4),(2,5),(2,6)]
     titleCard = [(0,2),(0,3),(0,4),(0,5),(0,6),(0,7)]
-    for row in range(gridSize):
-        for col in range(gridSize):
-            gridRow.append(0)
-        app.startMenuGrid.append(gridRow)
-        gridRow=[]
+    app.characterSelectionButton = [(4,3),(4,4),(4,5),(4,6)]
+    # for row in range(gridSize):
+    #     for col in range(gridSize):
+    #         gridRow.append(0)
+    #     app.startMenuGrid.append(gridRow)
+    #     gridRow=[]
         
+    
     # add buttons
     for row in range(gridSize):
         for col in range(gridSize):
@@ -316,6 +326,8 @@ def initStartMenu(app):
                 app.startMenuGrid[row][col] = 1
             elif (row,col) in app.startGameButton:
                 app.startMenuGrid[row][col] = 2
+            elif (row,col) in app.characterSelectionButton:
+                app.startMenuGrid[row][col] = 3
                 
     # make image
     smallerSide = min(app.width, app.height)
@@ -407,7 +419,7 @@ def initDeathScreen(app):
 #######################################
 ###App First Run#######################
 #######################################
-def appStarted(app): # initialize the model (app.xyz)
+def appStarted(app, character = 'Default Character'): # initialize the model (app.xyz)
     #Make System Variables
     app.framerate = 30
     app.timerDelay = 1000//app.framerate
@@ -417,7 +429,7 @@ def appStarted(app): # initialize the model (app.xyz)
     app.gameState = 'start'
     app.turn = 'player'
     app.currentLevel = 1
-    app.currentCharacter = 'Default Character'
+    app.currentCharacter = character
     app.map = False
     
     #font stuff
@@ -490,6 +502,7 @@ def keyPressed(app, event): # use event.key
                 if app.playerCharacter.getRoomPos()[0] > 0:
                     if currentRoom[playerRoomPos[0]-1][playerRoomPos[1]] != 1:
                         app.playerCharacter.moveUpRoom()
+                        app.playerMovesLeft -= 1
                 else:
                     if grid[playerDungeonPOS[0]-1][playerDungeonPOS[1]] != 1:
                         app.playerCharacter.moveUpDungeon()
@@ -500,6 +513,7 @@ def keyPressed(app, event): # use event.key
                 if app.playerCharacter.getRoomPos()[1] > 0:
                     if currentRoom[playerRoomPos[0]][playerRoomPos[1]-1] != 1:
                         app.playerCharacter.moveLeftRoom()
+                        app.playerMovesLeft -= 1
                 else:
                     if grid[playerDungeonPOS[0]][playerDungeonPOS[1]-1] != 1:
                         app.playerCharacter.moveLeftDungeon()
@@ -510,6 +524,7 @@ def keyPressed(app, event): # use event.key
                 if app.playerCharacter.getRoomPos()[0] < app.dungeon.getRoom(playerDungeonPOS[0], playerDungeonPOS[1]).getSize()-1:
                     if currentRoom[playerRoomPos[0]+1][playerRoomPos[1]] != 1:
                         app.playerCharacter.moveDownRoom()
+                        app.playerMovesLeft -= 1
                 else:
                     if grid[playerDungeonPOS[0]+1][playerDungeonPOS[1]] != 1:
                         app.playerCharacter.moveDownDungeon()
@@ -520,6 +535,7 @@ def keyPressed(app, event): # use event.key
                 if app.playerCharacter.getRoomPos()[1] < app.dungeon.getRoom(playerDungeonPOS[0], playerDungeonPOS[1]).getSize()-1:
                     if currentRoom[playerRoomPos[0]][playerRoomPos[1]+1] != 1:
                         app.playerCharacter.moveRightRoom()
+                        app.playerMovesLeft -= 1
                 else:
                     if grid[playerDungeonPOS[0]][playerDungeonPOS[1]+1] != 1:
                         app.playerCharacter.moveRightDungeon()
@@ -570,12 +586,9 @@ def keyPressed(app, event): # use event.key
             elif event.key == 'e':
                 if app.playerCharacter.currentItem != None:
                     app.playerCharacter.useItem()
-            elif event.key == 'Space':
-                app.playerCharacter.takeDamage(10)
                 
             
             #player turns
-            # app.playerMovesLeft -= 1
             if app.playerMovesLeft <= 0:
                 app.turn = 'enemy'
                 
@@ -595,6 +608,9 @@ def mousePressed(app, event): # use event.x and event.y
         (row,col) = getCell(event.x, event.y, app.width, app.height, 10)
         if (row,col) in app.startGameButton:
             app.gameState = 'game'
+        if (row,col) in app.characterSelectionButton:
+            app.gameState = 'characterSelection'
+            print('character selection')
             
     elif app.gameState == 'game':
         if event.x > app.gridWidth:
@@ -615,14 +631,16 @@ def mousePressed(app, event): # use event.x and event.y
                     app.playerCharacter.currentItem = None
                 else:
                     app.playerCharacter.currentItem = col
-        elif event.x <= app.gridWidth:
-            (row,col) = getCell(event.x, event.y, app.gridWidth, app.gridHeight, app.currentRoom.getSize())
-            if distance(row, col, app.playerCharacter.getRoomPos()[0], app.playerCharacter.getRoomPos()[1]) <= app.playerCharacter.movementSpeed:
-                if app.playerCharacter.currentWeapon != None:
-                    if isinstance(app.currentRoom.getLayout()[row][col], Monster):
-                        app.currentRoom.getLayout()[row][col].takeDamage(app.playerCharacter.dealDamage())
-                        if app.currentRoom.getLayout()[row][col].getHealth() <= 0:
-                            app.currentRoom.updateGrid(row, col, 0)
+        elif app.turn == 'player':
+            if event.x <= app.gridWidth:
+                (row,col) = getCell(event.x, event.y, app.gridWidth, app.gridHeight, app.currentRoom.getSize())
+                if distance(row, col, app.playerCharacter.getRoomPos()[0], app.playerCharacter.getRoomPos()[1]) <= app.playerCharacter.movementSpeed:
+                    if app.playerCharacter.currentWeapon != None:
+                        if isinstance(app.currentRoom.getLayout()[row][col], Monster):
+                            app.currentRoom.getLayout()[row][col].takeDamage(app.playerCharacter.dealDamage())
+                            if app.currentRoom.getLayout()[row][col].getHealth() <= 0:
+                                app.currentRoom.updateGrid(row, col, 0)
+                            app.playerMovesLeft -= 1
         
     
     elif app.gameState == 'pauseMenu':
@@ -645,7 +663,7 @@ def mousePressed(app, event): # use event.x and event.y
         (row,col) = getCell(event.x, event.y, app.width, app.height, 10)
         if (row, col) in app.exitToStartButton:
             app.gameState = 'loadingScreen'
-            appStarted(app)
+            appStarted(app, app.currentCharacter)
     
 
 # def mouseReleased(app, event): # use event.x and event.y
@@ -683,15 +701,17 @@ def timerFired(app): # respond to timer events
     if app.gameState == 'game':
         if app.playerCharacter.getHealth() <= 0:
             app.gameState = 'deathScreen'
-        #monster turns
-        if app.turn == 'enemy':
-            pass
-        #handle animations
+            
+        #handle animations and other time stuff
         app.animationTimer += app.framerate
         if app.animationTimer >= 100:
             app.animationTimer = 0
             doAnimations(app)
-            app.currentRoom.tick(app.playerCharacter)
+            # monster turns
+            if app.turn == 'enemy':
+                app.currentRoom.tick(app.playerCharacter)
+                app.turn = 'player'
+
     if app.gameState == 'win':
         continueGame(app)
         app.gameState = 'continueMenu'

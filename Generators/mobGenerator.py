@@ -23,9 +23,9 @@ for path in os.scandir(basePath):
         "roomColumn": 1,
         "spriteSheet": basePath+"/"+path.name,
         "spriteCounter": 0,
-        "hitPoints": random.randint(1,20),
-        "strength": random.randint(10,16),
-        "movementSpeed": int(random.randint(10,20)),
+        "hitPoints": random.randint(20,60),
+        "strength": random.randint(12,20),
+        "movementSpeed": int(random.randint(20,40)),
         })
 print2dList(newItemsDictionary)
 # Serializing json

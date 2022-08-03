@@ -19,6 +19,8 @@ class Monster:
         self.monsterName = monsterDict.get("monsterName")
         self.step = 0
         self.tickCounter = 0
+        self.previousPlayerPos = None
+        self.moves = self.movementSpeed
     
     
 #######################################
@@ -102,24 +104,24 @@ class Monster:
 
     def tick(self, player, roomLayout):
         path = None
-        offset = 2
         playerPos = player.getRoomPos()
-        if lineOfSight(self.getRoomPos(), playerPos, roomLayout):
-            path = aStar(self.getRoomPos(), playerPos, roomLayout)
-            self.tickCounter += 1
-        
-        if distance(self.getRoomPos()[0],self.getRoomPos()[1], playerPos[0], playerPos[1]) <= self.movementSpeed and self.tickCounter == 1:
-            player.takeDamage(self.dealDamage())
-            self.step = 0
-            self.tickCounter = 0
+        self.moves = self.movementSpeed
+        while self.moves > 0:
+            if lineOfSight(self.getRoomPos(), playerPos, roomLayout) and self.previousPlayerPos != playerPos:
+                path = aStar(self.getRoomPos(), playerPos, roomLayout)
             
-        if path and self.tickCounter == 1:
-            if self.step >= len(path):
+            if distance(self.getRoomPos()[0],self.getRoomPos()[1], playerPos[0], playerPos[1]) <= self.movementSpeed:
+                player.takeDamage(self.dealDamage())
                 self.step = 0
-            move = path[self.step]
-            self.setRoomPos(move[0], move[1])
-            self.step += 1
-            self.tickCounter = 0
+                self.tickCounter = 0
+            
+            if path:
+                if self.step >= len(path):
+                    self.step = 0
+                move = path[self.step]
+                self.setRoomPos(move[0], move[1])
+                self.step += 1
+            self.moves -= 1
             
         return self.getRoomPos()
             

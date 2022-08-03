@@ -5,9 +5,9 @@
         "roomColumn": 1,
         "spriteSheet": "monsterSprites//banshee-1x1.png",
         "spriteCounter": 0,
-        "hitPoints": 4,
-        "strength": 16,
-        "movementSpeed": 12
+        "hitPoints": 42,
+        "strength": 15,
+        "movementSpeed": 40
     },
     {
         "monsterName": "demon2-2x2",
@@ -15,9 +15,9 @@
         "roomColumn": 1,
         "spriteSheet": "monsterSprites//demon2-2x2.png",
         "spriteCounter": 0,
-        "hitPoints": 8,
-        "strength": 11,
-        "movementSpeed": 11
+        "hitPoints": 33,
+        "strength": 18,
+        "movementSpeed": 30
     },
     {
         "monsterName": "demon2hand-1x1",
@@ -25,9 +25,9 @@
         "roomColumn": 1,
         "spriteSheet": "monsterSprites//demon2hand-1x1.png",
         "spriteCounter": 0,
-        "hitPoints": 9,
-        "strength": 13,
-        "movementSpeed": 17
+        "hitPoints": 46,
+        "strength": 18,
+        "movementSpeed": 25
     },
     {
         "monsterName": "drider-2x2",
@@ -35,9 +35,9 @@
         "roomColumn": 1,
         "spriteSheet": "monsterSprites//drider-2x2.png",
         "spriteCounter": 0,
-        "hitPoints": 16,
-        "strength": 10,
-        "movementSpeed": 17
+        "hitPoints": 57,
+        "strength": 14,
+        "movementSpeed": 23
     },
     {
         "monsterName": "fleshgolem1-1x1",
@@ -45,9 +45,9 @@
         "roomColumn": 1,
         "spriteSheet": "monsterSprites//fleshgolem1-1x1.png",
         "spriteCounter": 0,
-        "hitPoints": 16,
-        "strength": 12,
-        "movementSpeed": 17
+        "hitPoints": 42,
+        "strength": 17,
+        "movementSpeed": 38
     },
     {
         "monsterName": "koboldfighter1-1x1",
@@ -55,9 +55,9 @@
         "roomColumn": 1,
         "spriteSheet": "monsterSprites//koboldfighter1-1x1.png",
         "spriteCounter": 0,
-        "hitPoints": 11,
-        "strength": 14,
-        "movementSpeed": 18
+        "hitPoints": 41,
+        "strength": 13,
+        "movementSpeed": 31
     },
     {
         "monsterName": "orcbarbarian-1x1",
@@ -65,9 +65,9 @@
         "roomColumn": 1,
         "spriteSheet": "monsterSprites//orcbarbarian-1x1.png",
         "spriteCounter": 0,
-        "hitPoints": 1,
-        "strength": 11,
-        "movementSpeed": 16
+        "hitPoints": 35,
+        "strength": 13,
+        "movementSpeed": 24
     },
     {
         "monsterName": "zombie3-1x1",
@@ -75,8 +75,8 @@
         "roomColumn": 1,
         "spriteSheet": "monsterSprites//zombie3-1x1.png",
         "spriteCounter": 0,
-        "hitPoints": 12,
-        "strength": 12,
-        "movementSpeed": 15
+        "hitPoints": 20,
+        "strength": 14,
+        "movementSpeed": 20
     }
 ]
