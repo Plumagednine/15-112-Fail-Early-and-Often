@@ -658,7 +658,6 @@ def mousePressed(app, event): # use event.x and event.y
 def doAnimations(app):
     app.playerCharacter.animateSprite()
     app.currentRoom.animateRoom()
-    app.currentRoom.tick(app.playerCharacter)
 
 def timerFired(app): # respond to timer events
     if app.gameState == 'game':
@@ -672,6 +671,7 @@ def timerFired(app): # respond to timer events
         if app.animationTimer >= 100:
             app.animationTimer = 0
             doAnimations(app)
+            app.currentRoom.tick(app.playerCharacter)
     if app.gameState == 'win':
         continueGame(app)
         app.gameState = 'continueMenu'

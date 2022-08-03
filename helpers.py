@@ -107,6 +107,16 @@ def print2dList(list):
 # #####################################
 ###Line of Sight Algorithm############
 #######################################
+    # """
+    # If the rise is greater than the run, then we iterate over the y values and adjust the x values as
+    # needed. If the run is greater than the rise, then we iterate over the x values and adjust the y
+    # values as needed
+    
+    # :param startPoint: (x,y) coordinates of the starting point
+    # :param endPoint: The point you want to check if you can see
+    # :param grid: a 2D array of 0s and 1s, where 0s are empty spaces and 1s are obstacles
+    # :return: A boolean value.
+    # """
 def lineOfSight(startPoint,endPoint,grid):
     x0, y0 = startPoint
     x1, y1 = endPoint
@@ -154,17 +164,19 @@ def lineOfSight(startPoint,endPoint,grid):
 #######################################
 ###A* Algorithm########################
 #######################################
-
-def isValidMove(row, col, grid):
-    if row < 0 or row >= len(grid) or col < 0 or col >= len(grid[0]):
-        return False
-    if grid[row][col] == 1:
-        return False
-    return True
-
-def isNotWall(row, col, grid):
-    return grid[row][col] != 1
-
+    # """
+    # The function takes in a start point, end point and a grid. It then creates a start node and an end
+    # node. It then creates an open list and a closed list. It then adds the start node to the open list.
+    # It then loops through the open list and checks if the current node is the end node. If it is not
+    # then it updates the open list. If it is then it returns the path.
+    
+    # :param row: the row of the starting point
+    # :param col: the column of the starting point
+    # :param grid: a 2D list of integers, where 0 is a walkable space, and 1 is a wall
+    # :return: The path from the start to the end
+    # """
+#Create a node class
+#Easier to work with than a dictionary or list
 class Node():
     def __init__(self, parent=None, pos=None):
         self.parent = parent
@@ -176,7 +188,61 @@ class Node():
 
     def __eq__(self, other):
         return self.position == other.position
+
+#chech if the move is valid:
+def isValidMove(row, col, grid):
+    if row < 0 or row >= len(grid) or col < 0 or col >= len(grid[0]):
+        return False
+    if grid[row][col] == 1:
+        return False
+    return True
+
+#update the open list
+#main part of the A* algorithm            
+def updateOpenList(currentPoint, openList, closedList, startPoint, endPoint, grid):
+    possibleMoves = []
+    #create a list of possible moves
+    #also called children nodes
+    for newPos in [(0, -1), (0, 1), (-1, 0), (1, 0)]:
+        pointPos = (currentPoint.position[0] + newPos[0], currentPoint.position[1] + newPos[1])
+        
+        #check if the move is valid
+        if not isValidMove(pointPos[0], pointPos[1], grid):
+            continue
+        
+        #branch from the parent node
+        newPoint = Node(currentPoint, pointPos)
+        possibleMoves.append(newPoint)
     
+    #Check all possible moves to see if they have been visited if they havent then add them to the open list
+    for move in possibleMoves:
+        for closed in closedList:
+            if move == closed:
+                continue
+        
+        #calculate the g, h and f values fir the child node
+        move.g = currentPoint.g + 1
+        move.h = abs(move.position[0] - endPoint.position[0]) + abs(move.position[1] - endPoint.position[1])
+        move.f = move.g + move.h
+        
+        # add the child node to the open list if it is not already in the open list and is more optimal than the current node
+        for open in openList:
+            if move == open:
+                if move.g > open.g:
+                    continue
+                
+        openList.append(move)
+        
+    return openList
+
+def returnPath(currentPoint, startPoint):
+    path = []
+    current = currentPoint
+    while current is not None:
+        path.append(current.position)
+        current = current.parent
+    return path[::-1]
+
 def aStar(start, end, grid):
     startPoint = Node(None, start)
     startPoint.g = startPoint.h = startPoint.f = 0
@@ -194,7 +260,8 @@ def aStar(start, end, grid):
         currentIndex = 0
         
         #check if current node is more efficient
-        for index, item in enumerate(openList):
+        for index in range(len(openList)):
+            item = openList[index]
             if item.f < currentPoint.f:
                 currentPoint = item
                 currentIndex = index
@@ -204,38 +271,19 @@ def aStar(start, end, grid):
         # add current node to closed list
         closedList.append(currentPoint)
         
+        #check if current node is the end node otherwise loop again
         if currentPoint == endPoint:
-            path = []
-            current = currentPoint
-            while current is not None:
-                path.append(current.position)
-                current = current.parent
-            return path[::-1]
-        
-        # get next possible moves of current node
-        possibleMoves = []
-        for newPos in [(0, -1), (0, 1), (-1, 0), (1, 0)]:
-            pointPos = (currentPoint.position[0] + newPos[0], currentPoint.position[1] + newPos[1])
-            if not isValidMove(pointPos[0], pointPos[1], grid):
-                continue
-            if not isNotWall(pointPos[0], pointPos[1], grid):
-                continue
-            
-            newPoint = Node(currentPoint, pointPos)
-            possibleMoves.append(newPoint)
-        
-        for move in possibleMoves:
-            for closed in closedList:
-                if move == closed:
-                    continue
-            
-            move.g = currentPoint.g + 1
-            move.h = abs(move.position[0] - endPoint.position[0]) + abs(move.position[1] - endPoint.position[1])
-            move.f = move.g + move.h
-            
-            for open in openList:
-                if move == open:
-                    if move.g > open.g:
-                        continue
-            
-            openList.append(move)
+            return returnPath(currentPoint, startPoint)
+        else:
+            openList = updateOpenList(currentPoint, openList, closedList, startPoint, endPoint, grid)
+
+
+start = (0, 0)
+end = (4, 4)
+grid = [[0, 0, 0, 0, 1],
+        [0, 0, 0, 0, 0],
+        [0, 1, 1, 1, 0],
+        [0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0]]
+print(aStar(start, end, grid))
+
