@@ -116,10 +116,13 @@ class Room:
                     self.updateGrid(i, self.gridSize-1, 4)
             pass
         
-    def tick(self, playerPos):
+    def tick(self, player):
         for row in range(self.gridSize):
             for col in range(self.gridSize):
                 if isinstance(self.grid[row][col],Monster):
-                    self.grid[row][col].tick(playerPos, self.getLayout())
+                    newMonsterPos = self.grid[row][col].tick(player, self.getLayout())
+                    if newMonsterPos != (row,col):
+                        self.grid[newMonsterPos[0]][newMonsterPos[1]] = self.grid[row][col]
+                        self.grid[row][col] = 0
       
         

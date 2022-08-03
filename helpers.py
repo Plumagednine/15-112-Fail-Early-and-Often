@@ -104,6 +104,9 @@ def print2dList(list):
 #######################################
 ###Algorithms##########################
 #######################################
+# #####################################
+###Line of Sight Algorithm############
+#######################################
 def lineOfSight(startPoint,endPoint,grid):
     x0, y0 = startPoint
     x1, y1 = endPoint
@@ -148,3 +151,91 @@ def lineOfSight(startPoint,endPoint,grid):
                     x += adjust
                     threshold += 1
     return True
+#######################################
+###A* Algorithm########################
+#######################################
+
+def isValidMove(row, col, grid):
+    if row < 0 or row >= len(grid) or col < 0 or col >= len(grid[0]):
+        return False
+    if grid[row][col] == 1:
+        return False
+    return True
+
+def isNotWall(row, col, grid):
+    return grid[row][col] != 1
+
+class Node():
+    def __init__(self, parent=None, pos=None):
+        self.parent = parent
+        self.position = pos
+
+        self.g = 0
+        self.h = 0
+        self.f = 0
+
+    def __eq__(self, other):
+        return self.position == other.position
+    
+def aStar(start, end, grid):
+    startPoint = Node(None, start)
+    startPoint.g = startPoint.h = startPoint.f = 0
+    endPoint = Node(None, end)
+    endPoint.g = endPoint.h = endPoint.f = 0
+    
+    openList = []
+    closedList = []
+    
+    openList.append(startPoint)
+    
+    while openList:
+        #get current node
+        currentPoint = openList[0]
+        currentIndex = 0
+        
+        #check if current node is more efficient
+        for index, item in enumerate(openList):
+            if item.f < currentPoint.f:
+                currentPoint = item
+                currentIndex = index
+        
+        # remove current node from open list
+        openList.pop(currentIndex)
+        # add current node to closed list
+        closedList.append(currentPoint)
+        
+        if currentPoint == endPoint:
+            path = []
+            current = currentPoint
+            while current is not None:
+                path.append(current.position)
+                current = current.parent
+            return path[::-1]
+        
+        # get next possible moves of current node
+        possibleMoves = []
+        for newPos in [(0, -1), (0, 1), (-1, 0), (1, 0)]:
+            pointPos = (currentPoint.position[0] + newPos[0], currentPoint.position[1] + newPos[1])
+            if not isValidMove(pointPos[0], pointPos[1], grid):
+                continue
+            if not isNotWall(pointPos[0], pointPos[1], grid):
+                continue
+            
+            newPoint = Node(currentPoint, pointPos)
+            possibleMoves.append(newPoint)
+        
+        for move in possibleMoves:
+            for closed in closedList:
+                if move == closed:
+                    continue
+            
+            move.g = currentPoint.g + 1
+            move.h = abs(move.position[0] - endPoint.position[0]) + abs(move.position[1] - endPoint.position[1])
+            move.f = move.g + move.h
+            
+            for open in openList:
+                if move == open:
+                    if move.g > open.g:
+                        continue
+            
+            openList.append(move)

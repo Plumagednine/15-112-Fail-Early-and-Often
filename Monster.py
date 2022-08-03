@@ -9,9 +9,11 @@ class Monster:
         self.totalHP = monsterDict.get("hitPoints")
         self.currentHP = monsterDict.get("hitPoints")
         self.strengthModifier = (monsterDict.get("strength")-10)//2
-        self.movementSpeed = monsterDict.get("movementSpeed")
+        self.movementSpeed = monsterDict.get("movementSpeed")//10
         self.spriteCounter = monsterDict.get("spriteCounter")
         self.monsterName = monsterDict.get("monsterName")
+        self.step = 0
+        self.tickCounter = 0
     
     
 #######################################
@@ -93,7 +95,27 @@ class Monster:
 ###Tick Functions######################
 #######################################
 
-    def tick(self, playerPos, roomLayout):
+    def tick(self, player, roomLayout):
+        path = None
+        offset = 2
+        playerPos = player.getRoomPos()
         if lineOfSight(self.getRoomPos(), playerPos, roomLayout):
-            print("Monster is in line of sight")
+            path = aStar(self.getRoomPos(), playerPos, roomLayout)
+            self.tickCounter += 1
+        
+        if distance(self.getRoomPos()[0],self.getRoomPos()[1], playerPos[0], playerPos[1]) <= self.movementSpeed and self.tickCounter == 1:
+            player.takeDamage(self.dealDamage())
+            self.step = 0
+            self.tickCounter = 0
+            
+        if path and self.tickCounter/offset == 1:
+            if self.step >= len(path):
+                self.step = 0
+            move = path[self.step]
+            self.setRoomPos(move[0], move[1])
+            self.step += 1
+            self.tickCounter = 0
+            
+        return self.getRoomPos()
+            
         

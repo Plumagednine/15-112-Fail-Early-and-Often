@@ -473,7 +473,6 @@ def keyPressed(app, event): # use event.key
         playerDungeonPOS = app.playerCharacter.getDungeonPos()
         playerRoomPos = app.playerCharacter.getRoomPos()
         currentRoom = app.dungeon.getRoom(playerDungeonPOS[0], playerDungeonPOS[1]).getLayout()
-
         if event.key == 'm':
             app.map = not app.map
             
@@ -640,7 +639,7 @@ def mousePressed(app, event): # use event.x and event.y
     elif app.gameState == 'deathScreen':
         (row,col) = getCell(event.x, event.y, app.width, app.height, 10)
         if (row, col) in app.exitToStartButton:
-            app.gameState = 'start'
+            appStarted(app)
     
 
 # def mouseReleased(app, event): # use event.x and event.y
@@ -659,11 +658,10 @@ def mousePressed(app, event): # use event.x and event.y
 def doAnimations(app):
     app.playerCharacter.animateSprite()
     app.currentRoom.animateRoom()
-    
+    app.currentRoom.tick(app.playerCharacter)
 
 def timerFired(app): # respond to timer events
     if app.gameState == 'game':
-        app.currentRoom.tick(app.playerCharacter.getRoomPos())
         if app.playerCharacter.getHealth() <= 0:
             app.gameState = 'deathScreen'
         #monster turns

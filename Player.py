@@ -160,8 +160,11 @@ class Player:
                     if item.itemModifier == 'Constitution':
                         totalOffset += random.randint(0, item.itemModifierValue)
                         maxOffset += item.itemModifierValue
-            print(damage*(totalOffset/maxOffset)-self.constitutionModifier)
-            self.currentHP -= damage*(totalOffset/maxOffset) - self.constitutionModifier
+            if maxOffset == 0:
+                self.currentHP -= damage-self.constitutionModifier
+            else:
+                print(damage*(totalOffset/maxOffset)-self.constitutionModifier)
+                self.currentHP -= damage*(totalOffset/maxOffset) - self.constitutionModifier
         pass
             
     def heal(self, heal):
