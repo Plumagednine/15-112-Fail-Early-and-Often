@@ -64,6 +64,9 @@ The following tools were used in this project:
 
 - [Python](https://https://www.python.org/)
 - [CMU 112 Graphics](https://www.cs.cmu.edu/~112/notes/cmu_112_graphics.py)
+- [Tkinter](https://docs.python.org/3/library/tkinter.html#module-tkinter)
+- [Pillow](https://pypi.org/project/Pillow/)
+- [Requests](https://pypi.org/project/requests/)
 
 ## :white_check_mark: Requirements ##
 
