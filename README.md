@@ -52,11 +52,15 @@ It is a roguelite game that I made because I love the genre and I thought it wou
 In total this project took aproximately 25 hours to make.
 
 ## :sparkles: Controls ##
-You control the player using "WASD".\n
-If you are within range of a monster you will be able to attack it by clicking on it.\n
-If you stand on top of an item you can pick it up by selecting the correct inventory slot and pressing "Q".\n
-If you have a potion selected you can use it by pressing "E".\n
-If you press you can toggle map by pressing "M". \n
+You control the player using "WASD".
+
+If you are within range of a monster you will be able to attack it by clicking on it.
+
+If you stand on top of an item you can pick it up by selecting the correct inventory slot and pressing "Q".
+
+If you have a potion selected you can use it by pressing "E".
+
+If you press you can toggle map by pressing "M".
 ### Debug Functions ###
 
 If you press "Control+1" you can toggle images on and off. (Disabled by default due to preformance issues)\n
