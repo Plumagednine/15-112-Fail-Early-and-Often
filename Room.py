@@ -25,6 +25,9 @@ class Room:
         self.allWeapons = {}
         self.allArmor = {}
         self.allMiscItems = {}
+        self.roomTextures = [["textures/dungeonTextures/floor/Floor1.png", "textures/dungeonTextures/floor/Floor2.png"],
+                             ["textures/dungeonTextures/walls/Wall1.png", "textures/dungeonTextures/walls/Wall2.png"]]
+        self.roomTextureIndex = random.randint(0,len(self.roomTextures)-1)
         for item in allItems:
             tempItem = allItems.get(item)
             if tempItem.getItemType() == "Weapon":
@@ -35,8 +38,12 @@ class Room:
                 self.allMiscItems[item] = allItems.get(item)
         self.allItemsList = [self.allWeapons, self.allArmor, self.allMiscItems]
         self.allMonsters = allMonsters
-        # app.gridWidth = app.width-int(app.height*.5)
-        # app.gridHeight = app.height
+        for element in range(len(self.roomTextures)):
+            for filePath in range(len(self.roomTextures[element])):
+                roomTextureImage = app.loadImage(self.roomTextures[element][filePath])
+                roomTextureImage = roomTextureImage.resize((app.gridWidth//self.gridSize, app.gridHeight//self.gridSize), Image.Resampling.LANCZOS)
+                self.roomTextures[element][filePath] = roomTextureImage
+            
         for row in range(self.gridSize):
             for col in range(self.gridSize):
                 if self.grid[row][col] == 2:
@@ -67,8 +74,12 @@ class Room:
                 canvas.create_rectangle(x0, y0, x1, y1, fill='#fffcf9', width = 1)
                 if gridLayout[row][col] == 0:
                     canvas.create_rectangle(x0, y0, x1, y1, fill='#fffcf9', width = 1)
+                    if app.roomImages:
+                        canvas.create_image(x0 + (x1-x0)//2, y0 + (y1-y0)//2, image = ImageTk.PhotoImage(self.roomTextures[0][self.roomTextureIndex]))
                 elif gridLayout[row][col] == 1:
                     canvas.create_rectangle(x0, y0, x1, y1, fill='#1c0f13', width = 1)
+                    if app.roomImages:
+                        canvas.create_image(x0 + (x1-x0)//2, y0 + (y1-y0)//2, image = ImageTk.PhotoImage(self.roomTextures[1][self.roomTextureIndex]))
                 elif gridLayout[row][col] == 2:
                     canvas.create_rectangle(x0, y0, x1, y1, fill='#1b4965', width = 1)
                 elif gridLayout[row][col] == 3:

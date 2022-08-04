@@ -748,6 +748,3 @@ runApp = TopLevelApp
 
 print(f'Loaded cmu_112_graphics version {App.version} (last updated {App.lastUpdated})')
 
-if (__name__ == '__main__'):
-    try: import cmu_112_graphics_tests
-    except: pass

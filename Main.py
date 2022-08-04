@@ -521,6 +521,7 @@ def appStarted(app, character = 'Default Character'): # initialize the model (ap
     app.currentLevel = 1
     app.currentCharacter = character
     app.map = False
+    app.roomImages = False
     
     #font stuff
     pyglet.font.add_file('font\Vecna-oppx.ttf')
@@ -572,6 +573,15 @@ def appStopped(app): # cleanup after app is done running
 #######################################
 
 def keyPressed(app, event): # use event.key
+    #debug keypresses
+    if event.key == "control-1":
+        app.roomImages = not app.roomImages
+    if event.key == "control-2":
+        app.map = not app.map
+    if event.key == "control-3":
+        appStarted(app)
+    
+        
     if app.gameState == 'pauseMenu':
         if event.key == 'Escape':
             app.gameState = 'game'
