@@ -243,6 +243,22 @@ def drawPauseMenu(app, canvas):
     tempX0,tempY0,tempX1,tempY1 = getCellBounds(app.exitToStartButton[midIndex][0], app.exitToStartButton[midIndex][1], app.width, app.height, gridSize)
     canvas.create_text(tempX0,tempY0, text="Exit To Start Menu", fill='#fffcf9', font=(app.font,60), anchor = 'n')
     
+    
+#######################################
+###Pause Menu Draw Functions###########
+#######################################
+def drawConeOfVision(app, canvas):
+    if app.coneOfVisionEnabled:
+        for row in range(app.currentRoom.getSize()):
+            for col in range(app.currentRoom.getSize()):
+                (x0, y0, x1, y1) = getCellBounds(row, col, app.gridWidth, app.gridHeight, app.currentRoom.getSize())
+                if app.coneOfVision[row][col] == 0:
+                    # canvas.create_rectangle(x0, y0, x1, y1, fill='#fffcf9', width = 1)
+                    continue
+                elif app.coneOfVision[row][col] == 1:
+                    canvas.create_rectangle(x0, y0, x1, y1, fill='#1c0f13', width = 1)
+    pass
+
 #######################################
 ###Redraw All##########################
 #######################################
@@ -264,9 +280,12 @@ def redrawAll(app, canvas): # draw (view) the model in the canvas
     if app.gameState == 'game':
         if app.map:
             app.dungeon.drawDungeon(app, canvas)
+            app.playerCharacter.drawPlayer(app, canvas, app.map)
         else:
             app.currentRoom.drawRoom(app, canvas)
-        app.playerCharacter.drawPlayer(app, canvas, app.map)
+            app.playerCharacter.drawPlayer(app, canvas, app.map)
+            drawConeOfVision(app, canvas)
+            
         drawSidebar(app, canvas)
         
     if app.gameState == 'pauseMenu':
@@ -290,6 +309,18 @@ def redrawAll(app, canvas): # draw (view) the model in the canvas
 #######################################
 ###Game Initializers###################
 #######################################
+def initConeOfVision(app):
+    app.coneOfVision = [[1 for row in range(app.currentRoom.getSize())] for col in range(app.currentRoom.getSize())]
+    updateConeOfVision(app)
+    # for row in range(app.currentRoom.getSize()):
+    #     for col in range(app.currentRoom.getSize()):
+    #         if (row > app.playerCharacter.getRoomPos()[0] - app.playerCharacter.getConeOfVision() 
+    #             and row < app.playerCharacter.getRoomPos()[0] + app.playerCharacter.getConeOfVision() 
+    #             and col > app.playerCharacter.getRoomPos()[1] - app.playerCharacter.getConeOfVision() 
+    #             and col < app.playerCharacter.getRoomPos()[1] + app.playerCharacter.getConeOfVision()):
+    #             app.coneOfVision[row][col] = 0
+    pass
+
 def continueGame(app):
     app.currentLevel += 1
     initDungeon(app, app.allRooms, app.dungeonSize)
@@ -522,6 +553,7 @@ def appStarted(app, character = 'Default Character'): # initialize the model (ap
     app.currentCharacter = character
     app.map = False
     app.roomImages = False
+    app.coneOfVisionEnabled = True
     
     #font stuff
     pyglet.font.add_file('font\Vecna-oppx.ttf')
@@ -553,6 +585,9 @@ def appStarted(app, character = 'Default Character'): # initialize the model (ap
     app.playerCharacter = app.allCharacters.get(app.currentCharacter)
     initPlayer(app, app.playerCharacter)
     
+    #cone of vision
+    initConeOfVision(app)
+    
     #make sidebar
     initSidebar(app)
     
@@ -577,7 +612,7 @@ def keyPressed(app, event): # use event.key
     if event.key == "control-1":
         app.roomImages = not app.roomImages
     if event.key == "control-2":
-        app.map = not app.map
+        app.coneOfVisionEnabled = not app.coneOfVisionEnabled
     if event.key == "control-3":
         appStarted(app)
     
@@ -642,7 +677,7 @@ def keyPressed(app, event): # use event.key
                         app.playerCharacter.moveRightDungeon()
                         app.playerCharacter.setRoomPos(playerRoomPos[0], 0)
                 pass
-                
+
             #pickup/drop item using e
             elif event.key == 'q':
                 if app.playerCharacter.currentWeapon != None:
@@ -685,10 +720,11 @@ def keyPressed(app, event): # use event.key
                         app.playerCharacter.miscItems[app.playerCharacter.currentItem] = 0
                         
             elif event.key == 'e':
-                if app.playerCharacter.currentItem != None:
+                if app.playerCharacter.currentItem != None and isinstance(app.playerCharacter.miscItems[app.playerCharacter.currentItem], Items):
                     app.playerCharacter.useItem()
                 
             
+            updateConeOfVision(app)
             #player turns
             if app.playerMovesLeft <= 0:
                 app.turn = 'enemy'
@@ -770,6 +806,7 @@ def mousePressed(app, event): # use event.x and event.y
         (row,col) = getCell(event.x, event.y, app.width, app.height, 10)
         if (row, col) in app.exitToStartButton:
             appStarted(app, app.currentCharacter)
+            
         if app.charcterSelectionGrid[row][col] == 3:
             currentCharacterIndex = characters.index(app.currentCharacter)
             app.currentCharacter = characters[(currentCharacterIndex+1)%len(characters)]
@@ -802,6 +839,17 @@ def updateRoomDimensions(app, room, width, height):
                 itemImage = resizeSprite(tempItem.itemImage, app.gridWidth//room.gridSize, app.gridHeight//room.gridSize)
                 tempItem.itemImage = itemImage
     pass
+
+def updateConeOfVision(app):
+    for row in range(app.currentRoom.getSize()):
+        for col in range(app.currentRoom.getSize()):
+            if (row > app.playerCharacter.getRoomPos()[0] - app.playerCharacter.getConeOfVision() 
+                and row < app.playerCharacter.getRoomPos()[0] + app.playerCharacter.getConeOfVision() 
+                and col > app.playerCharacter.getRoomPos()[1] - app.playerCharacter.getConeOfVision() 
+                and col < app.playerCharacter.getRoomPos()[1] + app.playerCharacter.getConeOfVision()):
+                app.coneOfVision[row][col] = 0
+            else:
+                app.coneOfVision[row][col] = 1
 
 def doAnimations(app):
     app.playerCharacter.animateSprite()

@@ -25,6 +25,7 @@ class Player:
         self.movementSpeed = playerDict.get("movementSpeed")//10
         self.spriteCounter = playerDict.get("spriteCounter")
         self.allItems = allItemsDictionary
+        self.coneOfVision = 4
         #######################################
         ###Weapon Inventory####################
         #######################################
@@ -47,6 +48,10 @@ class Player:
             self.miscItems[i] = self.allItems.get(playerDict.get("miscItems")[i])
         self.currentItem = None
         pass
+
+        
+    def getConeOfVision(self):
+        return self.coneOfVision
     
 #######################################
 ###Graphics Functions##################
@@ -80,7 +85,6 @@ class Player:
 ###############################################
 ###Dungeon Movement and Location Functions#####
 ###############################################
-    
     def getDungeonPos(self):
         return (self.dungeonRow, self.dungeonCol)
     
@@ -133,6 +137,7 @@ class Player:
     def moveRightRoom(self):
         self.roomCol += 1
         pass
+    
 #######################################
 ###Item Functions######################
 #######################################

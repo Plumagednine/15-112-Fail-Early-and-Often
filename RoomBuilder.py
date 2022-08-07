@@ -1,6 +1,11 @@
 from cmu_112_graphics import *
 from helpers import print2dList
 
+###############################################################################
+# Code taken and modified from:
+#https://www.cs.cmu.edu/~112/notes/notes-animations-part2.html
+###############################################################################
+
 def appStarted(app):
     app.rows = 16
     app.cols = 16

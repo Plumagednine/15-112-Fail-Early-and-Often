@@ -60,7 +60,7 @@ If you press you can toggle map by pressing "M".
 ### Debug Functions ###
 
 If you press "Control+1" you can toggle images on and off. (Disabled by default due to preformance issues)\
-If you press "Control+2" you can toggle map. \
+If you press "Control+2" you can toggle cone of vision. \
 If you press "Control+3" you restart the game.
 
 
