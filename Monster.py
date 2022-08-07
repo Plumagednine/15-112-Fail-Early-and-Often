@@ -106,22 +106,23 @@ class Monster:
         path = None
         playerPos = player.getRoomPos()
         self.moves = self.movementSpeed
-        while self.moves > 0:
-            if lineOfSight(self.getRoomPos(), playerPos, roomLayout) and self.previousPlayerPos != playerPos:
-                path = aStar(self.getRoomPos(), playerPos, roomLayout)
-            
-            if distance(self.getRoomPos()[0],self.getRoomPos()[1], playerPos[0], playerPos[1]) <= self.movementSpeed:
-                player.takeDamage(self.dealDamage())
-                self.step = 0
+        while self.moves > 0 and lineOfSight(self.getRoomPos(), playerPos, roomLayout):
+            self.tickCounter += 1
+            if self.tickCounter == 100:
+                self.moves -= 1
                 self.tickCounter = 0
-            
-            if path:
-                if self.step >= len(path):
-                    self.step = 0
-                move = path[self.step]
-                self.setRoomPos(move[0], move[1])
-                self.step += 1
-            self.moves -= 1
+                if self.previousPlayerPos != playerPos:
+                    path = aStar(self.getRoomPos(), playerPos, roomLayout)
+                
+                if distance(self.getRoomPos()[0],self.getRoomPos()[1], playerPos[0], playerPos[1]) <= self.movementSpeed:
+                    player.takeDamage(self.dealDamage())
+                
+                elif path:
+                    if self.step >= len(path):
+                        self.step = 0
+                    move = path[self.step]
+                    self.setRoomPos(move[0], move[1])
+                    self.step += 1
             
         return self.getRoomPos()
             

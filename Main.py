@@ -852,6 +852,10 @@ def updateConeOfVision(app):
                 app.coneOfVision[row][col] = 1
 
 def doAnimations(app):
+
+    if app.playerMovesLeft <= 0:
+        app.turn = 'enemy'
+        
     app.playerCharacter.animateSprite()
     app.currentRoom.animateRoom()
 
@@ -868,6 +872,7 @@ def timerFired(app): # respond to timer events
             # monster turns
             if app.turn == 'enemy':
                 app.currentRoom.tick(app.playerCharacter)
+                app.playerMovesLeft = app.playerCharacter.movementSpeed
                 app.turn = 'player'
 
     if app.gameState == 'win':
