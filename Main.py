@@ -312,13 +312,6 @@ def redrawAll(app, canvas): # draw (view) the model in the canvas
 def initConeOfVision(app):
     app.coneOfVision = [[1 for row in range(app.currentRoom.getSize())] for col in range(app.currentRoom.getSize())]
     updateConeOfVision(app)
-    # for row in range(app.currentRoom.getSize()):
-    #     for col in range(app.currentRoom.getSize()):
-    #         if (row > app.playerCharacter.getRoomPos()[0] - app.playerCharacter.getConeOfVision() 
-    #             and row < app.playerCharacter.getRoomPos()[0] + app.playerCharacter.getConeOfVision() 
-    #             and col > app.playerCharacter.getRoomPos()[1] - app.playerCharacter.getConeOfVision() 
-    #             and col < app.playerCharacter.getRoomPos()[1] + app.playerCharacter.getConeOfVision()):
-    #             app.coneOfVision[row][col] = 0
     pass
 
 def continueGame(app):
@@ -412,11 +405,6 @@ def initStartMenu(app):
     app.startGameButton = [(2,3),(2,4),(2,5),(2,6)]
     titleCard = [(0,2),(0,3),(0,4),(0,5),(0,6),(0,7)]
     app.characterSelectionButton = [(4,3),(4,4),(4,5),(4,6)]
-    # for row in range(gridSize):
-    #     for col in range(gridSize):
-    #         gridRow.append(0)
-    #     app.startMenuGrid.append(gridRow)
-    #     gridRow=[]
         
     
     # add buttons
@@ -574,8 +562,6 @@ def appStarted(app, character = 'Default Character'): # initialize the model (ap
     
     # #make monster
     app.allMonsters = loadMonsters()
-    # app.testMonster = allMonsters.get('Default Monster')
-    # initMonster(app, app.testMonster)
     
     #make items
     app.allItems = loadItems()
