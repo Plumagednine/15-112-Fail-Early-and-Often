@@ -89,6 +89,7 @@ def drawStartMenu(app, canvas):
     startButton = []
     title = []
     characterSelect = []
+    howToPlay = []
     for row in range(gridSize):
         for col in range(gridSize):
             (x0, y0, x1, y1) = getCellBounds(row, col, app.width, app.height, gridSize)
@@ -99,6 +100,8 @@ def drawStartMenu(app, canvas):
                 startButton.append((row,col))
             if app.startMenuGrid[row][col] == 3:
                 characterSelect.append((row,col))
+            if app.startMenuGrid[row][col] == 4:
+                howToPlay.append((row,col))
     
     #make background image
     # canvas.create_image(app.width//2,0,anchor = 'n', pilImage = app.startMenuBackground)
@@ -117,6 +120,11 @@ def drawStartMenu(app, canvas):
     midIndex = len(startButton)//2
     tempX0,tempY0,tempX1,tempY1 = getCellBounds(characterSelect[midIndex][0], characterSelect[midIndex][1], app.width, app.height, gridSize)
     canvas.create_text(tempX0,tempY0, text="Select Character", fill='#fffcf9', font=(app.font,60), anchor = 'n')
+    
+    # make howToPlay button
+    midIndex = len(startButton)//2
+    tempX0,tempY0,tempX1,tempY1 = getCellBounds(howToPlay[midIndex][0], howToPlay[midIndex][1], app.width, app.height, gridSize)
+    canvas.create_text(tempX0,tempY0, text="How To Play", fill='#fffcf9', font=(app.font,60), anchor = 'n')
     pass
 
 #######################################
@@ -188,7 +196,8 @@ def drawDeathScreen(app, canvas):
 def drawLoadingScreen(app, canvas):
     canvas.create_rectangle(0,0,app.width,app.height, fill='#1c0f13', width = 0)
     canvas.create_text(app.width//2,app.height//2, text="Loading...", fill='#fffcf9', font=(app.font,60), anchor = 'n')
-    
+
+  
     
 #######################################
 ###Character Selection Draw Functions##
@@ -220,6 +229,41 @@ def drawCharacterSelection(app, canvas):
     midIndex = len(changeCharacterButton)//2
     tempX0,tempY0,tempX1,tempY1 = getCellBounds(changeCharacterButton[midIndex][0], changeCharacterButton[midIndex][1], app.width, app.height, gridSize)
     canvas.create_text(tempX0,tempY0, text="Change Character", fill='#fffcf9', font=(app.font,60), anchor = 'n')
+    
+    # make characterSelect button
+    midIndex = len(exitToStartButton)//2
+    tempX0,tempY0,tempX1,tempY1 = getCellBounds(exitToStartButton[midIndex][0], exitToStartButton[midIndex][1], app.width, app.height, gridSize)
+    canvas.create_text(tempX0,tempY0, text="Exit To Start Menu", fill='#fffcf9', font=(app.font,60), anchor = 'n')
+    # pass
+
+#######################################
+###How To Play Draw Functions##
+#######################################
+                
+def drawHowToPlayMenu(app, canvas):
+    #make interactive grid
+    gridSize = 10
+    exitToStartButton = []
+    howToPlayText = []
+    for row in range(gridSize):
+        for col in range(gridSize):
+            (x0, y0, x1, y1) = getCellBounds(row, col, app.width, app.height, gridSize)
+            canvas.create_rectangle(x0, y0, x1, y1, fill='#1c0f13', width = 0)
+            if app.howToPlayGrid[row][col] == 1: 
+                exitToStartButton.append((row,col))
+            if app.howToPlayGrid[row][col] == 2:
+                howToPlayText.append((row,col))
+    
+    # make how to play text
+    midIndex = 0
+    tempX0,tempY0,tempX1,tempY1 = getCellBounds(howToPlayText[midIndex][0], howToPlayText[midIndex][1], app.width, app.height, gridSize)
+    canvas.create_text(tempX0,tempY0, text=('''
+                        You control the player using "WASD".
+                        If you are within range of a monster you will be able to attack it by clicking on it.
+                        If you stand on top of an item you can pick it up by 
+                        selecting the correct inventory slot and pressing "Q".
+                        If you have a potion selected you can use it by pressing "E".
+                        If you press you can toggle map by pressing "M".'''), fill='#fffcf9', font=(app.font,18), anchor = 'nw',)
     
     # make characterSelect button
     midIndex = len(exitToStartButton)//2
@@ -299,6 +343,9 @@ def redrawAll(app, canvas): # draw (view) the model in the canvas
     
     if app.gameState == 'characterSelection':
         drawCharacterSelection(app, canvas)
+    
+    if app.gameState == 'howToPlay':
+        drawHowToPlayMenu(app, canvas)
     pass      
 
 #######################################
@@ -405,6 +452,7 @@ def initStartMenu(app):
     app.startGameButton = [(2,3),(2,4),(2,5),(2,6)]
     titleCard = [(0,2),(0,3),(0,4),(0,5),(0,6),(0,7)]
     app.characterSelectionButton = [(4,3),(4,4),(4,5),(4,6)]
+    app.howToPlayButton = [(6,3),(6,4),(6,5),(6,6)]
         
     
     # add buttons
@@ -416,6 +464,8 @@ def initStartMenu(app):
                 app.startMenuGrid[row][col] = 2
             elif (row,col) in app.characterSelectionButton:
                 app.startMenuGrid[row][col] = 3
+            elif (row,col) in app.howToPlayButton:
+                app.startMenuGrid[row][col] = 4
                 
     # make image
     smallerSide = min(app.width, app.height)
@@ -532,6 +582,32 @@ def initCharacterSelectionScreen(app):
                 app.charcterSelectionGrid[row][col] = 2
             if (row,col) in app.changeCharacterButton:
                 app.charcterSelectionGrid[row][col] = 3
+                     
+#######################################
+###howToPlay Initializers####
+#######################################
+        
+def initHowToPlayMenu(app):
+    # create a 10x10 grid
+    gridSize = 10
+    app.howToPlayGrid = []
+    gridRow = []
+    howToPlayText = [(1,0),(1,1),(1,2),(1,3),(1,4),(1,5),(1,6),(1,7),(1,8),(1,9)]
+    app.exitToStartButton = [(7,2),(7,3),(7,4),(7,5),(7,6),(7,7)]
+    exitToStartButton = app.exitToStartButton
+    for row in range(gridSize):
+        for col in range(gridSize):
+            gridRow.append(0)
+        app.howToPlayGrid.append(gridRow)
+        gridRow=[]
+        
+    # add buttons
+    for row in range(gridSize):
+        for col in range(gridSize):
+            if (row,col) in exitToStartButton:
+                app.howToPlayGrid[row][col] = 1
+            if (row,col) in howToPlayText:
+                app.howToPlayGrid[row][col] = 2
             
                 
 #######################################
@@ -575,6 +651,7 @@ def appStarted(app, character = 'Default Character'): # initialize the model (ap
     #Make Start Menu
     initStartMenu(app)
     initCharacterSelectionScreen(app)
+    initHowToPlayMenu(app)
     
     #Make Player
     app.allCharacters = loadPlayerCharacters(app.allItems)
@@ -746,6 +823,9 @@ def mousePressed(app, event): # use event.x and event.y
             app.gameState = 'game'
         if (row,col) in app.characterSelectionButton:
             app.gameState = 'characterSelection'
+        if (row,col) in app.howToPlayButton:
+            print('how to play')
+            app.gameState = 'howToPlay'
             
     elif app.gameState == 'game':
         if event.x > app.gridWidth:
@@ -811,6 +891,11 @@ def mousePressed(app, event): # use event.x and event.y
                 initCurrentPlayer(app)
                 initSidebar(app)
                 app.gameState = 'start'
+    
+    elif app.gameState == 'howToPlay':
+        (row,col) = getCell(event.x, event.y, app.width, app.height, 10)
+        if (row, col) in app.exitToStartButton: 
+            app.gameState = 'start'
             
         if app.charcterSelectionGrid[row][col] == 3:
             currentCharacterIndex = characters.index(app.currentCharacter)
