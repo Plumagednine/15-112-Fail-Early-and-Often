@@ -329,15 +329,24 @@ def continueGame(app):
     app.playerCharacter.setDungeonPos(dungeonRow,dungeonCol)
     app.playerCharacter.setRoomPos(roomRow,roomCol)
 
+def initAllPlayers(app):
+    app.initilizedPlayers = {}
+    for character in app.allCharacters:
+        characterClass = initPlayer(app, app.allCharacters.get(character))
+        app.initilizedPlayers[character] = characterClass
+
 def initPlayer(app, player):
     spriteSheet = player.sprites
     app.playerCharacterSprites = animateSprite(app, spriteSheet, app.gridWidth, app.gridHeight, app.dungeon.getSize()) 
     player.sprites = app.playerCharacterSprites
     player.dungeonRow, player.dungeonCol = app.dungeon.getSpawnPoint()
     player.roomRow, player.roomCol = app.dungeon.getRoom(app.dungeon.getSpawnPoint()[0],app.dungeon.getSpawnPoint()[1]).getPlayerSpawn()
-    app.playerMaxMoves = player.movementSpeed
-    app.playerMovesLeft = app.playerMaxMoves
+    return player
     pass
+
+def initCurrentPlayer(app):
+    app.playerMaxMoves = app.playerCharacter.movementSpeed
+    app.playerMovesLeft = app.playerMaxMoves
 
 def initMonster(app, monster):
     spriteSheet = monster.sprites
@@ -554,6 +563,7 @@ def appStarted(app, character = 'Default Character'): # initialize the model (ap
     app.map = False
     app.roomImages = False
     app.coneOfVisionEnabled = True
+    app.gameStarted = False
     
     #font stuff
     pyglet.font.add_file('font\Vecna-oppx.ttf')
@@ -582,8 +592,10 @@ def appStarted(app, character = 'Default Character'): # initialize the model (ap
     
     #Make Player
     app.allCharacters = loadPlayerCharacters(app.allItems)
-    app.playerCharacter = app.allCharacters.get(app.currentCharacter)
-    initPlayer(app, app.playerCharacter)
+    initAllPlayers(app)
+    app.playerCharacter = app.initilizedPlayers.get(app.currentCharacter)
+    initCurrentPlayer(app)
+    
     
     #cone of vision
     initConeOfVision(app)
@@ -744,6 +756,7 @@ def mousePressed(app, event): # use event.x and event.y
     if app.gameState == 'start':
         (row,col) = getCell(event.x, event.y, app.width, app.height, 10)
         if (row,col) in app.startGameButton:
+            app.gameStarted = True
             app.gameState = 'game'
         if (row,col) in app.characterSelectionButton:
             app.gameState = 'characterSelection'
@@ -804,8 +817,14 @@ def mousePressed(app, event): # use event.x and event.y
     elif app.gameState == 'characterSelection':
         characters = ['Default Character', 'Tony', 'Rinn', 'Drahkhan', 'Ruisheart']
         (row,col) = getCell(event.x, event.y, app.width, app.height, 10)
-        if (row, col) in app.exitToStartButton:
-            appStarted(app, app.currentCharacter)
+        if (row, col) in app.exitToStartButton:    
+            if app.gameStarted == True:
+                appStarted(app, app.currentCharacter)
+            else:    
+                app.playerCharacter = app.initilizedPlayers.get(app.currentCharacter)
+                initCurrentPlayer(app)
+                initSidebar(app)
+                app.gameState = 'start'
             
         if app.charcterSelectionGrid[row][col] == 3:
             currentCharacterIndex = characters.index(app.currentCharacter)

@@ -176,7 +176,6 @@ class Player:
             if maxOffset == 0:
                 self.currentHP -= damage-self.constitutionModifier
             else:
-                print(damage*(totalOffset/maxOffset)-self.constitutionModifier)
                 self.currentHP -= damage*(totalOffset/maxOffset) - self.constitutionModifier
         pass
             
