@@ -17,7 +17,7 @@
 
   <img alt="License" src="https://img.shields.io/github/license/sbalbale/15-112-fail-early-and-often?color=56BEB8">
   
-  [![](https://tokei.cherrybrooknetworks.dev/b1/github/sbalbale/15-112-Fail-Early-and-Often)]()
+  <img alt="Linef of Code" src="https://tokei.cherrybrooknetworks.dev/b1/github/sbalbale/15-112-Fail-Early-and-Often">
   
   <img alt="Number of Files" src="https://img.shields.io/github/directory-file-count/sbalbale/15-112-Fail-Early-and-Often?color=%2356BEB8&label=number%20of%20files">
 
