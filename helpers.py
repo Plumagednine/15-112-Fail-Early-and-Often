@@ -117,6 +117,11 @@ def print2dList(list):
     # :param endPoint: The point you want to check if you can see
     # :param grid: a 2D array of 0s and 1s, where 0s are empty spaces and 1s are obstacles
     # :return: A boolean value.
+    
+    # Sources:
+    # - [Bresenham's line algorithm Wikipedia](https://en.wikipedia.org/wiki/Bresenham's_line_algorithm)
+    # - [Bresenham's line algorithm Geeks For Geeks](https://www.geeksforgeeks.org/bresenhams-line-generation-algorithm/)
+    # - [Bresenham's line algorithm YouTube](https://www.youtube.com/watch?v=lKVo6oLsCXs&t=39s)
     # """
 def lineOfSight(startPoint,endPoint,grid):
     x0, y0 = startPoint
@@ -175,6 +180,11 @@ def lineOfSight(startPoint,endPoint,grid):
     # :param col: the column of the starting point
     # :param grid: a 2D list of integers, where 0 is a walkable space, and 1 is a wall
     # :return: The path from the start to the end
+    
+    # Sources:
+    # - [A* Search Algorithm Wikipedia](https://en.wikipedia.org/wiki/A*_search_algorithm)
+    # - [A* Search Algorithm Geeks For Geeks](https://www.geeksforgeeks.org/a-search-algorithm/)
+    # - [A* Search Algorithm YouTube](https://www.youtube.com/watch?v=i0x5fj4PqP4)
     # """
 #Create a node class
 #Easier to work with than a dictionary or list

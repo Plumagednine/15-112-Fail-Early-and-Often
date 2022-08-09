@@ -35,8 +35,22 @@ class level_generation:
         self.spawnPoint = random.randint(0,gridSize-1), random.randint(0,gridSize-1)
         self.endpoint = self.spawnPoint
         #######################################
-        ###Generating Maze Code################
+        ###Prims Algoritim For Maze Generation#
         #######################################
+        # """
+        # It starts with a single cell, then it randomly picks a wall around that
+        # cell and checks if there are less than two hallways around it. If there
+        # are less than two hallways, it sets the wall to a hallway and adds the
+        # walls around the new hallway to the list of walls to check
+        
+        # :param currentCell: the cell that we are currently working on
+        # :return: The grid is being returned.
+        
+        # # Sources:
+        # # - [Prims Algorithm Wikipedia](https://en.wikipedia.org/wiki/Prim%27s_algorithm)
+        # # - [Prims Algorithm Geeks For Geeks](https://www.geeksforgeeks.org/prims-minimum-spanning-tree-mst-greedy-algo-5/)
+        # # - [Prims Algorithm YouTube](https://www.youtube.com/watch?v=xthRL0lcx2w)
+        # """
         startingRow, startingCol = self.spawnPoint
         for col in range(self.gridSize):
             for row in range(self.gridSize):

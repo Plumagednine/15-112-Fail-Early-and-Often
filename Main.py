@@ -753,7 +753,7 @@ def keyPressed(app, event): # use event.key
                         app.playerCharacter.setRoomPos(playerRoomPos[0], 0)
                 pass
 
-            #pickup/drop item using e
+            #pickup/drop item using q
             elif event.key == 'q':
                 if app.playerCharacter.currentWeapon != None:
                     if isinstance(currentRoom[playerRoomPos[0]][playerRoomPos[1]], Items):
@@ -794,6 +794,7 @@ def keyPressed(app, event): # use event.key
                         currentRoom[playerRoomPos[0]][playerRoomPos[1]] = app.playerCharacter.miscItems[app.playerCharacter.currentItem]
                         app.playerCharacter.miscItems[app.playerCharacter.currentItem] = 0
                         
+            #use item using e 
             elif event.key == 'e':
                 if app.playerCharacter.currentItem != None and isinstance(app.playerCharacter.miscItems[app.playerCharacter.currentItem], Items):
                     app.playerCharacter.useItem()
