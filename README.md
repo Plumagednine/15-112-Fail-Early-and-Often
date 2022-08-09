@@ -9,13 +9,17 @@
 <h1 align="center">15 112 Fail Early And Often</h1>
 
 <p align="center">
-  <img alt="Github top language" src="https://img.shields.io/github/languages/top/sbalbale/15-112-fail-early-and-often?color=56BEB8">
+  <img alt="Github top language" src="https://img.shields.io/github/languages/top/sbalbale/15-112-fail-early-and-often?color=4484c7">
 
-  <img alt="Github language count" src="https://img.shields.io/github/languages/count/sbalbale/15-112-fail-early-and-often?color=56BEB8">
+  <img alt="Github language count" src="https://img.shields.io/github/languages/count/sbalbale/15-112-fail-early-and-often?color=4484c7">
 
-  <img alt="Repository size" src="https://img.shields.io/github/repo-size/sbalbale/15-112-fail-early-and-often?color=56BEB8">
+  <img alt="Repository size" src="https://img.shields.io/github/repo-size/sbalbale/15-112-fail-early-and-often?color=4484c7">
 
-  <img alt="License" src="https://img.shields.io/github/license/sbalbale/15-112-fail-early-and-often?color=56BEB8">
+  <img alt="License" src="https://img.shields.io/github/license/sbalbale/15-112-fail-early-and-often?color=4484c7">
+  
+  <img alt="Linef of Code" src="https://tokei.cherrybrooknetworks.dev/b1/github/sbalbale/15-112-Fail-Early-and-Often">
+  
+  <img alt="Number of Files" src="https://img.shields.io/github/directory-file-count/sbalbale/15-112-Fail-Early-and-Often?color=4484c7">
 
   <!-- <img alt="Github issues" src="https://img.shields.io/github/issues/sbalbale/15-112-fail-early-and-often?color=56BEB8" /> -->
 
