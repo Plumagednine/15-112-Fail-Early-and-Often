@@ -1,5 +1,10 @@
 {
     "docwriter.style": "Auto-detect",
     "docwriter.progress.trackClasses": true,
-    "docwriter.progress.trackTypes": true
+    "docwriter.progress.trackTypes": true,
+    "java.showBuildStatusOnStart.enabled": "notification",
+    "editor.rulers": [80,120],
+    "workbench.colorCustomizations": {
+        "editorRuler.foreground": "#ff4081"
+    }
 }
