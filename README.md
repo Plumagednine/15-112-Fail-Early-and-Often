@@ -19,7 +19,7 @@
   
   <img alt="Lines of Code" src="https://img.shields.io/tokei/lines/github/sbalbale/15-112-Fail-Early-and-Often?color=%2356BEB8">
   
-  <img alt="Number of Files" src="https://img.shields.io/github/directory-file-count/sbalbale/15-112-Fail-Early-and-Often?color=%2356BEB8&label=number%20of%20files"
+  <img alt="Number of Files" src="https://img.shields.io/github/directory-file-count/sbalbale/15-112-Fail-Early-and-Often?color=%2356BEB8&label=number%20of%20files">
 
   <!-- <img alt="Github issues" src="https://img.shields.io/github/issues/sbalbale/15-112-fail-early-and-often?color=56BEB8" /> -->
 
