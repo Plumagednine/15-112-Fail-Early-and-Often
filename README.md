@@ -66,7 +66,8 @@ If you click on a item either in your inventory or on the ground you can see the
 
 If you press "Control+1" you can toggle images on and off. (Disabled by default due to preformance issues)\
 If you press "Control+2" you can toggle cone of vision. \
-If you press "Control+3" you restart the game.
+If you press "Control+3" you restart the game.\
+If you press "Control+4" you trigger move to the next level.
 
 
 ## :rocket: Technologies ##
