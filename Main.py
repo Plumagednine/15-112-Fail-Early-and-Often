@@ -168,8 +168,8 @@ def drawContinueMenu(app, canvas):
     gridSize = 10
     
     # make continue button
-    midIndex = len(app.levelCounter)//2
-    tempX0,tempY0,tempX1,tempY1 = getCellBounds(app.levelCounter[midIndex][0], app.levelCounter[midIndex][1], app.width, app.height, gridSize)
+    midIndex = len(app.levelCounterContinue)//2
+    tempX0,tempY0,tempX1,tempY1 = getCellBounds(app.levelCounterContinue[midIndex][0], app.levelCounterContinue[midIndex][1], app.width, app.height, gridSize)
     canvas.create_text(tempX0,tempY0, text=f"Level: {app.currentLevel-1} Completed", fill='#fffcf9', font=(app.font,60), anchor = 'n',)
     
     # make continue button
@@ -191,8 +191,8 @@ def drawDeathScreen(app, canvas):
     gridSize = 10
     
     # make continue button
-    midIndex = len(app.levelCounter)//2
-    tempX0,tempY0,tempX1,tempY1 = getCellBounds(app.levelCounter[midIndex][0], app.levelCounter[midIndex][1], app.width, app.height, gridSize)
+    midIndex = len(app.levelCounterDeath)//2
+    tempX0,tempY0,tempX1,tempY1 = getCellBounds(app.levelCounterDeath[midIndex][0], app.levelCounterDeath[midIndex][1], app.width, app.height, gridSize)
     canvas.create_text(tempX0,tempY0, text=f"You Made it to Level: {app.currentLevel}", fill='#fffcf9', font=(app.font,60), anchor = 'n',)
     
     # make death text button
@@ -543,7 +543,7 @@ def initContinueMenu(app):
     gridSize = 10
     app.pauseMenuGrid = []
     gridRow = []
-    app.levelCounter = [(1,2),(1,3),(1,4),(1,5),(1,6),(1,7)]
+    app.levelCounterContinue = [(1,2),(1,3),(1,4),(1,5),(1,6),(1,7)]
     app.contineuGameButton = [(4,2),(4,3),(4,4),(4,5),(4,6),(4,7)]
     app.exitToStartButton = [(7,2),(7,3),(7,4),(7,5),(7,6),(7,7)]
     contineuGameButton = app.contineuGameButton
@@ -572,7 +572,7 @@ def initDeathScreen(app):
     app.pauseMenuGrid = []
     gridRow = []
     app.youDiedText = [(1,2),(1,3),(1,4),(1,5),(1,6),(1,7)]
-    app.levelCounter = [(4,2),(4,3),(4,4),(4,5),(4,6),(4,7)]
+    app.levelCounterDeath = [(4,2),(4,3),(4,4),(4,5),(4,6),(4,7)]
     app.exitToStartButton = [(7,2),(7,3),(7,4),(7,5),(7,6),(7,7)]
     exitToStartButton = app.exitToStartButton
     for row in range(gridSize):
@@ -620,7 +620,7 @@ def initCharacterSelectionScreen(app):
                 app.charcterSelectionGrid[row][col] = 4
                      
 #######################################
-###howToPlay Initializers####
+###howToPlay Initializers##############
 #######################################
         
 def initHowToPlayMenu(app):
@@ -644,7 +644,11 @@ def initHowToPlayMenu(app):
                 app.howToPlayGrid[row][col] = 1
             if (row,col) in howToPlayText:
                 app.howToPlayGrid[row][col] = 2
-            
+#######################################
+###Other Functions#####################
+#######################################   
+def triggerWin(app):
+    app.gameState = "win"
                 
 #######################################
 ###App First Run#######################
@@ -727,6 +731,8 @@ def keyPressed(app, event): # use event.key
         app.coneOfVisionEnabled = not app.coneOfVisionEnabled
     if event.key == "control-3":
         appStarted(app)
+    if event.key == "control-4":
+        triggerWin(app)
     
         
     if app.gameState == 'pauseMenu':
