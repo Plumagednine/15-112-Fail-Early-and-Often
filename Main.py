@@ -294,7 +294,9 @@ def drawHowToPlayMenu(app, canvas):
                         If you stand on top of an item you can pick it up by 
                         selecting the correct inventory slot and pressing "Q".
                         If you have a potion selected you can use it by pressing "E".
-                        If you press you can toggle map by pressing "M".'''), fill='#fffcf9', font=(app.font,18), anchor = 'nw',)
+                        If you press you can toggle map by pressing "M".
+                        If you click on a item either in your inventory or on 
+                        the ground you can see the stats on the sidebar.'''), fill='#fffcf9', font=(app.font,18), anchor = 'nw',)
     
     # make characterSelect button
     midIndex = len(exitToStartButton)//2
