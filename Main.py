@@ -396,11 +396,13 @@ def initConeOfVision(app):
 
 def continueGame(app):
     app.currentLevel += 1
+    app.allRooms = loadRooms(app, app.allItems, app.allMonsters)
     initDungeon(app, app.allRooms, app.dungeonSize)
     dungeonRow,dungeonCol = app.spawnPointDungeon
     roomRow,roomCol = app.dungeon.getRoom(app.dungeon.getSpawnPoint()[0],app.dungeon.getSpawnPoint()[1]).getPlayerSpawn()
     app.playerCharacter.setDungeonPos(dungeonRow,dungeonCol)
     app.playerCharacter.setRoomPos(roomRow,roomCol)
+    updateConeOfVision(app)
 
 def initAllPlayers(app):
     app.initilizedPlayers = {}
@@ -429,7 +431,7 @@ def initMonster(app, monster):
     pass
 
 def initDungeon(app, allRooms, gridSize): 
-    app.dungeon = level_generation(allRooms, gridSize)
+    app.dungeon = Dungeon(allRooms, gridSize)
     print2dList(app.dungeon.getLayout())
     app.spawnPointDungeon = app.dungeon.getSpawnPoint()
     app.endPointDungeon = app.dungeon.getEndPoint()

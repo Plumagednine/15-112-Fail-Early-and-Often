@@ -13,7 +13,7 @@ from Room import *
 # numbers, and the values are the room objects
 # :param gridSize: the size of the grid, defaults to 16 (optional)
 # """
-class level_generation:
+class Dungeon:
     def setSurroundingWalls(self, row, col):
         if self.grid[row-1][col] == 1:
                     self.grid[row][col].setWall(0)

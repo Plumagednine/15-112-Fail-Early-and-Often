@@ -53,7 +53,8 @@
 
 15-112: Fail Early and Often is my term project for Carnegie Mellon University's 15-112 course.\
 It is a roguelite game that I made because I love the genre and I thought it would be fun to make.\
-In total this project took aproximately 25 hours to make.
+In total this project took aproximately 25 hours to make.\
+[Demo Video: https://youtu.be/aftX408l35E](https://youtu.be/aftX408l35E)
 
 ## :sparkles: Controls ##
 You control the player using "WASD".\
