@@ -17,9 +17,6 @@ from loadData import *
 #######################################
 ###Game Draw Functions#################
 #######################################
-
-
-
 def drawSidebar(app, canvas):
     # """
     # It draws the sidebar.
@@ -37,8 +34,10 @@ def drawSidebar(app, canvas):
                     , text=f'Health: {app.playerCharacter.getHealth():.0f}', fill='#fffcf9', font=(app.font,14), anchor = 'w')
     
     #create weapon inventory
+    (x0, y0, x1, y1) = getCellBounds(0, 0, app.sidebarActualWidth, app.sidebarActualWidth, len(app.playerCharacter.weapons))
+    canvas.create_text(x0+app.sidebarMinWidth,y0+app.sidebarMaxHeight//10+40+10, text='Weapons:', fill='#fffcf9', font=(app.font,25), anchor = 'nw')
     for col in range(len(app.playerCharacter.weapons)):
-        (x0, y0, x1, y1) = getCellBounds(0, col, app.sidebarActualWidth, app.sidebarActualWidth, len(app.playerCharacter.weapons))
+        (x0, y0, x1, y1) = getCellBounds(1, col, app.sidebarActualWidth, app.sidebarActualWidth, len(app.playerCharacter.weapons))
         if col == app.playerCharacter.currentWeapon:
             canvas.create_rectangle(x0+app.sidebarMinWidth, y0+app.sidebarMaxHeight//10+40,
                                 x1+app.sidebarMinWidth, y1+app.sidebarMaxHeight//10+40, fill='#F686BD', width = 1)
@@ -49,8 +48,10 @@ def drawSidebar(app, canvas):
                                 image=ImageTk.PhotoImage(app.playerCharacter.weapons[col].itemImage))
     
     #create armor inventory
+    (x0, y0, x1, y1) = getCellBounds(2, 0, app.sidebarActualWidth, app.sidebarActualWidth, len(app.playerCharacter.weapons))
+    canvas.create_text(x0+app.sidebarMinWidth,y0+app.sidebarMaxHeight//10+40+10, text='Armor:', fill='#fffcf9', font=(app.font,25), anchor = 'nw')
     for col in range(len(app.playerCharacter.armor)):
-        (x0, y0, x1, y1) = getCellBounds(1, col, app.sidebarActualWidth, app.sidebarActualWidth, len(app.playerCharacter.armor))
+        (x0, y0, x1, y1) = getCellBounds(3, col, app.sidebarActualWidth, app.sidebarActualWidth, len(app.playerCharacter.armor))
         if col == app.playerCharacter.currentArmor:
             canvas.create_rectangle(x0+app.sidebarMinWidth, y0+app.sidebarMaxHeight//10+40,
                                 x1+app.sidebarMinWidth, y1+app.sidebarMaxHeight//10+40, fill='#F686BD', width = 1)
@@ -61,8 +62,10 @@ def drawSidebar(app, canvas):
                                 image=ImageTk.PhotoImage(app.playerCharacter.armor[col].itemImage))
     
     #create misc item inventory
+    (x0, y0, x1, y1) = getCellBounds(4, 0, app.sidebarActualWidth, app.sidebarActualWidth, len(app.playerCharacter.weapons))
+    canvas.create_text(x0+app.sidebarMinWidth,y0+app.sidebarMaxHeight//10+40+10, text='Other Items:', fill='#fffcf9', font=(app.font,25), anchor = 'nw')
     for col in range(len(app.playerCharacter.miscItems)):
-        (x0, y0, x1, y1) = getCellBounds(2, col, app.sidebarActualWidth, app.sidebarActualWidth, len(app.playerCharacter.miscItems))
+        (x0, y0, x1, y1) = getCellBounds(5, col, app.sidebarActualWidth, app.sidebarActualWidth, len(app.playerCharacter.miscItems))
         if col == app.playerCharacter.currentItem:
             canvas.create_rectangle(x0+app.sidebarMinWidth, y0+app.sidebarMaxHeight//10+40,
                                 x1+app.sidebarMinWidth, y1+app.sidebarMaxHeight//10+40, fill='#F686BD', width = 1)
@@ -70,7 +73,20 @@ def drawSidebar(app, canvas):
                                 x1+app.sidebarMinWidth-10, y1+app.sidebarMaxHeight//10+40-10, fill='#fffcf9', width = 1)
         if app.playerCharacter.miscItems[col] != 0:
             canvas.create_image(x0 + (x1-x0)//2 + app.sidebarMinWidth, y0 + (y1-y0)//2 +app.sidebarMaxHeight//10+40,
-                                image=ImageTk.PhotoImage(app.playerCharacter.miscItems[col].itemImage))      
+                                image=ImageTk.PhotoImage(app.playerCharacter.miscItems[col].itemImage))
+    
+    #create item stat box
+    if isinstance(app.lastClickedItem, Items):
+        lastClickedItemStats = app.lastClickedItem.getStats()
+        statsText = ["Item Stats:",
+                    f"Item Name: {lastClickedItemStats[0]}",
+                    f"Item Type: {lastClickedItemStats[1]}",
+                    f"Item Modifier: {lastClickedItemStats[2]}",
+                    f"Item Modifier Value: {lastClickedItemStats[3]}"]
+        (x0, y0, x1, y1) = getCellBounds(6, 0, app.sidebarActualWidth, app.sidebarActualWidth, len(app.playerCharacter.weapons))
+        for i in range(len(statsText)):
+            canvas.create_text(x0+app.sidebarMinWidth,y0+app.sidebarMaxHeight//10+40+10+(30*i), text=statsText[i][:27], fill='#fffcf9', font=(app.font,18), anchor = 'nw')
+    
     pass
 
 
@@ -209,6 +225,8 @@ def drawCharacterSelection(app, canvas):
     exitToStartButton = []
     changeCharacterButton = []
     characterText = []
+    infoText = []
+    characterInfo = app.initilizedPlayers.get(app.currentCharacter).getStats()
     for row in range(gridSize):
         for col in range(gridSize):
             (x0, y0, x1, y1) = getCellBounds(row, col, app.width, app.height, gridSize)
@@ -219,18 +237,31 @@ def drawCharacterSelection(app, canvas):
                 characterText.append((row,col))
             if app.charcterSelectionGrid[row][col] == 3: 
                 changeCharacterButton.append((row,col))
+            if app.charcterSelectionGrid[row][col] == 4:
+                infoText.append((row,col))
     
     # make current character text
     midIndex = len(characterText)//2
     tempX0,tempY0,tempX1,tempY1 = getCellBounds(characterText[midIndex][0], characterText[midIndex][1], app.width, app.height, gridSize)
     canvas.create_text(tempX0,tempY0, text=f"Current Character: {app.currentCharacter}", fill='#fffcf9', font=(app.font,45), anchor = 'n',)
     
-    # make start button
+    # make character info text button
+    midIndex = len(infoText)//2-1
+    tempX0,tempY0,tempX1,tempY1 = getCellBounds(infoText[midIndex][0], infoText[midIndex][1], app.width, app.height, gridSize)
+    canvas.create_text(tempX0,tempY0, text=f'''
+                       Character Stats:
+                       HP: {characterInfo[0]}
+                       Strength: {characterInfo[1]}
+                       Dexterity: {characterInfo[2]}
+                       Constitution: {characterInfo[3]}
+                       Movement: {characterInfo[4]}''', fill='#fffcf9', font=(app.font,25), justify=CENTER, anchor = 'n')
+    
+    # make change character button
     midIndex = len(changeCharacterButton)//2
     tempX0,tempY0,tempX1,tempY1 = getCellBounds(changeCharacterButton[midIndex][0], changeCharacterButton[midIndex][1], app.width, app.height, gridSize)
     canvas.create_text(tempX0,tempY0, text="Change Character", fill='#fffcf9', font=(app.font,60), anchor = 'n')
     
-    # make characterSelect button
+    # make exit to start button
     midIndex = len(exitToStartButton)//2
     tempX0,tempY0,tempX1,tempY1 = getCellBounds(exitToStartButton[midIndex][0], exitToStartButton[midIndex][1], app.width, app.height, gridSize)
     canvas.create_text(tempX0,tempY0, text="Exit To Start Menu", fill='#fffcf9', font=(app.font,60), anchor = 'n')
@@ -420,19 +451,19 @@ def initSidebar(app):
     #get inventory images
     weapons = app.playerCharacter.weapons
     for weapon in weapons:
-        if weapon != 0:
+        if weapon != 0 and isinstance(weapon.itemImage, str):
             weaponImage = app.loadImage(weapon.itemImage)
             weaponImage = weaponImage.resize(((app.sidebarActualWidth)//len(weapons)-20, (app.sidebarActualWidth)//len(weapons)-20), Image.Resampling.LANCZOS)
             weapon.itemImage = weaponImage
     armors = app.playerCharacter.armor
     for armor in armors:
-        if armor != 0:
+        if armor != 0 and isinstance(armor.itemImage, str):
             armorImage = app.loadImage(armor.itemImage)
             armorImage = armorImage.resize(((app.sidebarActualWidth)//len(armors)-20, (app.sidebarActualWidth)//len(armors)-20), Image.Resampling.LANCZOS)
             armor.itemImage = armorImage
     miscItems = app.playerCharacter.miscItems
     for item in miscItems:
-        if item != 0:
+        if item != 0 and isinstance(item.itemImage, str):
             itemImage = app.loadImage(item.itemImage)
             itemImage = itemImage.resize(((app.sidebarActualWidth)//len(miscItems)-20, (app.sidebarActualWidth)//len(miscItems)-20), Image.Resampling.LANCZOS)
             item.itemImage = itemImage
@@ -564,9 +595,10 @@ def initCharacterSelectionScreen(app):
     app.charcterSelectionGrid = []
     gridRow = []
     characterText = [(1,2),(1,3),(1,4),(1,5),(1,6),(1,7)]
-    app.changeCharacterButton = [(3,2),(3,3),(3,4),(3,5),(3,6),(3,7)]
-    app.exitToStartButton = [(7,2),(7,3),(7,4),(7,5),(7,6),(7,7)]
-    exitToStartButton = app.exitToStartButton
+    infoText = [(2,2),(2,3),(2,4),(2,5),(2,6),(2,7)]
+    app.changeCharacterButton = [(6,2),(6,3),(6,4),(6,5),(6,6),(6,7)]
+    app.exitToStartButtonCharacterSelection = [(8,2),(8,3),(8,4),(8,5),(8,6),(8,7)]
+    exitToStartButtonCharacterSelection = app.exitToStartButtonCharacterSelection
     for row in range(gridSize):
         for col in range(gridSize):
             gridRow.append(0)
@@ -576,12 +608,14 @@ def initCharacterSelectionScreen(app):
     # add buttons
     for row in range(gridSize):
         for col in range(gridSize):
-            if (row,col) in exitToStartButton:
+            if (row,col) in exitToStartButtonCharacterSelection:
                 app.charcterSelectionGrid[row][col] = 1
             if (row,col) in characterText:
                 app.charcterSelectionGrid[row][col] = 2
             if (row,col) in app.changeCharacterButton:
                 app.charcterSelectionGrid[row][col] = 3
+            if (row,col) in infoText:
+                app.charcterSelectionGrid[row][col] = 4
                      
 #######################################
 ###howToPlay Initializers####
@@ -628,6 +662,7 @@ def appStarted(app, character = 'Default Character'): # initialize the model (ap
     app.roomImages = False
     app.coneOfVisionEnabled = True
     app.gameStarted = False
+    app.lastClickedItem = None
     
     #font stuff
     pyglet.font.add_file('font\Vecna-oppx.ttf')
@@ -832,25 +867,36 @@ def mousePressed(app, event): # use event.x and event.y
         if event.x > app.gridWidth:
             (row,col) = getCell(event.x, event.y, app.sidebarActualWidth, app.sidebarActualWidth, len(app.playerCharacter.weapons)
                                 , app.sidebarMinWidth, app.sidebarMinHeight+(app.gridWidth//app.dungeon.getSize()))
-            if row == 0 and (col >= 0 and col < len(app.playerCharacter.weapons)):
-                if app.playerCharacter.currentWeapon == col:
+            if row == 1 and (col >= 0 and col < len(app.playerCharacter.weapons)):
+                if app.playerCharacter.currentWeapon == col and app.lastClickedItem == app.playerCharacter.weapons[col]:
                     app.playerCharacter.currentWeapon = None
                 else:
                     app.playerCharacter.currentWeapon = col
-            if row == 1 and (col >= 0 and col < len(app.playerCharacter.armor)):
-                if app.playerCharacter.currentArmor == col:
+                    app.lastClickedItem = app.playerCharacter.weapons[col]
+                    app.playerCharacter.currentArmor = None
+                    app.playerCharacter.currentItem = None
+            if row == 3 and (col >= 0 and col < len(app.playerCharacter.armor)):
+                if app.playerCharacter.currentArmor == col and app.lastClickedItem == app.playerCharacter.armor[col]:
                     app.playerCharacter.currentArmor = None
                 else:
                     app.playerCharacter.currentArmor = col
-            if row == 2 and (col >= 0 and col < len(app.playerCharacter.miscItems)):
-                if app.playerCharacter.currentItem == col:
+                    app.lastClickedItem = app.playerCharacter.armor[col]
+                    app.playerCharacter.currentWeapon = None
+                    app.playerCharacter.currentItem = None
+            if row == 5 and (col >= 0 and col < len(app.playerCharacter.miscItems)):
+                if app.playerCharacter.currentItem == col and app.lastClickedItem == app.playerCharacter.miscItems[col]:
                     app.playerCharacter.currentItem = None
                 else:
                     app.playerCharacter.currentItem = col
+                    app.lastClickedItem = app.playerCharacter.miscItems[col]
+                    app.playerCharacter.currentWeapon = None
+                    app.playerCharacter.currentArmor = None
         elif app.turn == 'player':
             if event.x <= app.gridWidth:
                 (row,col) = getCell(event.x, event.y, app.gridWidth, app.gridHeight, app.currentRoom.getSize())
                 if distance(row, col, app.playerCharacter.getRoomPos()[0], app.playerCharacter.getRoomPos()[1]) <= app.playerCharacter.movementSpeed:
+                    if isinstance(app.currentRoom.getLayout()[row][col], Items):
+                        app.lastClickedItem = app.currentRoom.getLayout()[row][col]
                     if app.playerCharacter.currentWeapon != None:
                         if isinstance(app.currentRoom.getLayout()[row][col], Monster):
                             app.currentRoom.getLayout()[row][col].takeDamage(app.playerCharacter.dealDamage())
@@ -884,7 +930,7 @@ def mousePressed(app, event): # use event.x and event.y
     elif app.gameState == 'characterSelection':
         characters = ['Default Character', 'Tony', 'Rinn', 'Drahkhan', 'Ruisheart']
         (row,col) = getCell(event.x, event.y, app.width, app.height, 10)
-        if (row, col) in app.exitToStartButton:    
+        if (row, col) in app.exitToStartButtonCharacterSelection:
             if app.gameStarted == True:
                 appStarted(app, app.currentCharacter)
             else:    
@@ -892,16 +938,18 @@ def mousePressed(app, event): # use event.x and event.y
                 initCurrentPlayer(app)
                 initSidebar(app)
                 app.gameState = 'start'
+                
+        if app.charcterSelectionGrid[row][col] == 3:
+            currentCharacterIndex = characters.index(app.currentCharacter)
+            app.currentCharacter = characters[(currentCharacterIndex+1)%len(characters)]
+        pass
     
     elif app.gameState == 'howToPlay':
         (row,col) = getCell(event.x, event.y, app.width, app.height, 10)
         if (row, col) in app.exitToStartButton: 
             app.gameState = 'start'
             
-        if app.charcterSelectionGrid[row][col] == 3:
-            currentCharacterIndex = characters.index(app.currentCharacter)
-            app.currentCharacter = characters[(currentCharacterIndex+1)%len(characters)]
-        pass
+        
     
 
 # def mouseReleased(app, event): # use event.x and event.y

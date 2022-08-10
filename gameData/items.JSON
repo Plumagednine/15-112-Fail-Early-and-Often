@@ -45,7 +45,7 @@
         "maxStackSize": 1,
         "itemModifier": "Health",
         "itemModifierValue": 8,
-        "itemImagePath": "textures/miscItems/health_potion.png"
+        "itemImagePath": "textures/miscItems/healthpotion.png"
     },
     {
         "itemName": "Basic Gloves",
@@ -53,13 +53,13 @@
         "maxStackSize": 1,
         "itemModifier": "Constitution",
         "itemModifierValue": 4,
-        "itemImagePath": "textures/armor/Gloves/Glove_Cloth_White_B1_1x1.png"
+        "itemImagePath": "textures/armor/Gloves/GloveClothWhiteB11x1.png"
     },
     {
         "itemName": "ChainmailBoots",
         "itemType": "Armor",
         "maxStackSize": 1,
-        "itemModifier": "none",
+        "itemModifier": "Constitution",
         "itemModifierValue": 9,
         "itemImagePath": "textures/armor/MinecraftTextures/ChainmailBoots.png"
     },
@@ -67,7 +67,7 @@
         "itemName": "ChainmailChestplate",
         "itemType": "Armor",
         "maxStackSize": 1,
-        "itemModifier": "none",
+        "itemModifier": "Constitution",
         "itemModifierValue": 9,
         "itemImagePath": "textures/armor/MinecraftTextures/ChainmailChestplate.png"
     },
@@ -75,7 +75,7 @@
         "itemName": "ChainmailHelmet",
         "itemType": "Armor",
         "maxStackSize": 1,
-        "itemModifier": "none",
+        "itemModifier": "Constitution",
         "itemModifierValue": 8,
         "itemImagePath": "textures/armor/MinecraftTextures/ChainmailHelmet.png"
     },
@@ -83,7 +83,7 @@
         "itemName": "ChainmailLeggings",
         "itemType": "Armor",
         "maxStackSize": 1,
-        "itemModifier": "none",
+        "itemModifier": "Constitution",
         "itemModifierValue": 4,
         "itemImagePath": "textures/armor/MinecraftTextures/ChainmailLeggings.png"
     },
@@ -91,7 +91,7 @@
         "itemName": "DiamondBoots",
         "itemType": "Armor",
         "maxStackSize": 1,
-        "itemModifier": "none",
+        "itemModifier": "Constitution",
         "itemModifierValue": 5,
         "itemImagePath": "textures/armor/MinecraftTextures/DiamondBoots.png"
     },
@@ -99,7 +99,7 @@
         "itemName": "DiamondChestplate",
         "itemType": "Armor",
         "maxStackSize": 1,
-        "itemModifier": "none",
+        "itemModifier": "Constitution",
         "itemModifierValue": 2,
         "itemImagePath": "textures/armor/MinecraftTextures/DiamondChestplate.png"
     },
@@ -107,7 +107,7 @@
         "itemName": "DiamondHelmet",
         "itemType": "Armor",
         "maxStackSize": 1,
-        "itemModifier": "none",
+        "itemModifier": "Constitution",
         "itemModifierValue": 8,
         "itemImagePath": "textures/armor/MinecraftTextures/DiamondHelmet.png"
     },
@@ -115,7 +115,7 @@
         "itemName": "DiamondLeggings",
         "itemType": "Armor",
         "maxStackSize": 1,
-        "itemModifier": "none",
+        "itemModifier": "Constitution",
         "itemModifierValue": 5,
         "itemImagePath": "textures/armor/MinecraftTextures/DiamondLeggings.png"
     },
@@ -123,7 +123,7 @@
         "itemName": "GoldenBoots",
         "itemType": "Armor",
         "maxStackSize": 1,
-        "itemModifier": "none",
+        "itemModifier": "Constitution",
         "itemModifierValue": 8,
         "itemImagePath": "textures/armor/MinecraftTextures/GoldenBoots.png"
     },
@@ -131,7 +131,7 @@
         "itemName": "GoldenChestplate",
         "itemType": "Armor",
         "maxStackSize": 1,
-        "itemModifier": "none",
+        "itemModifier": "Constitution",
         "itemModifierValue": 10,
         "itemImagePath": "textures/armor/MinecraftTextures/GoldenChestplate.png"
     },
@@ -139,7 +139,7 @@
         "itemName": "GoldenHelmet",
         "itemType": "Armor",
         "maxStackSize": 1,
-        "itemModifier": "none",
+        "itemModifier": "Constitution",
         "itemModifierValue": 3,
         "itemImagePath": "textures/armor/MinecraftTextures/GoldenHelmet.png"
     },
@@ -147,7 +147,7 @@
         "itemName": "GoldenLeggings",
         "itemType": "Armor",
         "maxStackSize": 1,
-        "itemModifier": "none",
+        "itemModifier": "Constitution",
         "itemModifierValue": 6,
         "itemImagePath": "textures/armor/MinecraftTextures/GoldenLeggings.png"
     },
@@ -155,7 +155,7 @@
         "itemName": "IronBoots",
         "itemType": "Armor",
         "maxStackSize": 1,
-        "itemModifier": "none",
+        "itemModifier": "Constitution",
         "itemModifierValue": 7,
         "itemImagePath": "textures/armor/MinecraftTextures/IronBoots.png"
     },
@@ -163,7 +163,7 @@
         "itemName": "IronChestplate",
         "itemType": "Armor",
         "maxStackSize": 1,
-        "itemModifier": "none",
+        "itemModifier": "Constitution",
         "itemModifierValue": 1,
         "itemImagePath": "textures/armor/MinecraftTextures/IronChestplate.png"
     },
@@ -171,7 +171,7 @@
         "itemName": "IronHelmet",
         "itemType": "Armor",
         "maxStackSize": 1,
-        "itemModifier": "none",
+        "itemModifier": "Constitution",
         "itemModifierValue": 10,
         "itemImagePath": "textures/armor/MinecraftTextures/IronHelmet.png"
     },
@@ -179,7 +179,7 @@
         "itemName": "IronLeggings",
         "itemType": "Armor",
         "maxStackSize": 1,
-        "itemModifier": "none",
+        "itemModifier": "Constitution",
         "itemModifierValue": 6,
         "itemImagePath": "textures/armor/MinecraftTextures/IronLeggings.png"
     },
@@ -187,7 +187,7 @@
         "itemName": "NetheriteBoots",
         "itemType": "Armor",
         "maxStackSize": 1,
-        "itemModifier": "none",
+        "itemModifier": "Constitution",
         "itemModifierValue": 7,
         "itemImagePath": "textures/armor/MinecraftTextures/NetheriteBoots.png"
     },
@@ -195,7 +195,7 @@
         "itemName": "NetheriteChestplate",
         "itemType": "Armor",
         "maxStackSize": 1,
-        "itemModifier": "none",
+        "itemModifier": "Constitution",
         "itemModifierValue": 7,
         "itemImagePath": "textures/armor/MinecraftTextures/NetheriteChestplate.png"
     },
@@ -203,7 +203,7 @@
         "itemName": "NetheriteHelmet",
         "itemType": "Armor",
         "maxStackSize": 1,
-        "itemModifier": "none",
+        "itemModifier": "Constitution",
         "itemModifierValue": 6,
         "itemImagePath": "textures/armor/MinecraftTextures/NetheriteHelmet.png"
     },
@@ -211,7 +211,7 @@
         "itemName": "NetheriteLeggings",
         "itemType": "Armor",
         "maxStackSize": 1,
-        "itemModifier": "none",
+        "itemModifier": "Constitution",
         "itemModifierValue": 10,
         "itemImagePath": "textures/armor/MinecraftTextures/NetheriteLeggings.png"
     },
@@ -219,7 +219,7 @@
         "itemName": "PurpleBoots",
         "itemType": "Armor",
         "maxStackSize": 1,
-        "itemModifier": "none",
+        "itemModifier": "Constitution",
         "itemModifierValue": 9,
         "itemImagePath": "textures/armor/MinecraftTextures/PurpleBoots.png"
     },
@@ -227,7 +227,7 @@
         "itemName": "PurpleChestplate",
         "itemType": "Armor",
         "maxStackSize": 1,
-        "itemModifier": "none",
+        "itemModifier": "Constitution",
         "itemModifierValue": 9,
         "itemImagePath": "textures/armor/MinecraftTextures/PurpleChestplate.png"
     },
@@ -235,7 +235,7 @@
         "itemName": "PurpleHelmet",
         "itemType": "Armor",
         "maxStackSize": 1,
-        "itemModifier": "none",
+        "itemModifier": "Constitution",
         "itemModifierValue": 6,
         "itemImagePath": "textures/armor/MinecraftTextures/PurpleHelmet.png"
     },
@@ -243,7 +243,7 @@
         "itemName": "PurpleLeggings",
         "itemType": "Armor",
         "maxStackSize": 1,
-        "itemModifier": "none",
+        "itemModifier": "Constitution",
         "itemModifierValue": 4,
         "itemImagePath": "textures/armor/MinecraftTextures/PurpleLeggings.png"
     },
@@ -251,7 +251,7 @@
         "itemName": "WhiteBoots",
         "itemType": "Armor",
         "maxStackSize": 1,
-        "itemModifier": "none",
+        "itemModifier": "Constitution",
         "itemModifierValue": 10,
         "itemImagePath": "textures/armor/MinecraftTextures/WhiteBoots.png"
     },
@@ -259,7 +259,7 @@
         "itemName": "WhiteChestplate",
         "itemType": "Armor",
         "maxStackSize": 1,
-        "itemModifier": "none",
+        "itemModifier": "Constitution",
         "itemModifierValue": 5,
         "itemImagePath": "textures/armor/MinecraftTextures/WhiteChestplate.png"
     },
@@ -267,7 +267,7 @@
         "itemName": "WhiteHelmet",
         "itemType": "Armor",
         "maxStackSize": 1,
-        "itemModifier": "none",
+        "itemModifier": "Constitution",
         "itemModifierValue": 8,
         "itemImagePath": "textures/armor/MinecraftTextures/WhiteHelmet.png"
     },
@@ -275,7 +275,7 @@
         "itemName": "WhiteLeggings",
         "itemType": "Armor",
         "maxStackSize": 1,
-        "itemModifier": "none",
+        "itemModifier": "Constitution",
         "itemModifierValue": 1,
         "itemImagePath": "textures/armor/MinecraftTextures/WhiteLeggings.png"
     },
@@ -1336,195 +1336,195 @@
         "itemImagePath": "textures/Weapons/Whip04.png"
     },
     {
-        "itemName": "Glove_Cloth_Bloodied_A1_1x1",
+        "itemName": "GloveClothBloodiedA11x1",
         "itemType": "Armor",
         "maxStackSize": 1,
         "itemModifier": "Constitution",
         "itemModifierValue": 2,
-        "itemImagePath": "textures/armor/Gloves/Glove_Cloth_Bloodied_A1_1x1.png"
+        "itemImagePath": "textures/armor/Gloves/GloveClothBloodiedA11x1.png"
     },
     {
-        "itemName": "Glove_Cloth_Bloodied_A2_1x1",
+        "itemName": "GloveClothBloodiedA21x1",
         "itemType": "Armor",
         "maxStackSize": 1,
         "itemModifier": "Constitution",
         "itemModifierValue": 7,
-        "itemImagePath": "textures/armor/Gloves/Glove_Cloth_Bloodied_A2_1x1.png"
+        "itemImagePath": "textures/armor/Gloves/GloveClothBloodiedA21x1.png"
     },
     {
-        "itemName": "Glove_Cloth_Bloodied_B1_1x1",
+        "itemName": "GloveClothBloodiedB11x1",
         "itemType": "Armor",
         "maxStackSize": 1,
         "itemModifier": "Constitution",
         "itemModifierValue": 6,
-        "itemImagePath": "textures/armor/Gloves/Glove_Cloth_Bloodied_B1_1x1.png"
+        "itemImagePath": "textures/armor/Gloves/GloveClothBloodiedB11x1.png"
     },
     {
-        "itemName": "Glove_Cloth_White_A1_1x1",
+        "itemName": "GloveClothWhiteA11x1",
         "itemType": "Armor",
         "maxStackSize": 1,
         "itemModifier": "Constitution",
         "itemModifierValue": 7,
-        "itemImagePath": "textures/armor/Gloves/Glove_Cloth_White_A1_1x1.png"
+        "itemImagePath": "textures/armor/Gloves/GloveClothWhiteA11x1.png"
     },
     {
-        "itemName": "Glove_Cloth_White_A2_1x1",
+        "itemName": "GloveClothWhiteA21x1",
         "itemType": "Armor",
         "maxStackSize": 1,
         "itemModifier": "Constitution",
         "itemModifierValue": 6,
-        "itemImagePath": "textures/armor/Gloves/Glove_Cloth_White_A2_1x1.png"
+        "itemImagePath": "textures/armor/Gloves/GloveClothWhiteA21x1.png"
     },
     {
-        "itemName": "Glove_Cloth_White_B1_1x1",
+        "itemName": "GloveClothWhiteB11x1",
         "itemType": "Armor",
         "maxStackSize": 1,
         "itemModifier": "Constitution",
         "itemModifierValue": 3,
-        "itemImagePath": "textures/armor/Gloves/Glove_Cloth_White_B1_1x1.png"
+        "itemImagePath": "textures/armor/Gloves/GloveClothWhiteB11x1.png"
     },
     {
-        "itemName": "Glove_Leather_Black_A1_1x1",
+        "itemName": "GloveLeatherBlackA11x1",
         "itemType": "Armor",
         "maxStackSize": 1,
         "itemModifier": "Constitution",
         "itemModifierValue": 10,
-        "itemImagePath": "textures/armor/Gloves/Glove_Leather_Black_A1_1x1.png"
+        "itemImagePath": "textures/armor/Gloves/GloveLeatherBlackA11x1.png"
     },
     {
-        "itemName": "Glove_Leather_Black_A2_1x1",
+        "itemName": "GloveLeatherBlackA21x1",
         "itemType": "Armor",
         "maxStackSize": 1,
         "itemModifier": "Constitution",
         "itemModifierValue": 7,
-        "itemImagePath": "textures/armor/Gloves/Glove_Leather_Black_A2_1x1.png"
+        "itemImagePath": "textures/armor/Gloves/GloveLeatherBlackA21x1.png"
     },
     {
-        "itemName": "Glove_Leather_Black_B1_1x1",
+        "itemName": "GloveLeatherBlackB11x1",
         "itemType": "Armor",
         "maxStackSize": 1,
         "itemModifier": "Constitution",
         "itemModifierValue": 7,
-        "itemImagePath": "textures/armor/Gloves/Glove_Leather_Black_B1_1x1.png"
+        "itemImagePath": "textures/armor/Gloves/GloveLeatherBlackB11x1.png"
     },
     {
-        "itemName": "Glove_Leather_Brown_A1_1x1",
+        "itemName": "GloveLeatherBrownA11x1",
         "itemType": "Armor",
         "maxStackSize": 1,
         "itemModifier": "Constitution",
         "itemModifierValue": 3,
-        "itemImagePath": "textures/armor/Gloves/Glove_Leather_Brown_A1_1x1.png"
+        "itemImagePath": "textures/armor/Gloves/GloveLeatherBrownA11x1.png"
     },
     {
-        "itemName": "Glove_Leather_Brown_A2_1x1",
+        "itemName": "GloveLeatherBrownA21x1",
         "itemType": "Armor",
         "maxStackSize": 1,
         "itemModifier": "Constitution",
         "itemModifierValue": 5,
-        "itemImagePath": "textures/armor/Gloves/Glove_Leather_Brown_A2_1x1.png"
+        "itemImagePath": "textures/armor/Gloves/GloveLeatherBrownA21x1.png"
     },
     {
-        "itemName": "Glove_Leather_Brown_B1_1x1",
+        "itemName": "GloveLeatherBrownB11x1",
         "itemType": "Armor",
         "maxStackSize": 1,
         "itemModifier": "Constitution",
         "itemModifierValue": 5,
-        "itemImagePath": "textures/armor/Gloves/Glove_Leather_Brown_B1_1x1.png"
+        "itemImagePath": "textures/armor/Gloves/GloveLeatherBrownB11x1.png"
     },
     {
-        "itemName": "Glove_Leather_Gray_A1_1x1",
+        "itemName": "GloveLeatherGrayA11x1",
         "itemType": "Armor",
         "maxStackSize": 1,
         "itemModifier": "Constitution",
         "itemModifierValue": 7,
-        "itemImagePath": "textures/armor/Gloves/Glove_Leather_Gray_A1_1x1.png"
+        "itemImagePath": "textures/armor/Gloves/GloveLeatherGrayA11x1.png"
     },
     {
-        "itemName": "Glove_Leather_Gray_A2_1x1",
+        "itemName": "GloveLeatherGrayA21x1",
         "itemType": "Armor",
         "maxStackSize": 1,
         "itemModifier": "Constitution",
         "itemModifierValue": 5,
-        "itemImagePath": "textures/armor/Gloves/Glove_Leather_Gray_A2_1x1.png"
+        "itemImagePath": "textures/armor/Gloves/GloveLeatherGrayA21x1.png"
     },
     {
-        "itemName": "Glove_Leather_Gray_B1_1x1",
+        "itemName": "GloveLeatherGrayB11x1",
         "itemType": "Armor",
         "maxStackSize": 1,
         "itemModifier": "Constitution",
         "itemModifierValue": 4,
-        "itemImagePath": "textures/armor/Gloves/Glove_Leather_Gray_B1_1x1.png"
+        "itemImagePath": "textures/armor/Gloves/GloveLeatherGrayB11x1.png"
     },
     {
-        "itemName": "Glove_Leather_Green_A1_1x1",
+        "itemName": "GloveLeatherGreenA11x1",
         "itemType": "Armor",
         "maxStackSize": 1,
         "itemModifier": "Constitution",
         "itemModifierValue": 4,
-        "itemImagePath": "textures/armor/Gloves/Glove_Leather_Green_A1_1x1.png"
+        "itemImagePath": "textures/armor/Gloves/GloveLeatherGreenA11x1.png"
     },
     {
-        "itemName": "Glove_Leather_Green_A2_1x1",
+        "itemName": "GloveLeatherGreenA21x1",
         "itemType": "Armor",
         "maxStackSize": 1,
         "itemModifier": "Constitution",
         "itemModifierValue": 3,
-        "itemImagePath": "textures/armor/Gloves/Glove_Leather_Green_A2_1x1.png"
+        "itemImagePath": "textures/armor/Gloves/GloveLeatherGreenA21x1.png"
     },
     {
-        "itemName": "Glove_Leather_Green_B1_1x1",
+        "itemName": "GloveLeatherGreenB11x1",
         "itemType": "Armor",
         "maxStackSize": 1,
         "itemModifier": "Constitution",
         "itemModifierValue": 1,
-        "itemImagePath": "textures/armor/Gloves/Glove_Leather_Green_B1_1x1.png"
+        "itemImagePath": "textures/armor/Gloves/GloveLeatherGreenB11x1.png"
     },
     {
-        "itemName": "Glove_Leather_Red_A1_1x1",
+        "itemName": "GloveLeatherRedA11x1",
         "itemType": "Armor",
         "maxStackSize": 1,
         "itemModifier": "Constitution",
         "itemModifierValue": 4,
-        "itemImagePath": "textures/armor/Gloves/Glove_Leather_Red_A1_1x1.png"
+        "itemImagePath": "textures/armor/Gloves/GloveLeatherRedA11x1.png"
     },
     {
-        "itemName": "Glove_Leather_Red_A2_1x1",
+        "itemName": "GloveLeatherRedA21x1",
         "itemType": "Armor",
         "maxStackSize": 1,
         "itemModifier": "Constitution",
         "itemModifierValue": 4,
-        "itemImagePath": "textures/armor/Gloves/Glove_Leather_Red_A2_1x1.png"
+        "itemImagePath": "textures/armor/Gloves/GloveLeatherRedA21x1.png"
     },
     {
-        "itemName": "Glove_Leather_Red_B1_1x1",
+        "itemName": "GloveLeatherRedB11x1",
         "itemType": "Armor",
         "maxStackSize": 1,
         "itemModifier": "Constitution",
         "itemModifierValue": 8,
-        "itemImagePath": "textures/armor/Gloves/Glove_Leather_Red_B1_1x1.png"
+        "itemImagePath": "textures/armor/Gloves/GloveLeatherRedB11x1.png"
     },
     {
-        "itemName": "Glove_Leather_Tan_A1_1x1",
+        "itemName": "GloveLeatherTanA11x1",
         "itemType": "Armor",
         "maxStackSize": 1,
         "itemModifier": "Constitution",
         "itemModifierValue": 8,
-        "itemImagePath": "textures/armor/Gloves/Glove_Leather_Tan_A1_1x1.png"
+        "itemImagePath": "textures/armor/Gloves/GloveLeatherTanA11x1.png"
     },
     {
-        "itemName": "Glove_Leather_Tan_A2_1x1",
+        "itemName": "GloveLeatherTanA21x1",
         "itemType": "Armor",
         "maxStackSize": 1,
         "itemModifier": "Constitution",
         "itemModifierValue": 4,
-        "itemImagePath": "textures/armor/Gloves/Glove_Leather_Tan_A2_1x1.png"
+        "itemImagePath": "textures/armor/Gloves/GloveLeatherTanA21x1.png"
     },
     {
-        "itemName": "Glove_Leather_Tan_B1_1x1",
+        "itemName": "GloveLeatherTanB11x1",
         "itemType": "Armor",
         "maxStackSize": 1,
         "itemModifier": "Constitution",
         "itemModifierValue": 10,
-        "itemImagePath": "textures/armor/Gloves/Glove_Leather_Tan_B1_1x1.png"
+        "itemImagePath": "textures/armor/Gloves/GloveLeatherTanB11x1.png"
     }
 ]

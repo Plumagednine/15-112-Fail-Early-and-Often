@@ -20,9 +20,13 @@ class Player:
         self.totalHP = playerDict.get("hitPoints")
         self.currentHP = playerDict.get("hitPoints")
         self.strengthModifier = (playerDict.get("strength")-10)//2
+        self.strength = playerDict.get("strength")
         self.dexterityModifier = (playerDict.get("dexterity")-10)//2
+        self.dexterity = playerDict.get("dexterity")
         self.constitutionModifier = (playerDict.get("constitution")-10)//2
+        self.constitution = playerDict.get("constitution")
         self.movementSpeed = playerDict.get("movementSpeed")//10
+        self.movement = playerDict.get("movementSpeed")
         self.spriteCounter = playerDict.get("spriteCounter")
         self.allItems = allItemsDictionary
         self.coneOfVision = 4
@@ -52,6 +56,9 @@ class Player:
         
     def getConeOfVision(self):
         return self.coneOfVision
+    
+    def getStats(self):
+        return (self.totalHP, self.strength, self.dexterity, self.constitution, self.movement)
     
 #######################################
 ###Graphics Functions##################

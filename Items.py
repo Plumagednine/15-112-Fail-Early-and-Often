@@ -17,6 +17,9 @@ class Items:
         self.itemImage = itemDict.get('itemImagePath')
         self.item = itemDict
         pass
+    
+    def getStats(self):
+        return (self.itemName, self.itemType, self.itemModifier, self.itemModifierValue)
 
     def getItem(self):
         return self.item
