@@ -81,7 +81,7 @@ class Room:
                     if app.roomImages:
                         canvas.create_image(x0 + (x1-x0)//2, y0 + (y1-y0)//2, image = ImageTk.PhotoImage(self.roomTextures[1][self.roomTextureIndex]))
                 elif gridLayout[row][col] == 2:
-                    canvas.create_rectangle(x0, y0, x1, y1, fill='#1b4965', width = 1)
+                    canvas.create_rectangle(x0, y0, x1, y1, fill='#fffcf9', width = 1)
                 elif gridLayout[row][col] == 3:
                     canvas.create_rectangle(x0, y0, x1, y1, fill='#6C7D47', width = 1)
                 elif gridLayout[row][col] == 4:
