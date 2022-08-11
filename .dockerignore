@@ -1,8 +1,0 @@
-*.gitattributes
-*LICENSE
-*README.md
-*.code-workspace
-**/.vscode
-**/Version History
-**/Generators
-**/Deliverables
