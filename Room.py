@@ -60,6 +60,7 @@ class Room:
                     tempItem = copy.deepcopy(self.allItems.get(random.choice(list(random.choice(self.allItemsList)))))
                     itemImage = app.loadImage(tempItem.itemImage)
                     itemImage = resizeSprite(itemImage, app.gridWidth//self.gridSize, app.gridHeight//self.gridSize)
+                    itemImage.apply_transparency()
                     tempItem.itemImage = itemImage
                     self.grid[row][col] = tempItem
                     

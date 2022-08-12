@@ -458,18 +458,21 @@ def initSidebar(app):
         if weapon != 0 and isinstance(weapon.itemImage, str):
             weaponImage = app.loadImage(weapon.itemImage)
             weaponImage = weaponImage.resize(((app.sidebarActualWidth)//len(weapons)-20, (app.sidebarActualWidth)//len(weapons)-20), Image.Resampling.LANCZOS)
+            weaponImage.apply_transparency()
             weapon.itemImage = weaponImage
     armors = app.playerCharacter.armor
     for armor in armors:
         if armor != 0 and isinstance(armor.itemImage, str):
             armorImage = app.loadImage(armor.itemImage)
             armorImage = armorImage.resize(((app.sidebarActualWidth)//len(armors)-20, (app.sidebarActualWidth)//len(armors)-20), Image.Resampling.LANCZOS)
+            armorImage.apply_transparency()
             armor.itemImage = armorImage
     miscItems = app.playerCharacter.miscItems
     for item in miscItems:
         if item != 0 and isinstance(item.itemImage, str):
             itemImage = app.loadImage(item.itemImage)
             itemImage = itemImage.resize(((app.sidebarActualWidth)//len(miscItems)-20, (app.sidebarActualWidth)//len(miscItems)-20), Image.Resampling.LANCZOS)
+            itemImage.apply_transparency()
             item.itemImage = itemImage
     pass
 
